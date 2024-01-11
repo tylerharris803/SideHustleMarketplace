@@ -25,14 +25,15 @@ You may also see any lint errors in the console.
 ## Convert HTML Page to React (JSX)
 Open [this page](https://transform.tools/html-to-jsx) and paste body contents from HTML page (exclude head)
 ### ExampleComponent.js (was ExampleComponent.html)
-`function ExampleFunction () {
+```jsx
+function ExampleFunction() {
   return (
     <>
-      // Converted HTML (without body tag)
+      {/* Converted HTML (without body tag) */}
     </>
-  )
+  );
 }
 
 export default ExampleFunction
-`
+```
 **(Don't do this for index.html!**

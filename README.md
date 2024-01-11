@@ -23,8 +23,8 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ## Convert HTML Page to React (JSX)
-Open [this page](https://transform.tools/html-to-jsx) and paste body contents (exclude head)
-### New Page in React
+Open [this page](https://transform.tools/html-to-jsx) and paste body contents from HTML page (exclude head)
+### ExampleComponent.js (was ExampleComponent.html)
 `function ExampleFunction () {
   return (
     <>
@@ -35,3 +35,4 @@ Open [this page](https://transform.tools/html-to-jsx) and paste body contents (e
 
 export default ExampleFunction
 `
+**(Don't do this for index.html!**

@@ -21,3 +21,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+## Convert HTML Page to React (JSX)
+Open [this page](https://transform.tools/html-to-jsx) and paste body contents (exclude head)
+### New Page in React
+`function ExampleFunction () {
+  return (
+    <>
+      // Converted HTML (without body tag)
+    </>
+  )
+}
+
+export default ExampleFunction
+`

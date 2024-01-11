@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Local Setup
-
+### Install node v21
 ### Install Dependencies
 #### `npm install` (in root directory)
 #### `cd public/`

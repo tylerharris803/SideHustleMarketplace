@@ -1,4 +1,14 @@
+import {useEffect, useState} from "react";
+
 function Home () {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("/api")
+        .then((res) => res.json())
+        .then((data) => setData(data.message));
+  }, []);
+
     return (
         <>
          <section className="content">
@@ -69,7 +79,7 @@ function Home () {
             </div>
             <div className="row align-items-center mb-2 d-flex">
               <div className="col-8">
-                <h2 className="d-flex align-items-center mb-0">213</h2>
+                <h2 className="d-flex align-items-center mb-0">{!data ? "Loading..." : data}</h2>
               </div>
               <div className="col-4 text-end">
                 <span>

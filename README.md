@@ -5,9 +5,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Local Setup
 ### Install node v21
 ### Install Dependencies
-1.  `npm install` (in root directory)
+1.  `npm install` (in client directory)
 2. `cd public/`
-3. `npm install`
+3. `npm install` (in client directory)
 
 
 ## Available Scripts

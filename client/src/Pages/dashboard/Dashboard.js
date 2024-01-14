@@ -2,12 +2,18 @@ import {useEffect, useState} from "react";
 
 function Home () {
   const [data, setData] = useState(null);
+  const [exercises, setExercises] = useState(null);
 
   useEffect(() => {
     fetch("/api")
         .then((res) => res.json())
         .then((data) => setData(data.message));
+
+    fetch("/getExerciseNames")
+        .then((res) => res.json())
+        .then((exercises) => setExercises(exercises));
   }, []);
+  console.log(exercises);
 
     return (
         <>
@@ -38,7 +44,7 @@ function Home () {
               <i className="far fa-window-restore" />
             </div>
             <div className="mb-4">
-              <h5 className="font-20 mb-0">Projects</h5>
+              <h5 className="font-20 mb-0">{!exercises ? "Loading..." : exercises.map((exercise) => exercise + ", ")}</h5>
             </div>
             <div className="row align-items-center mb-2 d-flex">
               <div className="col-8">

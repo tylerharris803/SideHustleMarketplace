@@ -3,24 +3,29 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Local Setup
+
 ### Install node v21
-### Install Dependencies
-1.  `npm install` (in client directory)
-2. `cd public/`
-3. `npm install` (in client directory)
+### Set up client
+The client is a react application
+1. `npm install` (in client directory)
+2. `npm start` to start the client. Hot refreshes on file changes
 
+### Set up server
+The server is a node/express server
+1. `npm install` (in server directory)
+2. Create file named `.env` (in server directory) and add secrets from Lauren. Don't commit this file to github for security
+3. `npx prisma generate`
+4. `npm start` to start the server. Hot refreshes on file changes
 
-## Available Scripts
+### Additional tools
+`.env` is used to save secrets. Shouldn't be committed but can be accessed using `env(varable)`  
 
-In the project directory, you can run:
+`npx prisma studio` is a GUI for editing the DB and mimics the functionality of prisma in code  
 
-### `npm start`
+`npx prisma migrate dev` migrates DB schema changes  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`prisma/`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ## Convert HTML Page to React (JSX)
 Open [this page](https://transform.tools/html-to-jsx) and paste body contents from HTML page (exclude head)

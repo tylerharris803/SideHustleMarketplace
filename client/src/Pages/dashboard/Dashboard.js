@@ -5,11 +5,11 @@ function Home () {
   const [exercises, setExercises] = useState(null);
 
   useEffect(() => {
-    fetch("/api")
+    fetch("/api/garbage/getBum")
         .then((res) => res.json())
         .then((data) => setData(data.message));
 
-    fetch("/getExerciseNames")
+    fetch("/api/exercise/getExerciseNames")
         .then((res) => res.json())
         .then((exercises) => setExercises(exercises));
   }, []);

@@ -14,6 +14,26 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 
 const WidgetsDropdown = () => {
+  const [data, setData] = React.useState(null)
+  const [exercises, setExercises] = React.useState(null)
+
+  React.useEffect(() => {
+    fetch('http://localhost:3001/api/garbage/getBum')
+      .then((res) => res.json())
+      .then((data) => setData(data.message))
+
+    fetch('http://localhost:3001/api/exercise/getExerciseNames')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return res.json()
+      })
+      .then((exercises) => setExercises(exercises))
+      .catch((error) => console.error('Fetch error:', error))
+  }, [])
+  console.log(exercises)
+
   return (
     <CRow>
       <CCol sm={6} lg={3}>
@@ -22,7 +42,8 @@ const WidgetsDropdown = () => {
           color="primary"
           value={
             <>
-              26K{' '}
+              {/*26K{' '}*/}
+              {!exercises ? 'Loading...' : exercises.map((exercise) => exercise + ', ')}
               <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
               </span>
@@ -109,7 +130,8 @@ const WidgetsDropdown = () => {
           color="info"
           value={
             <>
-              $6.200{' '}
+              {/*$6.200{' '}*/}
+              {!data ? 'Loading...' : data}
               <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span>

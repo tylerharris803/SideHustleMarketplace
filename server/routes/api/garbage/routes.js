@@ -1,7 +1,7 @@
-import getBum from "./getBum.js";
-import { Router } from "express";
+import getBum from './getBum.js'
+import { Router } from 'express'
 
-export const garbageRouter = Router();
+export const garbageRouter = Router()
 
-garbageRouter.route("/getBum")
-    .get(getBum);
+garbageRouter.route('/getBum')
+  .get(getBum)

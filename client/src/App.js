@@ -1,6 +1,15 @@
-import React, { Component, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
+import { useState, useEffect } from 'react'
+import { createClient } from '@supabase/supabase-js'
+import { Auth } from '@supabase/auth-ui-react'
+import { ThemeSupa } from '@supabase/auth-ui-shared'
+
+const supabaseUrl = 'https://lmbqbgttksrohbynfldf.supabase.co'
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY
+console.log(supabaseKey)
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 const loading = (
   <div className="pt-3 text-center">
@@ -17,8 +26,26 @@ const Register = React.lazy(() => import('./views/pages/register/Register'))
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
-class App extends Component {
-  render() {
+export default function App() {
+  const [session, setSession] = useState(null)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  if (!session) {
+    return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+  } else {
     return (
       <HashRouter>
         <Suspense fallback={loading}>
@@ -34,5 +61,3 @@ class App extends Component {
     )
   }
 }
-
-export default App

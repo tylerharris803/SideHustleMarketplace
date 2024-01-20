@@ -1,5 +1,5 @@
-import {apiRouter} from "./api/routes.js";
+import { apiRouter } from './api/routes.js'
 
 export function routeHandler (app) {
-    app.use("/api", apiRouter);
+  app.use('/api', apiRouter)
 }

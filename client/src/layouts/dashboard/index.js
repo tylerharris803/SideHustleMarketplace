@@ -34,8 +34,12 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+// Import the supabase instance from app.js
+import { supabase } from "../../App";
 
-function Dashboard() {
+async function Dashboard() {
+  let { categories: category, error } = supabase.from("category").select("*");
+
   const { sales, tasks } = reportsLineChartData;
 
   return (
@@ -53,7 +57,7 @@ function Dashboard() {
                 percentage={{
                   color: "success",
                   amount: "+55%",
-                  label: "than lask week",
+                  label: "than last week",
                 }}
               />
             </MDBox>
@@ -63,7 +67,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="leaderboard"
                 title="Today's Users"
-                count="2,300"
+                count={!categories ? "Loading..." : categories}
                 percentage={{
                   color: "success",
                   amount: "+3%",

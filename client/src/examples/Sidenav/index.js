@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
@@ -46,8 +46,26 @@ import {
   setTransparentSidenav,
   setWhiteSidenav,
 } from "context";
+import { supabase } from "../../supabaseClient";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
+  const [exercises, setExercises] = useState([]);
+  async function getExercises() {
+    try {
+      const { data, error } = await supabase.from("exercise").select("name").limit(5);
+      console.log(data);
+      if (error) throw error;
+      if (data != null) {
+        setExercises(data);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+  useEffect(() => {
+    getExercises();
+  }, []);
+
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
   const location = useLocation();
@@ -190,7 +208,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           fullWidth
         >
           Hey there
-          
+          {exercises.map((exercise) => exercise.name).join(", ")}
         </MDButton>
       </MDBox>
     </SidenavRoot>

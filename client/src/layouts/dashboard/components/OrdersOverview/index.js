@@ -27,15 +27,23 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../../supabaseClient";
 
 function OrdersOverview() {
-  async function readExercises() {
-    try {
-      const { data, error } = await supabase.from("exercise").select("name");
-      console.log(data);
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-  readExercises();
+  // const [exercises, setExercises] = useState([]);
+  // async function getExercises() {
+  //   try {
+  //     const { data, error } = await supabase.from("exercise").select("name").limit(10);
+  //     console.log(data);
+  //     if (error) throw error;
+  //     if (data != null) {
+  //       setExercises(data);
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // }
+  // useEffect(() => {
+  //   getExercises();
+  // }, []);
+
   //
   // const [newdata, setnewData] = useState(null);
   //

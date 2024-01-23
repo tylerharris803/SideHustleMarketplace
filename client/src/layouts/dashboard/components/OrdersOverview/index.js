@@ -23,8 +23,33 @@ import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React example components
 import TimelineItem from "examples/Timeline/TimelineItem";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../../supabaseClient";
 
 function OrdersOverview() {
+  async function readExercises() {
+    try {
+      const { data, error } = await supabase.from("exercise").select("name");
+      console.log(data);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+  readExercises();
+  //
+  // const [newdata, setnewData] = useState(null);
+  //
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     let { data: exercise, error } = await supabase.from("exercise").select("name");
+  //     console.log(data);
+  //     if (exercise) {
+  //       setnewData(exercise);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+
   return (
     <Card sx={{ height: "100%" }}>
       <MDBox pt={3} px={3}>

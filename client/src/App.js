@@ -53,13 +53,9 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "./supabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function App() {
   const [session, setSession] = useState(null);

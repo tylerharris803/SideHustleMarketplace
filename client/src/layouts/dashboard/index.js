@@ -34,12 +34,8 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
-// Import the supabase instance from app.js
-import { supabase } from "../../App";
 
-async function Dashboard() {
-  let { categories: category, error } = supabase.from("category").select("*");
-
+function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
 
   return (
@@ -67,7 +63,7 @@ async function Dashboard() {
               <ComplexStatisticsCard
                 icon="leaderboard"
                 title="Today's Users"
-                count={!categories ? "Loading..." : categories}
+                count="2300"
                 percentage={{
                   color: "success",
                   amount: "+3%",

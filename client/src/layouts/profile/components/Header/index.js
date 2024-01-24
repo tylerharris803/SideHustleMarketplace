@@ -101,7 +101,6 @@ function Header({ children }) {
               <MDTypography variant="h5" fontWeight="medium">
                 Tyler Harris
               </MDTypography>
-              
               <MDTypography variant="button" color="text" fontWeight="regular">
                 CEO / Co-Founder
               </MDTypography>

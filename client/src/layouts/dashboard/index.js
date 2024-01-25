@@ -15,6 +15,7 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Grid from "@mui/material/Grid";
+import MDProgress from "components/MDProgress";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -47,9 +48,9 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
-                icon="weekend"
-                title="Bookings"
-                count={281}
+                icon="today"
+                title="Date"
+                count="Jan 23, 2024"
                 percentage={{
                   color: "success",
                   amount: "+55%",
@@ -61,9 +62,9 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                icon="leaderboard"
-                title="Today's Users"
-                count="2300"
+                icon="check"
+                title="Assigned Workouts"
+                count="Run 1 mile"
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -77,14 +78,15 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
-                count="34k"
+                title="Completed Wellness"
+                count="60%"
                 percentage={{
                   color: "success",
                   amount: "+1%",
                   label: "than yesterday",
                 }}
               />
+              <MDProgress value={60} color="info" variant="gradient" label={false} />
             </MDBox>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
@@ -92,14 +94,15 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Followers"
-                count="+91"
+                title="Completed Workouts"
+                count="90%"
                 percentage={{
                   color: "success",
                   amount: "",
                   label: "Just updated",
                 }}
               />
+              <MDProgress value={90} color="success" variant="gradient" label={false} />
             </MDBox>
           </Grid>
         </Grid>

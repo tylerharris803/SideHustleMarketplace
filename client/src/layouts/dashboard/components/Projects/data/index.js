@@ -71,16 +71,16 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "companies", accessor: "companies", width: "45%", align: "left" },
-      { Header: "members", accessor: "members", width: "10%", align: "left" },
-      { Header: "budget", accessor: "budget", align: "center" },
-      { Header: "completion", accessor: "completion", align: "center" },
+      { Header: "day", accessor: "day", width: "20%", align: "left" },
+      { Header: "workout", accessor: "workout", width: "40%", align: "left" },
+      { Header: "assinged to", accessor: "assignedto", width: "20%", align: "left" },
+      { Header: "wellness", accessor: "wellness", width: "20%", align: "left" },
     ],
 
     rows: [
       {
-        companies: <Company image={logoXD} name="Material UI XD Version" />,
-        members: (
+        day: <Company image={logoXD} name="Material UI XD Version" />,
+        workout: (
           <MDBox display="flex" py={1}>
             {avatars([
               [team1, "Ryan Tompson"],
@@ -90,20 +90,20 @@ export default function data() {
             ])}
           </MDBox>
         ),
-        budget: (
+        assignedto: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
             $14,000
           </MDTypography>
         ),
-        completion: (
+        wellness: (
           <MDBox width="8rem" textAlign="left">
             <MDProgress value={60} color="info" variant="gradient" label={false} />
           </MDBox>
         ),
       },
       {
-        companies: <Company image={logoAtlassian} name="Add Progress Track" />,
-        members: (
+        day: <Company image={logoAtlassian} name="Add Progress Track" />,
+        workout: (
           <MDBox display="flex" py={1}>
             {avatars([
               [team2, "Romina Hadid"],
@@ -111,20 +111,20 @@ export default function data() {
             ])}
           </MDBox>
         ),
-        budget: (
+        assignedto: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
             $3,000
           </MDTypography>
         ),
-        completion: (
+        wellness: (
           <MDBox width="8rem" textAlign="left">
             <MDProgress value={10} color="info" variant="gradient" label={false} />
           </MDBox>
         ),
       },
       {
-        companies: <Company image={logoSlack} name="Fix Platform Errors" />,
-        members: (
+        day: <Company image={logoSlack} name="Fix Platform Errors" />,
+        workout: (
           <MDBox display="flex" py={1}>
             {avatars([
               [team1, "Ryan Tompson"],
@@ -132,20 +132,20 @@ export default function data() {
             ])}
           </MDBox>
         ),
-        budget: (
+        assignedto: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
             Not set
           </MDTypography>
         ),
-        completion: (
+        wellness: (
           <MDBox width="8rem" textAlign="left">
             <MDProgress value={100} color="success" variant="gradient" label={false} />
           </MDBox>
         ),
       },
       {
-        companies: <Company image={logoSpotify} name="Launch our Mobile App" />,
-        members: (
+        day: <Company image={logoSpotify} name="Launch our Mobile App" />,
+        workout: (
           <MDBox display="flex" py={1}>
             {avatars([
               [team4, "Jessica Doe"],
@@ -155,38 +155,38 @@ export default function data() {
             ])}
           </MDBox>
         ),
-        budget: (
+        assignedto: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
             $20,500
           </MDTypography>
         ),
-        completion: (
+        wellness: (
           <MDBox width="8rem" textAlign="left">
             <MDProgress value={100} color="success" variant="gradient" label={false} />
           </MDBox>
         ),
       },
       {
-        companies: <Company image={logoJira} name="Add the New Pricing Page" />,
-        members: (
+        day: <Company image={logoJira} name="Add the New Pricing Page" />,
+        workout: (
           <MDBox display="flex" py={1}>
             {avatars([[team4, "Jessica Doe"]])}
           </MDBox>
         ),
-        budget: (
+        assignedto: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
             $500
           </MDTypography>
         ),
-        completion: (
+        wellness: (
           <MDBox width="8rem" textAlign="left">
             <MDProgress value={25} color="info" variant="gradient" label={false} />
           </MDBox>
         ),
       },
       {
-        companies: <Company image={logoInvesion} name="Redesign New Online Shop" />,
-        members: (
+        day: <Company image={logoInvesion} name="Redesign New Online Shop" />,
+        workout: (
           <MDBox display="flex" py={1}>
             {avatars([
               [team1, "Ryan Tompson"],
@@ -194,12 +194,12 @@ export default function data() {
             ])}
           </MDBox>
         ),
-        budget: (
+        assignedto: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
             $2,000
           </MDTypography>
         ),
-        completion: (
+        wellness: (
           <MDBox width="8rem" textAlign="left">
             <MDProgress value={40} color="info" variant="gradient" label={false} />
           </MDBox>

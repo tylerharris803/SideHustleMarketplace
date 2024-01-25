@@ -37,8 +37,36 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
+import { supabase } from "../../../../supabaseClient";
 
 function Header({ children }) {
+  const [profile, setProfile] = useState(null); // Initialize state within the component
+
+  useEffect(() => {
+    async function getProfile() {
+      try {
+        const user = await supabase.auth.getUser();
+        const userId = user.data.user.id;
+
+        const { data, error } = await supabase
+          .from("profile")
+          .select("*")
+          .eq("id", userId)
+          .single();
+
+        console.log(data);
+
+        if (data != null) {
+          setProfile(data);
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    getProfile();
+  }, []); // Use the useEffect hook to fetch data when the component mounts
+
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -99,7 +127,7 @@ function Header({ children }) {
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
               <MDTypography variant="h5" fontWeight="medium">
-                Tyler Harris
+                {profile ? profile.first_name : ""} {profile ? profile.last_name : ""}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
                 CEO / Co-Founder

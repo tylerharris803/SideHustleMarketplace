@@ -37,6 +37,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
+import { supabase } from "../../../../supabaseClient";
 
 function Header({ children }) {
   const [profile, setProfile] = useState(null); // Initialize state within the component
@@ -126,7 +127,7 @@ function Header({ children }) {
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
               <MDTypography variant="h5" fontWeight="medium">
-                {profile ? profile.first_name : ''} {profile ? profile.last_name : ''}
+                {profile ? profile.first_name : ""} {profile ? profile.last_name : ""}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
                 CEO / Co-Founder

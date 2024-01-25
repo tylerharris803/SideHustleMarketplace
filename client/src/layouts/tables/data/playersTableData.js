@@ -36,46 +36,64 @@ import team4 from "assets/images/team-4.jpg";
 import { supabase } from "../../../supabaseClient";
 
 export default function data() {
-  const [exercises, setExercises] = useState([]);
-  async function getExercises() {
+  const [profiles, setProfiles] = useState([]);
+  async function getProfiles() {
     try {
-      const { data, error } = await supabase.from("exercise").select("*");
+      const { data, error } = await supabase.from("profile").select("*");
       console.log(data);
       if (error) throw error;
       if (data != null) {
-        setExercises(data);
+        setProfiles(data);
       }
     } catch (error) {
       alert(error.message);
     }
   }
   useEffect(() => {
-    getExercises();
+    getProfiles();
   }, []);
 
   return {
     columns: [
-      { Header: "name", accessor: "name", width: "20%", align: "left" },
-      { Header: "category", accessor: "category", width: "20%", align: "left" },
-      { Header: "description", accessor: "description", width: "40%", align: "left" },
+      { Header: "First Name", accessor: "first", width: "20%", align: "left" },
+      { Header: "Last Name", accessor: "last", width: "20%", align: "left" },
+      { Header: "Position", accessor: "position", width: "40%", align: "left" },
+      { Header: "Jersey Number", accessor: "jersey", width: "40%", align: "left" },
+      { Header: "Phone Number", accessor: "phone", width: "40%", align: "left" },
+      { Header: "Email Address", accessor: "email", width: "40%", align: "left" },
       { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
       { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
     ],
 
-    rows: exercises.map((exercise, index) => ({
-      name: (
+    rows: profiles.map((profile, index) => ({
+      first: (
         <MDBox display="flex" py={1}>
-          {exercise.name} {/* Display the name of the current exercise */}
+          {profile.first_name} {/* Display the name of the current exercise */}
         </MDBox>
       ),
-      category: (
+      last: (
         <MDBox display="flex" py={1}>
-          {exercise.category} {/* Display the name of the current exercise */}
+          {profile.last_name} {/* Display the name of the current exercise */}
         </MDBox>
       ),
-      description: (
+      position: (
         <MDTypography variant="caption" color="text" fontWeight="medium">
-          {exercise.description}
+          {profile.position}
+        </MDTypography>
+      ),
+      jersey: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {profile.jersey_number}
+        </MDTypography>
+      ),
+      phone: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {profile.phone_number}
+        </MDTypography>
+      ),
+      email: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {profile.email_address}
         </MDTypography>
       ),
       edit: (

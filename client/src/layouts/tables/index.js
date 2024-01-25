@@ -28,11 +28,11 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import exercisesTableData from "layouts/tables/data/exercisesTableData";
+import playersTableData from "layouts/tables/data/playersTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
 function Tables() {
-  const { columns, rows } = exercisesTableData();
+  const { columns, rows } = playersTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
@@ -53,7 +53,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Authors Table
+                  Players Table
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

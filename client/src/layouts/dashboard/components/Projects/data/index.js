@@ -15,6 +15,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useEffect, useState } from "react";
 // @mui material components
 import Tooltip from "@mui/material/Tooltip";
 import MDBox from "components/MDBox";
@@ -34,7 +35,27 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
+// Add supabase connection
+import { supabase } from "../../../../../supabaseClient";
+
 export default function data() {
+  const [exercises, setExercises] = useState([]);
+  async function getExercises() {
+    try {
+      const { data, error } = await supabase.from("exercise").select("*");
+      console.log(data);
+      if (error) throw error;
+      if (data != null) {
+        setExercises(data);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+  useEffect(() => {
+    getExercises();
+  }, []);
+
   const avatars = (members) =>
     members.map(([image, name]) => (
       <Tooltip key={name} title={name} placeholder="bottom">
@@ -77,134 +98,147 @@ export default function data() {
       { Header: "wellness", accessor: "wellness", width: "20%", align: "left" },
     ],
 
-    rows: [
-      {
-        day: <Company image={logoXD} name="Material UI XD Version" />,
-        workout: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team1, "Ryan Tompson"],
-              [team2, "Romina Hadid"],
-              [team3, "Alexander Smith"],
-              [team4, "Jessica Doe"],
-            ])}
-          </MDBox>
-        ),
-        assignedto: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            $14,000
-          </MDTypography>
-        ),
-        wellness: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={60} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        day: <Company image={logoAtlassian} name="Add Progress Track" />,
-        workout: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team2, "Romina Hadid"],
-              [team4, "Jessica Doe"],
-            ])}
-          </MDBox>
-        ),
-        assignedto: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            $3,000
-          </MDTypography>
-        ),
-        wellness: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={10} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        day: <Company image={logoSlack} name="Fix Platform Errors" />,
-        workout: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team1, "Ryan Tompson"],
-              [team3, "Alexander Smith"],
-            ])}
-          </MDBox>
-        ),
-        assignedto: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            Not set
-          </MDTypography>
-        ),
-        wellness: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={100} color="success" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        day: <Company image={logoSpotify} name="Launch our Mobile App" />,
-        workout: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team4, "Jessica Doe"],
-              [team3, "Alexander Smith"],
-              [team2, "Romina Hadid"],
-              [team1, "Ryan Tompson"],
-            ])}
-          </MDBox>
-        ),
-        assignedto: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            $20,500
-          </MDTypography>
-        ),
-        wellness: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={100} color="success" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        day: <Company image={logoJira} name="Add the New Pricing Page" />,
-        workout: (
-          <MDBox display="flex" py={1}>
-            {avatars([[team4, "Jessica Doe"]])}
-          </MDBox>
-        ),
-        assignedto: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            $500
-          </MDTypography>
-        ),
-        wellness: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={25} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-      {
-        day: <Company image={logoInvesion} name="Redesign New Online Shop" />,
-        workout: (
-          <MDBox display="flex" py={1}>
-            {avatars([
-              [team1, "Ryan Tompson"],
-              [team4, "Jessica Doe"],
-            ])}
-          </MDBox>
-        ),
-        assignedto: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            $2,000
-          </MDTypography>
-        ),
-        wellness: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={40} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
-      },
-    ],
+    rows: exercises.map((exercise, index) => ({
+      day: (
+        <MDBox display="flex" py={1}>
+          {exercise.id} {/* Display the name of the current exercise */}
+        </MDBox>
+      ),
+      workout: (
+        <MDBox display="flex" py={1}>
+          {exercise.name} {/* Display the name of the current exercise */}
+        </MDBox>
+      ),
+      assignedto: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {exercise.description}
+        </MDTypography>
+      ),
+      wellness: (
+        <MDBox width="8rem" textAlign="left">
+          <MDProgress value={60} color="info" variant="gradient" label={false} />
+        </MDBox>
+      ),
+    })),
+
+    // rows: [
+    //   {
+    //     day: <Company image={logoXD} name="Material UI XD Version" />,
+    //     workout: (
+    //       <MDBox display="flex" py={1}>
+    //         {exercises.map((exercise) => exercise.name)}
+    //       </MDBox>
+    //     ),
+    //     assignedto: (
+    //       <MDTypography variant="caption" color="text" fontWeight="medium">
+    //         $14,000
+    //       </MDTypography>
+    //     ),
+    //     wellness: (
+    //       <MDBox width="8rem" textAlign="left">
+    //         <MDProgress value={60} color="info" variant="gradient" label={false} />
+    //       </MDBox>
+    //     ),
+    //   },
+    //   {
+    //     day: <Company image={logoAtlassian} name="Add Progress Track" />,
+    //     workout: (
+    //       <MDBox display="flex" py={1}>
+    //         {exercises.map((exercise) => exercise.name)}
+    //       </MDBox>
+    //     ),
+    //     assignedto: (
+    //       <MDTypography variant="caption" color="text" fontWeight="medium">
+    //         $3,000
+    //       </MDTypography>
+    //     ),
+    //     wellness: (
+    //       <MDBox width="8rem" textAlign="left">
+    //         <MDProgress value={10} color="info" variant="gradient" label={false} />
+    //       </MDBox>
+    //     ),
+    //   },
+    //   {
+    //     day: <Company image={logoSlack} name="Fix Platform Errors" />,
+    //     workout: (
+    //       <MDBox display="flex" py={1}>
+    //         {exercises.map((exercise) => exercise.name)}
+
+    //       </MDBox>
+    //     ),
+    //     assignedto: (
+    //       <MDTypography variant="caption" color="text" fontWeight="medium">
+    //         Not set
+    //       </MDTypography>
+    //     ),
+    //     wellness: (
+    //       <MDBox width="8rem" textAlign="left">
+    //         <MDProgress value={100} color="success" variant="gradient" label={false} />
+    //       </MDBox>
+    //     ),
+    //   },
+    //   {
+    //     day: <Company image={logoSpotify} name="Launch our Mobile App" />,
+    //     workout: (
+    //       <MDBox display="flex" py={1}>
+    //         {avatars([
+    //           [team4, "Jessica Doe"],
+    //           [team3, "Alexander Smith"],
+    //           [team2, "Romina Hadid"],
+    //           [team1, "Ryan Tompson"],
+    //         ])}
+    //       </MDBox>
+    //     ),
+    //     assignedto: (
+    //       <MDTypography variant="caption" color="text" fontWeight="medium">
+    //         $20,500
+    //       </MDTypography>
+    //     ),
+    //     wellness: (
+    //       <MDBox width="8rem" textAlign="left">
+    //         <MDProgress value={100} color="success" variant="gradient" label={false} />
+    //       </MDBox>
+    //     ),
+    //   },
+    //   {
+    //     day: <Company image={logoJira} name="Add the New Pricing Page" />,
+    //     workout: (
+    //       <MDBox display="flex" py={1}>
+    //         {avatars([[team4, "Jessica Doe"]])}
+    //       </MDBox>
+    //     ),
+    //     assignedto: (
+    //       <MDTypography variant="caption" color="text" fontWeight="medium">
+    //         $500
+    //       </MDTypography>
+    //     ),
+    //     wellness: (
+    //       <MDBox width="8rem" textAlign="left">
+    //         <MDProgress value={25} color="info" variant="gradient" label={false} />
+    //       </MDBox>
+    //     ),
+    //   },
+    //   {
+    //     day: <Company image={logoInvesion} name="Redesign New Online Shop" />,
+    //     workout: (
+    //       <MDBox display="flex" py={1}>
+    //         {avatars([
+    //           [team1, "Ryan Tompson"],
+    //           [team4, "Jessica Doe"],
+    //         ])}
+    //       </MDBox>
+    //     ),
+    //     assignedto: (
+    //       <MDTypography variant="caption" color="text" fontWeight="medium">
+    //         $2,000
+    //       </MDTypography>
+    //     ),
+    //     wellness: (
+    //       <MDBox width="8rem" textAlign="left">
+    //         <MDProgress value={40} color="info" variant="gradient" label={false} />
+    //       </MDBox>
+    //     ),
+    //   },
+    // ],
   };
 }

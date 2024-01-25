@@ -38,6 +38,7 @@ Coded by www.creative-tim.com
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
+import ExerciseLibrary from "layouts/exerciselibrary";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
@@ -64,6 +65,14 @@ const routes = [
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/tables",
     component: <Tables />,
+  },
+  {
+    type: "collapse",
+    name: "Exercise Library",
+    key: "exerciselibrary",
+    icon: <Icon fontSize="small">book</Icon>,
+    route: "/exerciselibrary",
+    component: <ExerciseLibrary />,
   },
   {
     type: "collapse",

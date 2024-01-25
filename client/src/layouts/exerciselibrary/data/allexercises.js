@@ -25,9 +25,9 @@ import MDBadge from "components/MDBadge";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import MDProgress from "../../../components/MDProgress";
 
 export default function data() {
-
   const [exercises, setExercises] = useState([]);
   async function getExercises() {
     try {
@@ -45,7 +45,6 @@ export default function data() {
     getExercises();
   }, []);
 
-  
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" />
@@ -97,7 +96,7 @@ export default function data() {
           <MDProgress value={60} color="info" variant="gradient" label={false} />
         </MDBox>
       ),
-    }))
+    })),
 
     // rows: [
     //   {

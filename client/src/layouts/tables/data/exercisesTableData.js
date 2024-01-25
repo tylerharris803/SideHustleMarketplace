@@ -17,12 +17,15 @@ Coded by www.creative-tim.com
 
 import { useEffect, useState } from "react";
 
+import Icon from "@mui/material/Icon";
+
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 import MDProgress from "components/MDProgress";
+import MDButton from "components/MDButton";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -50,34 +53,13 @@ export default function data() {
     getExercises();
   }, []);
 
-  // const Author = ({ image, name, email }) => (
-  //   <MDBox display="flex" alignItems="center" lineHeight={1}>
-  //     <MDAvatar src={image} name={name} size="sm" />
-  //     <MDBox ml={2} lineHeight={1}>
-  //       <MDTypography display="block" variant="button" fontWeight="medium">
-  //         {name}
-  //       </MDTypography>
-  //       <MDTypography variant="caption">{email}</MDTypography>
-  //     </MDBox>
-  //   </MDBox>
-  // );
-
-  // const Job = ({ title, description }) => (
-  //   <MDBox lineHeight={1} textAlign="left">
-  //     <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
-  //       {title}
-  //     </MDTypography>
-  //     <MDTypography variant="caption">{description}</MDTypography>
-  //   </MDBox>
-  // );
-
   return {
     columns: [
       { Header: "name", accessor: "name", width: "20%", align: "left" },
-      { Header: "category", accessor: "category", align: "left" },
-      { Header: "description", accessor: "description", align: "left" },
-      { Header: "employed", accessor: "employed", align: "left" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "category", accessor: "category", width: "20%", align: "left" },
+      { Header: "description", accessor: "description", width: "40%", align: "left" },
+      { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
+      { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
     ],
 
     rows: exercises.map((exercise, index) => ({
@@ -96,9 +78,18 @@ export default function data() {
           {exercise.description}
         </MDTypography>
       ),
-      wellness: (
-        <MDBox width="8rem" textAlign="left">
-          <MDProgress value={60} color="info" variant="gradient" label={false} />
+      edit: (
+        <MDBox>
+          <MDButton variant="text" color="dark">
+            <Icon>edit</Icon>&nbsp;edit
+          </MDButton>
+        </MDBox>
+      ),
+      delete: (
+        <MDBox mr={1}>
+          <MDButton variant="text" color="error">
+            <Icon>delete</Icon>&nbsp;delete
+          </MDButton>
         </MDBox>
       ),
     })),

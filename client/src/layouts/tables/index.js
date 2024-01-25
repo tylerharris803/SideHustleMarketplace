@@ -28,11 +28,11 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
+import exercisesTableData from "layouts/tables/data/exercisesTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
 function Tables() {
-  const { columns, rows } = authorsTableData();
+  const { columns, rows } = exercisesTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (

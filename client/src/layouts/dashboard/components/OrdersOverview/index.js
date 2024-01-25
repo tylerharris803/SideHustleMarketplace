@@ -62,9 +62,9 @@ function OrdersOverview() {
     <Card sx={{ height: "100%" }}>
       <MDBox pt={3} px={3}>
         <MDTypography variant="h6" fontWeight="medium">
-          Orders overview
+          TODO - List
         </MDTypography>
-        <MDBox mt={0} mb={2}>
+        {/* <MDBox mt={0} mb={2}>
           <MDTypography variant="button" color="text" fontWeight="regular">
             <MDTypography display="inline" variant="body2" verticalAlign="middle">
               <Icon sx={{ color: ({ palette: { success } }) => success.main }}>arrow_upward</Icon>
@@ -75,7 +75,7 @@ function OrdersOverview() {
             </MDTypography>{" "}
             this month
           </MDTypography>
-        </MDBox>
+        </MDBox> */}
       </MDBox>
       <MDBox p={2}>
         <TimelineItem

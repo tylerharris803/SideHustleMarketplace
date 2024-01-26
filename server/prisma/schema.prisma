@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,8 +8,59 @@ datasource db {
 }
 
 model exercise {
-  id          Int    @id @default(autoincrement())
-  name        String
-  category    String
-  description String
+  id                                   Int                   @id(map: "pk_exercise_id") @default(autoincrement())
+  name                                 String
+  category                             Int?
+  description                          String
+  media                                String?               @db.VarChar(100)
+  customized_exercise                  customized_exercise[]
+  category_exercise_categoryTocategory category?             @relation("exercise_categoryTocategory", fields: [category], references: [category_id], onDelete: NoAction, onUpdate: NoAction, map: "exercise_category_category_id_fk")
+}
+
+model assignment {
+  id                  Int                   @id(map: "pk_assignment_id") @default(autoincrement())
+  workout_id          Int?
+  date                DateTime?             @db.Date
+  notes               String?               @db.VarChar
+  player_id           Int?
+  workout             workout?              @relation(fields: [workout_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "assignment_workout_id_fk")
+  exercise_completion exercise_completion[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model category {
+  category_name                        String?    @db.VarChar(255)
+  category_id                          Int        @id(map: "pk_category_id")
+  exercise_exercise_categoryTocategory exercise[] @relation("exercise_categoryTocategory")
+}
+
+model customized_exercise {
+  id                  Int                   @id(map: "pk_customized_exercise_id") @default(autoincrement())
+  time                String?               @db.VarChar(25)
+  sets                Int?
+  reps                Int?
+  coach_notes         String?               @db.VarChar
+  workout_id          Int?
+  exercise_id         Int?
+  order_in_workout    Int?
+  exercise            exercise?             @relation(fields: [exercise_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "customized_exercise_exercise_id_fk")
+  workout             workout?              @relation(fields: [workout_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "customized_exercise_workout_id_fk")
+  exercise_completion exercise_completion[]
+}
+
+model exercise_completion {
+  id                     Int                  @id(map: "exercise_completion_pk") @default(autoincrement())
+  date_completed         DateTime?            @db.Date
+  player_notes           String?              @db.VarChar
+  customized_exercise_id Int?
+  assignment_id          Int?
+  assignment             assignment?          @relation(fields: [assignment_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "exercise_completion_assignment_id_fk")
+  customized_exercise    customized_exercise? @relation(fields: [customized_exercise_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "exercise_completion_customized_exercise_id_fk")
+}
+
+model workout {
+  id                  Int                   @id(map: "pk_workout_id") @default(autoincrement())
+  workout_name        String?               @db.VarChar(25)
+  assignment          assignment[]
+  customized_exercise customized_exercise[]
 }

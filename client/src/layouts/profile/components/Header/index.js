@@ -37,43 +37,61 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images
 import backgroundImage from "assets/images/bg-profile.jpeg";
 import { supabase } from "../../../../supabaseClient";
+import { getProfilePicURL } from "../../../../getProfilePicUrl";
+import { fetchUserProfile } from "../../../../fetchUserProfile";
 
 function Header({ children }) {
-  const [profile, setProfile] = useState(null); // Initialize state within the component
+  const [profile, setProfile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
+  // useEffect(() => {
+  //   fetchUserProfile();
+  // }, []);
+
   useEffect(() => {
-    async function getProfile() {
-      try {
-        const user = await supabase.auth.getUser();
-        const userId = user.data.user.id;
+    const fetchData = async () => {
+      const data = await fetchUserProfile();
+      const url = await getProfilePicURL(data?.profile_picture);
 
-        const { data, error } = await supabase
-          .from("profile")
-          .select("*")
-          .eq("id", userId)
-          .single();
+      setProfile(data);
+      setImageUrl(url);
+    };
+    fetchData();
+  }, []);
 
-        if (data != null) {
-          setProfile(data);
-        }
+  // useEffect(() => {
+  //   async function getProfile() {
+  //     try {
+  //       const user = await supabase.auth.getUser();
+  //       const userId = user.data.user.id;
+  //
+  //       const { data, error } = await supabase
+  //         .from("profile")
+  //         .select("*")
+  //         .eq("id", userId)
+  //         .single();
+  //
+  //       if (data != null) {
+  //         setProfile(data);
+  //       }
+  //
+  //       setImageUrl(await getProfilePicURL(data.profile_picture));
+  //
+  //     } catch (error) {
+  //       alert(error.message);
+  //     }
+  //   }
+  //
+  //   getProfile();
+  // }, []); // Use the useEffect hook to fetch data when the component mounts
 
-        setImageUrl(await getProfilePicURL(data.profile_picture));
-      } catch (error) {
-        alert(error.message);
-      }
-    }
-
-    getProfile();
-  }, []); // Use the useEffect hook to fetch data when the component mounts
-
-  async function getProfilePicURL(file_path) {
-    const { data, error } = await supabase.storage
-      .from("images")
-      .createSignedUrl(`${file_path}`, 60);
-
-    return data.signedUrl;
-  }
+  // async function getProfilePicURL(file_path) {
+  //   const { data, error } = await supabase.storage
+  //     .from("images")
+  //     .createSignedUrl(`${file_path}`, 60);
+  //
+  //   return data.signedUrl;
+  // }
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);

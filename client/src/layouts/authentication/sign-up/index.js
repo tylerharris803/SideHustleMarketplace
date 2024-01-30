@@ -31,6 +31,17 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import { FormControl, InputLabel, Select } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+
+// const handleSignUp = async () => {
+//   try {
+//     const { data, error } = await supabase
+//       .from('profile')
+//       .update({})
+//       .eq
+//   }
+// }
 
 function Cover() {
   return (
@@ -57,13 +68,25 @@ function Cover() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="text" label="Name" variant="standard" fullWidth />
+              <MDInput type="text" label="First Name" variant="standard" fullWidth />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" variant="standard" fullWidth />
+              <MDInput type="text" label="Last Name" variant="standard" fullWidth />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" variant="standard" fullWidth />
+              <MDInput type="date" label="Birth Date" variant="standard" fullWidth />
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput type="tel" label="Phone Number" variant="standard" fullWidth />
+            </MDBox>
+            <MDBox mb={2}>
+              <FormControl fullWidth>
+                <InputLabel>Coach or Player?</InputLabel>
+                <Select>
+                  <MenuItem value="player">Player</MenuItem>
+                  <MenuItem value="coach">Coach</MenuItem>
+                </Select>
+              </FormControl>
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox />
@@ -88,7 +111,7 @@ function Cover() {
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" fullWidth>
-                sign in
+                get started!
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">

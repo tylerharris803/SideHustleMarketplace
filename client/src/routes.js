@@ -39,6 +39,7 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import ExerciseLibrary from "layouts/exerciselibrary";
+import AddExercise from "layouts/addexercise";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
@@ -73,6 +74,14 @@ const routes = [
     icon: <Icon fontSize="small">book</Icon>,
     route: "/exerciselibrary",
     component: <ExerciseLibrary />,
+  },
+  {
+    type: "collapse",
+    name: "Add Exercise",
+    key: "addexercise",
+    icon: <Icon fontSize="small">accessibility</Icon>,
+    route: "/addexercise",
+    component: <AddExercise />,
   },
   {
     type: "collapse",

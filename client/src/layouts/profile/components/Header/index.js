@@ -44,10 +44,6 @@ function Header({ children }) {
   const [profile, setProfile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
-  // useEffect(() => {
-  //   fetchUserProfile();
-  // }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchUserProfile();
@@ -58,40 +54,6 @@ function Header({ children }) {
     };
     fetchData();
   }, []);
-
-  // useEffect(() => {
-  //   async function getProfile() {
-  //     try {
-  //       const user = await supabase.auth.getUser();
-  //       const userId = user.data.user.id;
-  //
-  //       const { data, error } = await supabase
-  //         .from("profile")
-  //         .select("*")
-  //         .eq("id", userId)
-  //         .single();
-  //
-  //       if (data != null) {
-  //         setProfile(data);
-  //       }
-  //
-  //       setImageUrl(await getProfilePicURL(data.profile_picture));
-  //
-  //     } catch (error) {
-  //       alert(error.message);
-  //     }
-  //   }
-  //
-  //   getProfile();
-  // }, []); // Use the useEffect hook to fetch data when the component mounts
-
-  // async function getProfilePicURL(file_path) {
-  //   const { data, error } = await supabase.storage
-  //     .from("images")
-  //     .createSignedUrl(`${file_path}`, 60);
-  //
-  //   return data.signedUrl;
-  // }
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
@@ -156,7 +118,7 @@ function Header({ children }) {
                 {profile ? profile.first_name : ""} {profile ? profile.last_name : ""}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                CEO / Co-Founder
+                {profile ? profile.position : ""}
               </MDTypography>
             </MDBox>
           </Grid>

@@ -9,7 +9,6 @@ export async function fetchUserProfile() {
     const { data, error } = await supabase.from("profile").select("*").eq("id", userId).single();
 
     return data;
-
   } catch (error) {
     alert(error.message);
   }

@@ -35,37 +35,25 @@ import MDAvatar from "components/MDAvatar";
 import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
-import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
 import { supabase } from "../../../../supabaseClient";
+import { getProfilePicURL } from "../../../../getProfilePicUrl";
+import { fetchUserProfile } from "../../../../fetchUserProfile";
 
 function Header({ children }) {
-  const [profile, setProfile] = useState(null); // Initialize state within the component
+  const [profile, setProfile] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
-    async function getProfile() {
-      try {
-        const user = await supabase.auth.getUser();
-        const userId = user.data.user.id;
+    const fetchData = async () => {
+      const data = await fetchUserProfile();
+      const url = await getProfilePicURL(data?.profile_picture);
 
-        const { data, error } = await supabase
-          .from("profile")
-          .select("*")
-          .eq("id", userId)
-          .single();
-
-        console.log(data);
-
-        if (data != null) {
-          setProfile(data);
-        }
-      } catch (error) {
-        alert(error.message);
-      }
-    }
-
-    getProfile();
-  }, []); // Use the useEffect hook to fetch data when the component mounts
+      setProfile(data);
+      setImageUrl(url);
+    };
+    fetchData();
+  }, []);
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
@@ -122,7 +110,7 @@ function Header({ children }) {
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item>
-            <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
+            <MDAvatar src={imageUrl} alt="profile-image" size="xl" shadow="sm" />
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
@@ -130,7 +118,7 @@ function Header({ children }) {
                 {profile ? profile.first_name : ""} {profile ? profile.last_name : ""}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                CEO / Co-Founder
+                {profile ? profile.position : ""}
               </MDTypography>
             </MDBox>
           </Grid>

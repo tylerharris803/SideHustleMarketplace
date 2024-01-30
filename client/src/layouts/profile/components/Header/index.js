@@ -58,8 +58,7 @@ function Header({ children }) {
           setProfile(data);
         }
 
-        setImageUrl(await getProfilePicURL());
-
+        setImageUrl(await getProfilePicURL(data.profile_picture));
       } catch (error) {
         alert(error.message);
       }
@@ -68,11 +67,10 @@ function Header({ children }) {
     getProfile();
   }, []); // Use the useEffect hook to fetch data when the component mounts
 
-  async function getProfilePicURL() {
-    const { data, error } = await supabase
-      .storage
-      .from('images')
-      .createSignedUrl('Tyler_Harris', 60);
+  async function getProfilePicURL(file_path) {
+    const { data, error } = await supabase.storage
+      .from("images")
+      .createSignedUrl(`${file_path}`, 60);
 
     return data.signedUrl;
   }

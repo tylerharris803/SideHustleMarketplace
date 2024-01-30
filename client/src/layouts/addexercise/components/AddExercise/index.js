@@ -7,17 +7,28 @@ import Button from "@mui/material/Button";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
+import { FormControl, InputLabel, Select } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+
 // Billing page components
 import Bill from "layouts/addexercise/components/Bill";
+
+import React, { useState } from "react";
 
 // Add supabase connection
 import { supabase } from "../../../../supabaseClient";
 
 function AddExercise() {
+  const [selectedCategory, setSelectedCategory] = useState(""); // new state for selected category
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
   const handleSubmit = async () => {
     const exerciseData = {
       name: document.getElementById("exercise-name").value,
-      category: document.getElementById("exercise-category").value,
+      category: selectedCategory, // use the selectedCategory state variable
       description: document.getElementById("exercise-description").value,
     };
 
@@ -55,7 +66,26 @@ function AddExercise() {
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          <TextField id="exercise-category" label="Category" variant="outlined" />
+          <MDBox mb={2}>
+              <FormControl fullWidth>
+                <InputLabel>Category</InputLabel>
+                <Select
+                  id="exercise-category"
+                  label="Category"
+                  variant="outlined"
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                >                  
+                  <MenuItem value="14">Training</MenuItem>
+                  <MenuItem value="8">Arms</MenuItem>
+                  <MenuItem value="9">Legs</MenuItem>
+                  <MenuItem value="10">Core</MenuItem>
+                  <MenuItem value="11">Back</MenuItem>
+                  <MenuItem value="12">Chest</MenuItem>
+                  <MenuItem value="13">Endurance</MenuItem>
+                </Select>
+              </FormControl>
+            </MDBox>
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>

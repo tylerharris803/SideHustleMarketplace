@@ -27,37 +27,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../../supabaseClient";
 
 function OrdersOverview() {
-  // const [exercises, setExercises] = useState([]);
-  // async function getExercises() {
-  //   try {
-  //     const { data, error } = await supabase.from("exercise").select("name").limit(10);
-  //     console.log(data);
-  //     if (error) throw error;
-  //     if (data != null) {
-  //       setExercises(data);
-  //     }
-  //   } catch (error) {
-  //     alert(error.message);
-  //   }
-  // }
-  // useEffect(() => {
-  //   getExercises();
-  // }, []);
-
-  //
-  // const [newdata, setnewData] = useState(null);
-  //
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     let { data: exercise, error } = await supabase.from("exercise").select("name");
-  //     console.log(data);
-  //     if (exercise) {
-  //       setnewData(exercise);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-
   return (
     <Card sx={{ height: "100%" }}>
       <MDBox pt={3} px={3}>

@@ -32,7 +32,6 @@ export default function data() {
   async function getExercises() {
     try {
       const { data, error } = await supabase.from("exercise").select("*");
-      console.log(data);
       if (error) throw error;
       if (data != null) {
         setExercises(data);

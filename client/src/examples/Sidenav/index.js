@@ -53,7 +53,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   async function getExercises() {
     try {
       const { data, error } = await supabase.from("exercise").select("name").limit(5);
-      console.log(data);
       if (error) throw error;
       if (data != null) {
         setExercises(data);

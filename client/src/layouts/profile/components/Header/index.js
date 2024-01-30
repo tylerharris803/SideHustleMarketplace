@@ -35,12 +35,12 @@ import MDAvatar from "components/MDAvatar";
 import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
-import burceMars from "assets/images/bruce-mars.jpg";
 import backgroundImage from "assets/images/bg-profile.jpeg";
 import { supabase } from "../../../../supabaseClient";
 
 function Header({ children }) {
   const [profile, setProfile] = useState(null); // Initialize state within the component
+  const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
     async function getProfile() {
@@ -54,11 +54,12 @@ function Header({ children }) {
           .eq("id", userId)
           .single();
 
-        console.log(data);
-
         if (data != null) {
           setProfile(data);
         }
+
+        setImageUrl(await getProfilePicURL());
+
       } catch (error) {
         alert(error.message);
       }
@@ -66,6 +67,15 @@ function Header({ children }) {
 
     getProfile();
   }, []); // Use the useEffect hook to fetch data when the component mounts
+
+  async function getProfilePicURL() {
+    const { data, error } = await supabase
+      .storage
+      .from('images')
+      .createSignedUrl('Tyler_Harris', 60);
+
+    return data.signedUrl;
+  }
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
@@ -122,7 +132,7 @@ function Header({ children }) {
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item>
-            <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
+            <MDAvatar src={imageUrl} alt="profile-image" size="xl" shadow="sm" />
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>

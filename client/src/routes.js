@@ -49,6 +49,8 @@ import SignOut from "layouts/authentication/sign-out";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import AddNewTeam from "./layouts/addteam/components/AddTeam";
+import Addnewteam from "./layouts/addteam";
 
 const routes = [
   {
@@ -82,6 +84,14 @@ const routes = [
     icon: <Icon fontSize="small">accessibility</Icon>,
     route: "/addexercise",
     component: <AddExercise />,
+  },
+  {
+    type: "collapse",
+    name: "Add New Team",
+    key: "addteam",
+    icon: <Icon fontSize="small">accessibility</Icon>,
+    route: "/addteam",
+    component: <Addnewteam />,
   },
   {
     type: "collapse",

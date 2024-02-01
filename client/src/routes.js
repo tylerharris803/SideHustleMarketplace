@@ -46,6 +46,9 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import SignOut from "layouts/authentication/sign-out";
+import CoachOrPlayer from "layouts/authentication/coachorplayer";
+import CoachInfo from "layouts/authentication/coachinfo";
+import TeamInfo from "layouts/authentication/coachinfo";
 import WorkoutLibrary from "layouts/workoutlibrary"
 
 // @mui icons
@@ -169,6 +172,30 @@ const routes = [
     icon: <Icon fontSize="small">logout</Icon>,
     route: "/authentication/sign-out",
     component: <SignOut />,
+  },
+  {
+    type: "collapse",
+    name: "Coach or Player",
+    key: "coachorplayer",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/coachorplayer",
+    component: <CoachOrPlayer />,
+  },
+  {
+    type: "collapse",
+    name: "Coach Info",
+    key: "coachinfo",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/coachinfo",
+    component: <CoachInfo />,
+  },
+  {
+    type: "collapse",
+    name: "Team Info",
+    key: "teaminfo",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/teaminfo",
+    component: <TeamInfo />,
   },
 ];
 

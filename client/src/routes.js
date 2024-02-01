@@ -49,14 +49,21 @@ import SignOut from "layouts/authentication/sign-out";
 import CoachOrPlayer from "layouts/authentication/coachorplayer";
 import CoachInfo from "layouts/authentication/coachinfo";
 import TeamInfo from "layouts/authentication/coachinfo";
-
-
-
+import WorkoutLibrary from "layouts/workoutlibrary"
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import PeopleIcon from '@mui/icons-material/People';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+
+
 import AddNewTeam from "./layouts/addteam/components/AddTeam";
 import Addnewteam from "./layouts/addteam";
+//import AddWorkout from "layouts/addworkout/components/AddWorkout";
+import AddWorkout from "./layouts/addworkout"
 
 const routes = [
   {
@@ -71,7 +78,7 @@ const routes = [
     type: "collapse",
     name: "Players",
     key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <PeopleIcon fontSize="small">table_view</PeopleIcon>,
     route: "/tables",
     component: <Tables />,
   },
@@ -79,18 +86,36 @@ const routes = [
     type: "collapse",
     name: "Exercise Library",
     key: "exerciselibrary",
-    icon: <Icon fontSize="small">book</Icon>,
+    icon: <ListAltIcon fontSize="small">book</ListAltIcon>,
     route: "/exerciselibrary",
     component: <ExerciseLibrary />,
   },
+
   {
     type: "collapse",
     name: "Add Exercise",
     key: "addexercise",
-    icon: <Icon fontSize="small">accessibility</Icon>,
+    icon: <FitnessCenterIcon fontSize="small">accessibility</FitnessCenterIcon>,
     route: "/addexercise",
     component: <AddExercise />,
   },
+  {
+    type: "collapse",
+    name: "Saved Workouts",
+    key: "workoutlibrary",
+    icon: <CollectionsBookmarkIcon fontSize="small">book</CollectionsBookmarkIcon>,
+    route: "/workoutlibrary",
+    component: <WorkoutLibrary />,
+  },
+  {
+    type: "collapse",
+    name: "Create Workout",
+    key: "addworkout",
+    icon: <DirectionsRunIcon fontSize="small">accessibility</DirectionsRunIcon>,
+    route: "/addworkout",
+    component: <AddWorkout />,
+  },
+ 
   {
     type: "collapse",
     name: "Add New Team",
@@ -99,6 +124,7 @@ const routes = [
     route: "/addteam",
     component: <Addnewteam />,
   },
+  
   {
     type: "collapse",
     name: "Billing",

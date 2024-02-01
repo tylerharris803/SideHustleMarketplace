@@ -74,8 +74,7 @@ function AddExercise() {
           <MDBox mb={0}>
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
-              <Select
-                
+              <Select 
                 id="exercise-category"
                 label="Category"
                 variant="outlined"

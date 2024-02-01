@@ -15,60 +15,38 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
 
-// Material Dashboard 2 React example components
+// Material Dashboard 2 React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
+import MasterCard from "examples/Cards/MasterCard";
+import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
-// Data
-import exercisesTableData from "layouts/tables/data/exercisesTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
-import workoutsTableData from "layouts/tables/data/workoutsTableData";
+// workout library page components
+
+import WorkoutLibrary from "./data/allworkouts";
+import Transactions from "layouts/billing/components/Transactions";
+
+//data
+import workoutsTableData from "layouts/tables/data/workoutsTableData"
 
 function Tables() {
-  const { columns, rows } = workoutsTableData();
-//   const { columns: pColumns, rows: pRows } = projectsTableData();
-
+    const { columns, rows } = workoutsTableData();
   return (
     <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Saved Workouts
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
+      <DashboardNavbar absolute isMini />
+      <MDBox mt={8}>
+        <MDBox mb={3}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={12}>
+              <WorkoutLibrary />
+            </Grid>
           </Grid>
-        </Grid>
+        </MDBox>
       </MDBox>
       <Footer />
     </DashboardLayout>

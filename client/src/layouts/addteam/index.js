@@ -2,22 +2,18 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
-import Transactions from "../addexercise/components/Transactions";
 import Footer from "../../examples/Footer";
 import AddTeam from "./components/AddTeam";
 
-function Billing() {
+function AddingTeam() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
       <MDBox mt={8}>
         <MDBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={7}>
+            <Grid item xs={12} md={12}>
               <AddTeam />
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <Transactions />
             </Grid>
           </Grid>
         </MDBox>
@@ -27,4 +23,4 @@ function Billing() {
   );
 }
 
-export default Billing;
+export default AddingTeam;

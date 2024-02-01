@@ -10,7 +10,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
 // Billing page components
-import Bill from "layouts/billing/components/Bill";
+import Bill from "../workouts_format/index";
 
 //data
 import workoutsTableData from "layouts/tables/data/workoutsTableData"
@@ -20,16 +20,60 @@ import { supabase } from "../../../supabaseClient";
 
 function data() {
     const [workouts, setWorkouts] = useState([]);
+    // async function getWorkouts() {
+    //   try {
+    //     const { data, error } = await supabase.from("workout").select("*");
+    //     if (error) throw error;
+    //     if (data != null) {
+    //       setWorkouts(data);
+    //     }
+    //   } catch (error) {
+    //     alert(error.message);
+    //   }
+    // }
     async function getWorkouts() {
-      try {
-        const { data, error } = await supabase.from("workout").select("*");
-        if (error) throw error;
-        if (data != null) {
-          setWorkouts(data);
+        try {
+          const { data: workoutsData, error: workoutsError } = await supabase
+            .from("workout")
+            .select("id, workout_name");
+      
+          if (workoutsError) throw workoutsError;
+      
+          if (workoutsData && workoutsData.length > 0) {
+            const workoutsWithExercises = await Promise.all(
+              workoutsData.map(async (workout) => {
+                try {
+                  const { data: exerciseData, error: exerciseError } = await supabase
+                    .from("customized_exercise")
+                    .select("exercise_id")
+                    .eq("workout_id", workout.id);
+      
+                  if (exerciseError) throw exerciseError;
+      
+                  const exercise_id = exerciseData && exerciseData.length > 0 ? exerciseData[0].exercise_id : null;
+      
+                  console.log("Workout:", workout);
+                  console.log("Exercise Data:", exerciseData);
+                  console.log("Exercise ID:", exercise_id);
+      
+                  return {
+                    ...workout,
+                    exercise_id,
+                  };
+                } catch (exError) {
+                  console.error("Error fetching exercise data:", exError);
+                  return workout;
+                }
+              })
+            );
+      
+            console.log("Workouts with Exercises:", workoutsWithExercises);
+      
+            setWorkouts(workoutsWithExercises);
+          }
+        } catch (error) {
+          alert(error.message);
         }
-      } catch (error) {
-        alert(error.message);
-      }
     }
     useEffect(() => {
       getWorkouts();
@@ -64,7 +108,7 @@ function WorkoutLibrary() {
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           {workouts.map((workout, index) => (
-            <Bill key={index} name={workout.workout_name} />
+            <Bill key={index} name={workout.workout_name} exercise_id={workout.exercise_id} />
           ))}
         </MDBox>
       </MDBox>

@@ -96,7 +96,8 @@ export default function data() {
         </MDBox>
       ),
     })),
-
+  };
+}
     // rows: [
     //   {
     //     author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
@@ -213,5 +214,3 @@ export default function data() {
     //     ),
     //   },
     // ],
-  };
-}

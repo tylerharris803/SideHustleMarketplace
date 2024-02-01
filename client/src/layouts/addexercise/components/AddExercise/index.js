@@ -34,10 +34,7 @@ function AddExercise() {
 
     try {
       // Use supabase client's api.post method to add data
-      const { data, error } = await supabase
-        .from("exercise")
-        .upsert([exerciseData])
-        .select();
+      const { data, error } = await supabase.from("exercise").upsert([exerciseData]).select();
 
       if (error) {
         console.error("Error adding exercise:", error);
@@ -67,25 +64,25 @@ function AddExercise() {
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <MDBox mb={2}>
-              <FormControl fullWidth>
-                <InputLabel>Category</InputLabel>
-                <Select
-                  id="exercise-category"
-                  label="Category"
-                  variant="outlined"
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
-                >                  
-                  <MenuItem value="14">Training</MenuItem>
-                  <MenuItem value="8">Arms</MenuItem>
-                  <MenuItem value="9">Legs</MenuItem>
-                  <MenuItem value="10">Core</MenuItem>
-                  <MenuItem value="11">Back</MenuItem>
-                  <MenuItem value="12">Chest</MenuItem>
-                  <MenuItem value="13">Endurance</MenuItem>
-                </Select>
-              </FormControl>
-            </MDBox>
+            <FormControl fullWidth>
+              <InputLabel>Category</InputLabel>
+              <Select
+                id="exercise-category"
+                label="Category"
+                variant="outlined"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              >
+                <MenuItem value="14">Training</MenuItem>
+                <MenuItem value="8">Arms</MenuItem>
+                <MenuItem value="9">Legs</MenuItem>
+                <MenuItem value="10">Core</MenuItem>
+                <MenuItem value="11">Back</MenuItem>
+                <MenuItem value="12">Chest</MenuItem>
+                <MenuItem value="13">Endurance</MenuItem>
+              </Select>
+            </FormControl>
+          </MDBox>
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>

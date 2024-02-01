@@ -14,26 +14,29 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../../../supabaseClient";
 import Checkbox from "@mui/material/Checkbox";
 
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const daysOfWeekMap = [
-  {id: 1, name: "Sunday"},
-  {id: 2, name: "Monday"},
-  {id: 3, name: "Tuesday"},
-  {id: 4, name: "Wednesday"},
-  {id: 5, name: "Thursday"},
-  {id: 6, name: "Friday"},
-  {id: 7, name: "Saturday"},
-]
+  { id: 1, name: "Sunday" },
+  { id: 2, name: "Monday" },
+  { id: 3, name: "Tuesday" },
+  { id: 4, name: "Wednesday" },
+  { id: 5, name: "Thursday" },
+  { id: 6, name: "Friday" },
+  { id: 7, name: "Saturday" },
+];
 
 function AddTeam() {
+  const navigate = useNavigate();
   const [selectedSport, setSelectedSport] = useState(""); // new state for selected sport
   const [selectedDays, setSelectedDays] = useState([]); // new state for selected days
   const [sports, setSports] = useState([]);
 
   async function getSports() {
     try {
-      let { data, error } = await supabase
-        .from("sport")
-        .select("*");
+      let { data, error } = await supabase.from("sport").select("*");
 
       if (error) throw error;
 
@@ -68,10 +71,9 @@ function AddTeam() {
     const teamData = {
       name: document.getElementById("team-name").value,
       sport_id: selectedSport, // use the selectedSport state variable
-      checkin_frequency: selectedDays.sort((a, b) => a - b).join('')
+      checkin_frequency: selectedDays.sort((a, b) => a - b).join(""),
     };
 
-    console.log("here's the data:", JSON.stringify(teamData))
     try {
       // Use supabase client's api.post method to add data
       const { data, error } = await supabase.from("team").upsert([teamData]).select();
@@ -81,7 +83,13 @@ function AddTeam() {
         // Handle the error here
       } else {
         console.log("Team added successfully!");
-        // Optionally, you can redirect or show a success message here
+
+        toast.success("Team added successfully!", {
+          autoClose: 2000,
+          onClose: () => {
+            navigate("/dashboard");
+          },
+        });
       }
     } catch (error) {
       console.error("Error:", error);

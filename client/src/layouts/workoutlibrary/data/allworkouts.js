@@ -84,7 +84,7 @@ export default function data() {
         <MDBox display="flex" py={1}>
           {workout.name} {/* Display the name of the current exercise */}
         </MDBox>
-      )
+      ),
     })),
 
     // rows: [

@@ -2,11 +2,10 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
-import Transactions from "../addexercise/components/Transactions";
 import Footer from "../../examples/Footer";
 import AddWorkout from "./components/AddWorkout";
 
-function Billing() {
+function AddingWorkout() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
@@ -27,4 +26,4 @@ function Billing() {
   );
 }
 
-export default Billing;
+export default AddingWorkout;

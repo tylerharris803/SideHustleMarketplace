@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -66,8 +66,8 @@ function Cover() {
               </MDBox>
             </MDBox>
             <MDBox mb={2}>
-                <MDInput type="text" label="Upload Profile Pic" variant="standard" fullWidth />
-              </MDBox>
+              <MDInput type="text" label="Upload Profile Pic" variant="standard" fullWidth />
+            </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton component={Link} to="/dashboard" variant="gradient" color="info" fullWidth>
                 Next

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -70,7 +70,13 @@ function Cover() {
               </ToggleButtonGroup>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/coachinfo" variant="gradient" color="info" fullWidth>
+              <MDButton
+                component={Link}
+                to="/authentication/coachinfo"
+                variant="gradient"
+                color="info"
+                fullWidth
+              >
                 Next
               </MDButton>
             </MDBox>

@@ -44,7 +44,7 @@ function AddExercise() {
       } else {
         console.log("Exercise added successfully!");
         // Optionally, you can redirect or show a success message here
-          toast.success("Team added successfully!", {
+        toast.success("Team added successfully!", {
           autoClose: 2000,
           onClose: () => {
             navigate("/exerciselibrary");
@@ -66,7 +66,12 @@ function AddExercise() {
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          <TextField id="exercise-name" label="Exercise Name" variant="outlined" sx={{ width: "30%" }}/>
+          <TextField
+            id="exercise-name"
+            label="Exercise Name"
+            variant="outlined"
+            sx={{ width: "30%" }}
+          />
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
@@ -74,13 +79,13 @@ function AddExercise() {
           <MDBox mb={0}>
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
-              <Select 
+              <Select
                 id="exercise-category"
                 label="Category"
                 variant="outlined"
                 value={selectedCategory}
                 onChange={handleCategoryChange}
-                sx={{ width: "30%", minHeight:'46px' }}
+                sx={{ width: "30%", minHeight: "46px" }}
               >
                 <MenuItem value="14">Training</MenuItem>
                 <MenuItem value="8">Arms</MenuItem>

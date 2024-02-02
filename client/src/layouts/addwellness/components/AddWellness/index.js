@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../../../supabaseClient";
 import Checkbox from "@mui/material/Checkbox";
 
-import slider from '@mui/material/Slider';
+import slider from "@mui/material/Slider";
 
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -40,15 +40,15 @@ function AddWellness() {
     sleep: { id: 2, value: 3 },
     stress: { id: 3, value: 3 },
     soreness: { id: 4, value: 3 },
-    energy: { id: 5, value: 3 }
+    energy: { id: 5, value: 3 },
   });
 
-   const handleSliderChange = (type, value) => {
+  const handleSliderChange = (type, value) => {
     setWellnessData((prevData) => ({
       ...prevData,
-      [type]: { id: prevData[type].id, value: value}
+      [type]: { id: prevData[type].id, value: value },
     }));
-   };
+  };
 
   // const handleSportChange = (event) => {
   //   setSelectedSport(event.target.value);
@@ -68,10 +68,10 @@ function AddWellness() {
 
   const handleSubmit = async () => {
     const dataToSubmit = Object.keys(wellnessData).map((type) => ({
-      player_id: '2cefa8cf-5c6f-4827-a552-5864f6dd130d', //update to get current user id
+      player_id: "2cefa8cf-5c6f-4827-a552-5864f6dd130d", //update to get current user id
       wellness_id: wellnessData[type].id,
-      date: '2024-02-01',                                 //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
-      created_at: new Date().toISOString(),      
+      date: "2024-02-01", //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
+      created_at: new Date().toISOString(),
       value: wellnessData[type].value,
     }));
 
@@ -107,37 +107,78 @@ function AddWellness() {
           Add Wellness
         </MDTypography>
         <MDTypography variant="body2" fontWeight="textSecondary" id="dateSelected">
-          Current Date: {new Date().toLocaleDateString()} {/* Want to update to be able to select a date */} 
+          Current Date: {new Date().toLocaleDateString()}{" "}
+          {/* Want to update to be able to select a date */}
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           Water
-          <Slider valueLabelDisplay="auto" step={1} marks min={1} max={5} value={wellnessData.water.value} onChange={(event, value) => handleSliderChange('water', value)} />
+          <Slider
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={1}
+            max={5}
+            value={wellnessData.water.value}
+            onChange={(event, value) => handleSliderChange("water", value)}
+          />
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          Sleep 
-          <Slider valueLabelDisplay="auto" step={1} marks min={1} max={5} value={wellnessData.sleep.value} onChange={(event, value) => handleSliderChange('sleep', value)}/>
+          Sleep
+          <Slider
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={1}
+            max={5}
+            value={wellnessData.sleep.value}
+            onChange={(event, value) => handleSliderChange("sleep", value)}
+          />
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           Stress
-          <Slider valueLabelDisplay="auto" step={1} marks min={1} max={5} value={wellnessData.stress.value} onChange={(event, value) => handleSliderChange('stress', value)}/>
+          <Slider
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={1}
+            max={5}
+            value={wellnessData.stress.value}
+            onChange={(event, value) => handleSliderChange("stress", value)}
+          />
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-         Soreness
-          <Slider valueLabelDisplay="auto" step={1} marks min={1} max={5} value={wellnessData.soreness.value} onChange={(event, value) => handleSliderChange('soreness', value)}/>
+          Soreness
+          <Slider
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={1}
+            max={5}
+            value={wellnessData.soreness.value}
+            onChange={(event, value) => handleSliderChange("soreness", value)}
+          />
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           Energy
-          <Slider valueLabelDisplay="auto" step={1} marks min={1} max={5} value={wellnessData.energy.value} onChange={(event, value) => handleSliderChange('energy', value)}/>
+          <Slider
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={1}
+            max={5}
+            value={wellnessData.energy.value}
+            onChange={(event, value) => handleSliderChange("energy", value)}
+          />
         </MDBox>
       </MDBox>
       <MDBox px={2} pb={2}>

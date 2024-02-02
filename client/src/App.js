@@ -13,6 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+
 import { useState, useEffect, useMemo, Component, Suspense } from "react";
 
 // react-router components
@@ -56,6 +58,37 @@ import brandDark from "assets/images/logo-ct-dark.png";
 import { supabase } from "./supabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
+
+const WelcomeBox = () => (
+  <div
+    style={{
+      position: 'absolute',
+      marginLeft: "auto",
+      height: '10%',
+      background: '#3498db', // Blue background color
+      padding: '25px',
+      borderRadius: '8px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      top: '12%', // Adjust the offset from the top
+      left: '50%', // Adjust the left offset
+      transform: 'translateX(-50%)',
+      textAlign: 'center',
+      color: '#fff', // Text color
+      zIndex: 2, // Make sure it's above other elements
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <h2 style={{ marginBottom: "10px" }}>Welcome to CoachSync</h2>
+    <img
+      src="/static/media/logo-ct.39c110530c00e2b0debf.png"
+      alt="CoachSync Logo"
+      style={{ maxWidth: '50px', marginBottom: '10px' }}
+    />
+  </div>
+);
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -121,6 +154,8 @@ export default function App() {
   // Setting the dir attribute for the body element
   useEffect(() => {
     document.body.setAttribute("dir", direction);
+    document.body.style.margin = 0;
+    document.body.style.padding = 0;
   }, [direction]);
 
   // Setting page scroll to 0 when changing the route
@@ -167,8 +202,74 @@ export default function App() {
   );
 
   if (!session) {
-    return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
+    return (
+      <div>
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            minHeight: "100vh",
+            background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/media/bg-sign-in-basic.f327db1d0e4b00ba3c81.jpeg")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              background: "white",
+              padding: "20px",
+              borderRadius: "8px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              maxWidth: "400px",
+              width: "100%",
+              textAlign: "center",
+              paddingTop: "6%",
+            }}
+          >
+            <Auth
+              supabaseClient={supabase}
+              appearance={{
+                style: {
+                  button: {
+                    background: "#3498db",
+                    color: "#fff",
+                    borderRadius: "4px",
+                    padding: "10px 20px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    border: "none",
+                    marginTop: "20px",
+                  },
+                  anchor: {
+                    color: "#3498db",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    marginTop: "20px",
+                  },
+                },
+                theme: ThemeSupa,
+                variables: {
+                  default: {
+                    space: {
+                      spaceSmall: "4px",
+                    },
+                  },
+                },
+              }}
+              providers={["google"]}
+              theme="default"
+            />
+          </div>
+          <WelcomeBox />
+        </div>
+      </div>
+    );
   } else {
+    // STOP UNDO
     return direction === "rtl" ? (
       <CacheProvider value={rtlCache}>
         <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>

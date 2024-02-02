@@ -48,7 +48,8 @@ import SignUp from "layouts/authentication/sign-up";
 import SignOut from "layouts/authentication/sign-out";
 import CoachOrPlayer from "layouts/authentication/coachorplayer";
 import CoachInfo from "layouts/authentication/coachinfo";
-import TeamInfo from "layouts/authentication/coachinfo";
+import TeamInfo from "layouts/authentication/teaminfo";
+import WellnessSetup from "layouts/authentication/wellness-setup";
 import WorkoutLibrary from "layouts/workoutlibrary"
 
 // @mui icons
@@ -175,7 +176,6 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Coach or Player",
     key: "coachorplayer",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/coachorplayer",
@@ -183,7 +183,6 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Coach Info",
     key: "coachinfo",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/coachinfo",
@@ -191,11 +190,17 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Team Info",
     key: "teaminfo",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/teaminfo",
     component: <TeamInfo />,
+  },
+  {
+    type: "collapse",
+    key: "wellness-setup",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/wellness-setup",
+    component: <WellnessSetup />,
   },
 ];
 

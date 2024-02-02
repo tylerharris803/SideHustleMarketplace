@@ -43,8 +43,8 @@ function CoverLayout({ coverHeight, image, children }) {
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             image &&
             `${linearGradient(
-              rgba(gradients.dark.main, 0.4),
-              rgba(gradients.dark.state, 0.4)
+              rgba(gradients.dark.main, 0.1),
+              rgba(gradients.dark.state, 0.1)
             )}, url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

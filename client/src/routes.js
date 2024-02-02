@@ -64,6 +64,7 @@ import AddNewTeam from "./layouts/addteam/components/AddTeam";
 import Addnewteam from "./layouts/addteam";
 //import AddWorkout from "layouts/addworkout/components/AddWorkout";
 import AddWorkout from "./layouts/addworkout"
+import Addnewwellness from "./layouts/addwellness"
 
 const routes = [
   {
@@ -125,6 +126,14 @@ const routes = [
     component: <Addnewteam />,
   },
   
+  {
+    type: "collapse",
+    name: "Add New Wellness",
+    key: "addwellness",
+    icon: <Icon fontSize="small">accessibility</Icon>,
+    route: "/addwellness",
+    component: <Addnewwellness />,
+  },
   {
     type: "collapse",
     name: "Billing",

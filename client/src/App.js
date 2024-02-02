@@ -62,19 +62,19 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 const WelcomeBox = () => (
   <div
     style={{
-      position: 'absolute',
+      position: "absolute",
       marginLeft: "auto",
-      height: '10%',
-      background: '#3498db', // Blue background color
-      padding: '25px',
-      borderRadius: '8px',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-      top: '12%', // Adjust the offset from the top
-      left: '50%', // Adjust the left offset
-      transform: 'translateX(-50%)',
-      textAlign: 'center',
-      color: '#fff', // Text color
-      zIndex: 2, // Make sure it's above other elements
+      height: "10%",
+      background: "#3498db", // Blue background color
+      padding: "25px",
+      borderRadius: "8px",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      top: "12%", // Adjust the offset from the top
+      left: "50%", // Adjust the left offset
+      transform: "translateX(-50%)",
+      textAlign: "center",
+      color: "#fff", // Text color
+      zIndex: 2, // Make sure it"s above other elements
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -85,7 +85,7 @@ const WelcomeBox = () => (
     <img
       src="/static/media/logo-ct.39c110530c00e2b0debf.png"
       alt="CoachSync Logo"
-      style={{ maxWidth: '50px', marginBottom: '10px' }}
+      style={{ maxWidth: "50px", marginBottom: "10px" }}
     />
   </div>
 );

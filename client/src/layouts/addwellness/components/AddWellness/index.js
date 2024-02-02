@@ -75,9 +75,11 @@ function AddWellness() {
       value: wellnessData[type].value,
     }));
 
+    console.log("dataToSubmit:", dataToSubmit);
+
     try {
       // Use supabase client's api.post method to add data
-      const { data, error } = await supabase.from("checkin").upsert([wellnessData]).select();
+      const { data, error } = await supabase.from("checkin").upsert(dataToSubmit).select();
 
       if (error) {
         console.error("Error adding wellness:", error);
@@ -100,9 +102,12 @@ function AddWellness() {
 
   return (
     <Card id="add-wellness">
-      <MDBox pt={3} px={2}>
+      <MDBox pt={3} px={2} display="flex" justifyContent="space-between">
         <MDTypography variant="h4" fontWeight="medium">
           Add Wellness
+        </MDTypography>
+        <MDTypography variant="body2" fontWeight="textSecondary" id="dateSelected">
+          Current Date: {new Date().toLocaleDateString()} {/* Update to be able to select a date */} 
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>

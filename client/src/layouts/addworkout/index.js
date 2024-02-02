@@ -15,9 +15,6 @@ function AddingWorkout() {
             <Grid item xs={12} md={12}>
               <AddWorkout />
             </Grid>
-            {/* <Grid item xs={12} md={5}>
-              <Transactions />
-            </Grid> */}
           </Grid>
         </MDBox>
       </MDBox>

@@ -22,12 +22,8 @@ const exerciseChoices = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4",
 
 function AddWorkout() {
   const navigate = useNavigate();
-  // const [selectedSport, setSelectedSport] = useState(""); // new state for selected sport
-  // const [selectedDays, setSelectedDays] = useState([]); // new state for selected days
   const [exerciseCount, setExerciseCount] = useState(3);
   const [exercises, setExercises] = useState([]);
-  //   const [workoutName, setWorkoutName] = useState("");
-  //const [selectedExercises, setSelectedExercises] = useState(Array(exerciseCount).fill({ exerciseId: "", reps: "", sets: "", duration: "" }));
   const [selectedExercises, setSelectedExercises] = useState(
     Array.from({ length: exerciseCount }, () => ({
       exerciseId: "",
@@ -83,17 +79,6 @@ function AddWorkout() {
     const workoutData = {
       workout_name: document.getElementById("workout-name").value,
     };
-    // try{
-    //   const { data, error } = await supabase.from("workout").upsert([workoutData]).select();
-    //   if (error) {
-    //     console.error("Error adding workout:", error);
-    //     // Handle the error here
-    //   } else {
-    //     console.log("Workout added successfully!");
-    //   }
-    // } catch (error){
-    //   console.error("Error:", error)
-    // };
     try {
       // Insert the workout record
       const { data: workoutResult, error: workoutError } = await supabase
@@ -171,8 +156,6 @@ function AddWorkout() {
                   onChange={(event) =>
                     handleExerciseChange(index, "exerciseId", event.target.value)
                   }
-
-                  // handleExerciseChange(index, 'id', event.target.value)}
                 >
                   {exercises.map((exercise, index) => (
                     <MenuItem key={index} value={exercise.id}>

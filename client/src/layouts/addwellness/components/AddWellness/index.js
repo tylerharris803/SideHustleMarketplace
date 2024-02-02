@@ -68,9 +68,9 @@ function AddWellness() {
 
   const handleSubmit = async () => {
     const dataToSubmit = Object.keys(wellnessData).map((type) => ({
-      player_id: '2cefa8cf-5c6f-4827-a552-5864f6dd130d', //get current user id
+      player_id: '2cefa8cf-5c6f-4827-a552-5864f6dd130d', //update to get current user id
       wellness_id: wellnessData[type].id,
-      date: '2024-02-01', //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
+      date: '2024-02-01',                                 //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
       created_at: new Date().toISOString(),      
       value: wellnessData[type].value,
     }));
@@ -107,7 +107,7 @@ function AddWellness() {
           Add Wellness
         </MDTypography>
         <MDTypography variant="body2" fontWeight="textSecondary" id="dateSelected">
-          Current Date: {new Date().toLocaleDateString()} {/* Update to be able to select a date */} 
+          Current Date: {new Date().toLocaleDateString()} {/* Want to update to be able to select a date */} 
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>

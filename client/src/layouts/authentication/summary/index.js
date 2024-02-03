@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -34,7 +34,21 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Cover() {
   const [selectedRole, setSelectedRole] = React.useState("player");
-  
+  const [userRole, setUserRole] = React.useState('');
+
+  useEffect(() => {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const storedUserRole = localStorage.getItem('userRole');
+        setUserRole(storedUserRole || '');
+      } else {
+        console.error('localStorage is not available');
+      }
+    } catch (error) {
+      console.error('Error while retrieving from localStorage:', error);
+    }
+  }, []);
+
 
   const handleRoleChange = (event, newRole) => {
     setSelectedRole(newRole);
@@ -53,7 +67,6 @@ function Cover() {
       console.error("Error while saving to localStorage:", error);
     }
   };
-  
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -69,7 +82,7 @@ function Cover() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
-            Are you a <strong style={{ fontWeight: 'bold' }}>Player</strong> or <strong style={{ fontWeight: 'bold' }}>Coach</strong>?
+            Summary
           </MDTypography>
           {/* <MDTypography display="block" variant="button" color="white" my={1}>
             Enter your email and password to register
@@ -78,34 +91,19 @@ function Cover() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <ToggleButtonGroup
-                value={selectedRole}
-                exclusive
-                onChange={handleRoleChange}
-                aria-label="Player or Coach"
-                fullWidth
-              >
-                <ToggleButton value="player">
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    Player
-                    <SportsBaseballIcon sx={{ width: "80%", minHeight:'30px' }} />
-                  </div>
-                </ToggleButton>
-                <ToggleButton value="coach">
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    Coach
-                    <SportsIcon sx={{ width: "100%", minHeight:'30px' }} />
-                  </div>
-                </ToggleButton>
-              </ToggleButtonGroup>
+            <MDBox mt={2} mb={1}>
+              <MDTypography variant="body2" color="text">
+                User Role: {userRole}
+              </MDTypography>
+            </MDBox>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/coachinfo" variant="gradient" color="info" fullWidth onClick={handleNextClick}>
-                Next
+              <MDButton component={Link} to="/dashboard" variant="gradient" color="success" fullWidth onClick={handleNextClick}>
+                Submit
               </MDButton>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/sign-up" color="white" fullWidth>
+              <MDButton component={Link} to="/authentication/wellness-setup" color="white" fullWidth>
                 Go Back
               </MDButton>
             </MDBox>

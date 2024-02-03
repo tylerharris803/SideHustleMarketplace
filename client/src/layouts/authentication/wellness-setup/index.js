@@ -159,7 +159,7 @@ function Cover() {
               </MDBox>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/dashboard" variant="gradient" color="info" fullWidth>
+              <MDButton component={Link} to="/authentication/summary" variant="gradient" color="info" fullWidth>
                 Next
               </MDButton>
             </MDBox>

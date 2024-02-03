@@ -117,8 +117,6 @@ function Cover() {
                 </Select>
               </FormControl>            
             </MDBox>
-
-
             <MDBox mb={2} {...getRootProps()} style={{ cursor: 'pointer' }}>
               <input {...getInputProps()} />
               <MDTypography display="block" variant="button" color="text" my={1}>

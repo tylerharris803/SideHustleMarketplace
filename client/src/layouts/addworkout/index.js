@@ -2,11 +2,10 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
-import Transactions from "../addexercise/components/Transactions";
 import Footer from "../../examples/Footer";
 import AddWorkout from "./components/AddWorkout";
 
-function Billing() {
+function AddingWorkout() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
@@ -16,9 +15,6 @@ function Billing() {
             <Grid item xs={12} md={12}>
               <AddWorkout />
             </Grid>
-            {/* <Grid item xs={12} md={5}>
-              <Transactions />
-            </Grid> */}
           </Grid>
         </MDBox>
       </MDBox>
@@ -27,4 +23,4 @@ function Billing() {
   );
 }
 
-export default Billing;
+export default AddingWorkout;

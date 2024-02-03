@@ -46,21 +46,24 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import SignOut from "layouts/authentication/sign-out";
-import WorkoutLibrary from "layouts/workoutlibrary"
+import CoachOrPlayer from "layouts/authentication/coachorplayer";
+import CoachInfo from "layouts/authentication/coachinfo";
+import TeamInfo from "layouts/authentication/coachinfo";
+import WorkoutLibrary from "layouts/workoutlibrary";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import PeopleIcon from '@mui/icons-material/People';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
-
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import PeopleIcon from "@mui/icons-material/People";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 
 import AddNewTeam from "./layouts/addteam/components/AddTeam";
 import Addnewteam from "./layouts/addteam";
 //import AddWorkout from "layouts/addworkout/components/AddWorkout";
-import AddWorkout from "./layouts/addworkout"
+import AddWorkout from "./layouts/addworkout";
+import Addnewwellness from "./layouts/addwellness";
 
 const routes = [
   {
@@ -112,7 +115,7 @@ const routes = [
     route: "/addworkout",
     component: <AddWorkout />,
   },
- 
+
   {
     type: "collapse",
     name: "Add New Team",
@@ -121,7 +124,15 @@ const routes = [
     route: "/addteam",
     component: <Addnewteam />,
   },
-  
+
+  {
+    type: "collapse",
+    name: "Add New Wellness",
+    key: "addwellness",
+    icon: <Icon fontSize="small">accessibility</Icon>,
+    route: "/addwellness",
+    component: <Addnewwellness />,
+  },
   {
     type: "collapse",
     name: "Billing",
@@ -169,6 +180,30 @@ const routes = [
     icon: <Icon fontSize="small">logout</Icon>,
     route: "/authentication/sign-out",
     component: <SignOut />,
+  },
+  {
+    type: "collapse",
+    name: "Coach or Player",
+    key: "coachorplayer",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/coachorplayer",
+    component: <CoachOrPlayer />,
+  },
+  {
+    type: "collapse",
+    name: "Coach Info",
+    key: "coachinfo",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/coachinfo",
+    component: <CoachInfo />,
+  },
+  {
+    type: "collapse",
+    name: "Team Info",
+    key: "teaminfo",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/teaminfo",
+    component: <TeamInfo />,
   },
 ];
 

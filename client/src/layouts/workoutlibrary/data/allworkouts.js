@@ -1,119 +1,207 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/function-component-definition */
+/**
+=========================================================
+* Material Dashboard 2 React - v2.2.0
+=========================================================
 
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-// @mui material components
-import Card from "@mui/material/Card";
-import React, { useState, useEffect } from "react";
+Coded by www.creative-tim.com
 
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDAvatar from "components/MDAvatar";
+import MDBadge from "components/MDBadge";
 
-// Billing page components
-import Bill from "../workouts_format/index";
+// Images
+import team2 from "assets/images/team-2.jpg";
+import team3 from "assets/images/team-3.jpg";
+import team4 from "assets/images/team-4.jpg";
+import MDProgress from "../../../components/MDProgress";
 
-//data
-import workoutsTableData from "layouts/tables/data/workoutsTableData"
-
-// Add supabase connection
-import { supabase } from "../../../supabaseClient";
-
-function data() {
-    const [workouts, setWorkouts] = useState([]);
-    // async function getWorkouts() {
-    //   try {
-    //     const { data, error } = await supabase.from("workout").select("*");
-    //     if (error) throw error;
-    //     if (data != null) {
-    //       setWorkouts(data);
-    //     }
-    //   } catch (error) {
-    //     alert(error.message);
-    //   }
-    // }
-    async function getWorkouts() {
-        try {
-          const { data: workoutsData, error: workoutsError } = await supabase
-            .from("workout")
-            .select("id, workout_name");
-      
-          if (workoutsError) throw workoutsError;
-      
-          if (workoutsData && workoutsData.length > 0) {
-            const workoutsWithExercises = await Promise.all(
-              workoutsData.map(async (workout) => {
-                try {
-                  const { data: exerciseData, error: exerciseError } = await supabase
-                    .from("customized_exercise")
-                    .select("exercise_id")
-                    .eq("workout_id", workout.id);
-      
-                  if (exerciseError) throw exerciseError;
-      
-                  const exercise_id = exerciseData && exerciseData.length > 0 ? exerciseData[0].exercise_id : null;
-      
-                  console.log("Workout:", workout);
-                  console.log("Exercise Data:", exerciseData);
-                  console.log("Exercise ID:", exercise_id);
-      
-                  return {
-                    ...workout,
-                    exercise_id,
-                  };
-                } catch (exError) {
-                  console.error("Error fetching exercise data:", exError);
-                  return workout;
-                }
-              })
-            );
-      
-            console.log("Workouts with Exercises:", workoutsWithExercises);
-      
-            setWorkouts(workoutsWithExercises);
-          }
-        } catch (error) {
-          alert(error.message);
-        }
-    }
-    useEffect(() => {
-      getWorkouts();
-    }, []);
-}
-function WorkoutLibrary() {
-    const [workouts, setWorkouts] = useState([]);
-
-  useEffect(() => {
-    async function getWorkouts() {
-      try {
-        const { data, error } = await supabase.from("workout").select("workout_name");
-        if (error) throw error;
-        if (data != null) {
-          setWorkouts(data);
-        }
-      } catch (error) {
-        alert(error.message);
+export default function data() {
+  const [workouts, setWorkouts] = useState([]);
+  async function getWorkouts() {
+    try {
+      const { data, error } = await supabase.from("workout").select("*");
+      if (error) throw error;
+      if (data != null) {
+        setWorkouts(data);
       }
+    } catch (error) {
+      alert(error.message);
     }
-
+  }
+  useEffect(() => {
     getWorkouts();
   }, []);
 
-  return (
-    <Card id="workout-library">
-      <MDBox pt={3} px={2}>
-        <MDTypography variant="h6" fontWeight="medium">
-          Saved Workouts
+  const Author = ({ image, name, email }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      <MDAvatar src={image} name={name} size="sm" />
+      <MDBox ml={2} lineHeight={1}>
+        <MDTypography display="block" variant="button" fontWeight="medium">
+          {name}
         </MDTypography>
+        <MDTypography variant="caption">{email}</MDTypography>
       </MDBox>
-      <MDBox pt={1} pb={2} px={2}>
-        <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          {workouts.map((workout, index) => (
-            <Bill key={index} name={workout.workout_name} exercise_id={workout.exercise_id} />
-          ))}
-        </MDBox>
-      </MDBox>
-    </Card>
+    </MDBox>
   );
-}
 
-export default WorkoutLibrary;
+  const Job = ({ title, description }) => (
+    <MDBox lineHeight={1} textAlign="left">
+      <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+        {title}
+      </MDTypography>
+      <MDTypography variant="caption">{description}</MDTypography>
+    </MDBox>
+  );
+
+  return {
+    columns: [
+      { Header: "author", accessor: "author", width: "45%", align: "left" },
+      { Header: "function", accessor: "function", align: "left" },
+      { Header: "status", accessor: "status", align: "center" },
+      { Header: "employed", accessor: "employed", align: "center" },
+      { Header: "action", accessor: "action", align: "center" },
+    ],
+
+    rows: exercises.map((workout, index) => ({
+      id: (
+        <MDBox display="flex" py={1}>
+          {workout.id} {/* Display the name of the current exercise */}
+        </MDBox>
+      ),
+      workout: (
+        <MDBox display="flex" py={1}>
+          {workout.name} {/* Display the name of the current exercise */}
+        </MDBox>
+      ),
+    })),
+
+    // rows: [
+    //   {
+    //     author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+    //     function: <Job title="Manager" description="Organization" />,
+    //     status: (
+    //       <MDBox ml={-1}>
+    //         <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+    //       </MDBox>
+    //     ),
+    //     employed: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         23/04/18
+    //       </MDTypography>
+    //     ),
+    //     action: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Edit
+    //       </MDTypography>
+    //     ),
+    //   },
+    //   {
+    //     author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
+    //     function: <Job title="Programator" description="Developer" />,
+    //     status: (
+    //       <MDBox ml={-1}>
+    //         <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
+    //       </MDBox>
+    //     ),
+    //     employed: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         11/01/19
+    //       </MDTypography>
+    //     ),
+    //     action: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Edit
+    //       </MDTypography>
+    //     ),
+    //   },
+    //   {
+    //     author: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
+    //     function: <Job title="Executive" description="Projects" />,
+    //     status: (
+    //       <MDBox ml={-1}>
+    //         <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+    //       </MDBox>
+    //     ),
+    //     employed: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         19/09/17
+    //       </MDTypography>
+    //     ),
+    //     action: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Edit
+    //       </MDTypography>
+    //     ),
+    //   },
+    //   {
+    //     author: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
+    //     function: <Job title="Programator" description="Developer" />,
+    //     status: (
+    //       <MDBox ml={-1}>
+    //         <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
+    //       </MDBox>
+    //     ),
+    //     employed: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         24/12/08
+    //       </MDTypography>
+    //     ),
+    //     action: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Edit
+    //       </MDTypography>
+    //     ),
+    //   },
+    //   {
+    //     author: <Author image={team3} name="Richard Gran" email="richard@creative-tim.com" />,
+    //     function: <Job title="Manager" description="Executive" />,
+    //     status: (
+    //       <MDBox ml={-1}>
+    //         <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
+    //       </MDBox>
+    //     ),
+    //     employed: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         04/10/21
+    //       </MDTypography>
+    //     ),
+    //     action: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Edit
+    //       </MDTypography>
+    //     ),
+    //   },
+    //   {
+    //     author: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+    //     function: <Job title="Programator" description="Developer" />,
+    //     status: (
+    //       <MDBox ml={-1}>
+    //         <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
+    //       </MDBox>
+    //     ),
+    //     employed: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         14/09/20
+    //       </MDTypography>
+    //     ),
+    //     action: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         Edit
+    //       </MDTypography>
+    //     ),
+    //   },
+    // ],
+  };
+}

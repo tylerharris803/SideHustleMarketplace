@@ -61,12 +61,15 @@ export default function data() {
     //   { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
     ],
 
-    rows: workouts.map((workout, index) => ({
-      name: (
-        <MDBox display="flex" py={1}>
-          {workout.workout_name} {/* Display the name of the current workout */}
-        </MDBox>
-        ),
+    // rows: workouts.map((workout, index) => ({
+    //   name: (
+    //     <MDBox display="flex" py={1}>
+    //       {workout.workout_name} {/* Display the name of the current workout */}
+    //     </MDBox>
+    //     ),
+    rows: workouts.map((workout) => ({
+      name: <MDBox display="flex" py={1}>{workout.workout_name}</MDBox>,
+      exercise_ids: workout.exercise_ids, // Access exercise_ids here
     //   category: (
     //     <MDBox display="flex" py={1}>
     //       {exercise.category} {/* Display the name of the current exercise */}

@@ -55,45 +55,42 @@ export default function data() {
   return {
     columns: [
       { Header: "name", accessor: "name", width: "20%", align: "left" },
-    //   { Header: "category", accessor: "category", width: "20%", align: "left" },
-    //   { Header: "description", accessor: "description", width: "40%", align: "left" },
-    //   { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
-    //   { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
+      //   { Header: "category", accessor: "category", width: "20%", align: "left" },
+      //   { Header: "description", accessor: "description", width: "40%", align: "left" },
+      //   { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
+      //   { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
     ],
 
-    // rows: workouts.map((workout, index) => ({
-    //   name: (
-    //     <MDBox display="flex" py={1}>
-    //       {workout.workout_name} {/* Display the name of the current workout */}
-    //     </MDBox>
-    //     ),
-    rows: workouts.map((workout) => ({
-      name: <MDBox display="flex" py={1}>{workout.workout_name}</MDBox>,
-      exercise_ids: workout.exercise_ids, // Access exercise_ids here
-    //   category: (
-    //     <MDBox display="flex" py={1}>
-    //       {exercise.category} {/* Display the name of the current exercise */}
-    //     </MDBox>
-    //   ),
-    //   description: (
-    //     <MDTypography variant="caption" color="text" fontWeight="medium">
-    //       {exercise.description}
-    //     </MDTypography>
-    //   ),
-    //   edit: (
-    //     <MDBox>
-    //       <MDButton variant="text" color="dark">
-    //         <Icon>edit</Icon>&nbsp;edit
-    //       </MDButton>
-    //     </MDBox>
-    //   ),
-    //   delete: (
-    //     <MDBox mr={1}>
-    //       <MDButton variant="text" color="error">
-    //         <Icon>delete</Icon>&nbsp;delete
-    //       </MDButton>
-    //     </MDBox>
-    //   ),
+    rows: workouts.map((workout, index) => ({
+      name: (
+        <MDBox display="flex" py={1}>
+          {workout.workout_name} {/* Display the name of the current workout */}
+        </MDBox>
+      ),
+      //   category: (
+      //     <MDBox display="flex" py={1}>
+      //       {exercise.category} {/* Display the name of the current exercise */}
+      //     </MDBox>
+      //   ),
+      //   description: (
+      //     <MDTypography variant="caption" color="text" fontWeight="medium">
+      //       {exercise.description}
+      //     </MDTypography>
+      //   ),
+      //   edit: (
+      //     <MDBox>
+      //       <MDButton variant="text" color="dark">
+      //         <Icon>edit</Icon>&nbsp;edit
+      //       </MDButton>
+      //     </MDBox>
+      //   ),
+      //   delete: (
+      //     <MDBox mr={1}>
+      //       <MDButton variant="text" color="error">
+      //         <Icon>delete</Icon>&nbsp;delete
+      //       </MDButton>
+      //     </MDBox>
+      //   ),
     })),
 
     // rows: [

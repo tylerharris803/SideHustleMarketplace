@@ -23,27 +23,18 @@ import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import MasterCard from "examples/Cards/MasterCard";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
-// Billing page components
-import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
 import AddExercise from "layouts/addexercise/components/AddExercise";
-import Transactions from "layouts/addexercise/components/Transactions";
 
-function Billing() {
+function AddingExercise() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
-      <MDBox mt={8}>
+      <MDBox mt={8} justifyContent="center" alignItems="center">
         <MDBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={7}>
+            <Grid item xs={12} md={12}>
               <AddExercise />
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <Transactions />
             </Grid>
           </Grid>
         </MDBox>
@@ -53,4 +44,4 @@ function Billing() {
   );
 }
 
-export default Billing;
+export default AddingExercise;

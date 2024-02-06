@@ -55,17 +55,17 @@ import WorkoutLibrary from "layouts/workoutlibrary"
 
 // @mui icons
 import Icon from "@mui/material/Icon";
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import PeopleIcon from '@mui/icons-material/People';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
-
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import PeopleIcon from "@mui/icons-material/People";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 
 import AddNewTeam from "./layouts/addteam/components/AddTeam";
 import Addnewteam from "./layouts/addteam";
 //import AddWorkout from "layouts/addworkout/components/AddWorkout";
-import AddWorkout from "./layouts/addworkout"
+import AddWorkout from "./layouts/addworkout";
+import Addnewwellness from "./layouts/addwellness";
 
 const routes = [
   {
@@ -117,7 +117,7 @@ const routes = [
     route: "/addworkout",
     component: <AddWorkout />,
   },
- 
+
   {
     type: "collapse",
     name: "Add New Team",
@@ -126,7 +126,15 @@ const routes = [
     route: "/addteam",
     component: <Addnewteam />,
   },
-  
+
+  {
+    type: "collapse",
+    name: "Add New Wellness",
+    key: "addwellness",
+    icon: <Icon fontSize="small">accessibility</Icon>,
+    route: "/addwellness",
+    component: <Addnewwellness />,
+  },
   {
     type: "collapse",
     name: "Billing",

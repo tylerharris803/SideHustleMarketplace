@@ -156,9 +156,6 @@ function Cover() {
                 </MDButton>
               </MDBox>
             )}
-
-
-
             <MDBox mt={4} mb={1}>
               <MDButton component={Link} to="/authentication/wellness-setup" variant="gradient" color="info" fullWidth>
                 Next

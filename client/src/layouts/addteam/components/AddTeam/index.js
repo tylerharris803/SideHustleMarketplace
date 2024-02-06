@@ -106,7 +106,7 @@ function AddTeam() {
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          <TextField id="team-name" label="Team Name" variant="outlined" sx={{ width: "30%" }}/>
+          <TextField id="team-name" label="Team Name" variant="outlined" sx={{ width: "30%" }} />
         </MDBox>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
@@ -120,7 +120,8 @@ function AddTeam() {
                 variant="outlined"
                 value={selectedSport}
                 onChange={handleSportChange}
-                sx={{ width: "30%", minHeight:'46px' }}              >
+                sx={{ width: "30%", minHeight: "46px" }}
+              >
                 {sports.map((sport, index) => (
                   <MenuItem key={index} value={sport.id}>
                     {sport.name}
@@ -131,9 +132,9 @@ function AddTeam() {
           </MDBox>
         </MDBox>
       </MDBox>
-      
+
       <MDBox pt={1} pb={2} px={2}>
-      <InputLabel>Days of the Week</InputLabel>
+        <InputLabel>Days of the Week</InputLabel>
 
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <MDBox mb={2}>

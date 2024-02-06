@@ -34,7 +34,7 @@ import workoutsTableData from "layouts/tables/data/workoutsTableData";
 
 function Tables() {
   const { columns, rows } = workoutsTableData();
-//   const { columns: pColumns, rows: pRows } = projectsTableData();
+  //   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
     <DashboardLayout>

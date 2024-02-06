@@ -3,17 +3,17 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
 import Footer from "../../examples/Footer";
-import AddWorkout from "./components/AddWorkout";
+import AddWellness from "./components/AddWellness";
 
-function AddingWorkout() {
+function Billing() {
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
       <MDBox mt={8}>
         <MDBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={12}>
-              <AddWorkout />
+            <Grid item xs={12} md={7}>
+              <AddWellness />
             </Grid>
           </Grid>
         </MDBox>
@@ -23,4 +23,4 @@ function AddingWorkout() {
   );
 }
 
-export default AddingWorkout;
+export default Billing;

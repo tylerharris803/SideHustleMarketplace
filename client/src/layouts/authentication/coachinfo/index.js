@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -23,16 +24,24 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
-import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import bgImage from "assets/images/grass2.jpg";
 import { FormControl, InputLabel, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
 function Cover() {
-  const [selectedRole, setSelectedRole] = React.useState("player");
+  const [profilePic, setProfilePic] = React.useState(null);
 
-  const handleRoleChange = (event, newRole) => {
-    setSelectedRole(newRole);
+  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the uploaded file (e.g., store it in state)
+    setProfilePic(acceptedFiles[0]);
+  }, []);
+
+  const deleteProfilePic = () => {
+    // Clear the profile picture from state
+    setProfilePic(null);
   };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <CoverLayout image={bgImage}>
@@ -64,13 +73,49 @@ function Cover() {
               <MDTypography display="block" variant="button" color="text" my={1}>
                 What type of coach are you? (Head, Assistant, etc...)
               </MDTypography>
-              <MDBox mb={2}>
-                <MDInput type="text" label="Coach Role" variant="standard" fullWidth />
+              <MDBox mb={5}>
+                <MDInput type="text" label="Coach Role" variant="outlined" fullWidth />
               </MDBox>
             </MDBox>
-            <MDBox mb={2}>
-              <MDInput type="text" label="Upload Profile Pic" variant="standard" fullWidth />
+            <MDBox mb={2} {...getRootProps()} style={{ cursor: 'pointer' }}>
+              <input {...getInputProps()} />
+              <MDTypography display="block" variant="button" color="text" my={1}>
+                Upload Profile Pic
+              </MDTypography>
+              {isDragActive ? (
+                <MDTypography display="block" variant="caption" color="info" mt={1}>
+                  Drop the files here...
+                </MDTypography>
+              ) : (
+                <MDButton>
+                  <MDTypography display="block" variant="caption" color="info" mt={1}>
+                    Drag and drop a profile picture here, or click to select one.
+                  </MDTypography>
+                </MDButton>
+              )}
             </MDBox>
+            {profilePic && (
+              <MDBox display="flex" flexDirection="column" alignItems="center">
+                <div
+                  style={{
+                    width: '200px', // Adjust the size of the circular image
+                    height: '200px', // Make sure this is the same as the width
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    border: '2px solid #fff', // Optional: border color
+                  }}
+                >
+                  <img
+                    src={URL.createObjectURL(profilePic)}
+                    alt="Profile"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
+                <MDButton onClick={deleteProfilePic} variant="text" color="error">
+                  Delete
+                </MDButton>
+              </MDBox>
+            )}
             <MDBox mt={4} mb={1}>
               <MDButton
                 component={Link}

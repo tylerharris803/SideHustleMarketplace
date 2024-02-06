@@ -62,19 +62,12 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 const WelcomeBox = () => (
   <div
     style={{
-      position: "absolute",
-      marginLeft: "auto",
-      height: "10%",
       background: "#3498db", // Blue background color
       padding: "25px",
       borderRadius: "8px",
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-      top: "12%", // Adjust the offset from the top
-      left: "50%", // Adjust the left offset
-      transform: "translateX(-50%)",
       textAlign: "center",
       color: "#fff", // Text color
-      zIndex: 2, // Make sure it"s above other elements
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -214,10 +207,12 @@ export default function App() {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
+          <WelcomeBox />
           <div
             style={{
               background: "white",
@@ -227,7 +222,7 @@ export default function App() {
               maxWidth: "400px",
               width: "100%",
               textAlign: "center",
-              paddingTop: "6%",
+              marginTop: "20px",
             }}
           >
             <Auth
@@ -264,7 +259,6 @@ export default function App() {
               theme="default"
             />
           </div>
-          <WelcomeBox />
         </div>
       </div>
     );

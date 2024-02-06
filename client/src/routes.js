@@ -161,14 +161,6 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
-  },
-  {
-    type: "collapse",
     name: "Sign Out",
     key: "sign-out",
     icon: <Icon fontSize="small">logout</Icon>,
@@ -177,8 +169,9 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Coach or Player",
     key: "coachorplayer",
-    icon: <Icon fontSize="small"></Icon>,
+    icon: <Icon fontSize="small">person</Icon>,
     route: "/authentication/coachorplayer",
     component: <CoachOrPlayer />,
   },
@@ -209,6 +202,13 @@ const routes = [
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/summary",
     component: <Summary />,
+  },
+  {
+    type: "collapse",
+    key: "sign-up",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/sign-up",
+    component: <SignUp />,
   },
 ];
 

@@ -40,7 +40,6 @@ export default function data() {
   async function getProfiles() {
     try {
       const { data, error } = await supabase.from("profile").select("*");
-      console.log(data);
       if (error) throw error;
       if (data != null) {
         setProfiles(data);

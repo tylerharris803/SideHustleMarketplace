@@ -39,15 +39,33 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import ExerciseLibrary from "layouts/exerciselibrary";
+import AddExercise from "layouts/addexercise";
 import Billing from "layouts/billing";
-import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import SignOut from "layouts/authentication/sign-out";
+import CoachOrPlayer from "layouts/authentication/coachorplayer";
+import CoachInfo from "layouts/authentication/coachinfo";
+import TeamInfo from "layouts/authentication/teaminfo";
+import WellnessSetup from "layouts/authentication/wellness-setup";
+import Summary from "layouts/authentication/summary";
+import WorkoutLibrary from "layouts/workoutlibrary"
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import PeopleIcon from "@mui/icons-material/People";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
+
+import AddNewTeam from "./layouts/addteam/components/AddTeam";
+import Addnewteam from "./layouts/addteam";
+//import AddWorkout from "layouts/addworkout/components/AddWorkout";
+import AddWorkout from "./layouts/addworkout";
+import Addnewwellness from "./layouts/addwellness";
 
 const routes = [
   {
@@ -62,7 +80,7 @@ const routes = [
     type: "collapse",
     name: "Players",
     key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <PeopleIcon fontSize="small">table_view</PeopleIcon>,
     route: "/tables",
     component: <Tables />,
   },
@@ -70,9 +88,52 @@ const routes = [
     type: "collapse",
     name: "Exercise Library",
     key: "exerciselibrary",
-    icon: <Icon fontSize="small">book</Icon>,
+    icon: <ListAltIcon fontSize="small">book</ListAltIcon>,
     route: "/exerciselibrary",
     component: <ExerciseLibrary />,
+  },
+
+  {
+    type: "collapse",
+    name: "Add Exercise",
+    key: "addexercise",
+    icon: <FitnessCenterIcon fontSize="small">accessibility</FitnessCenterIcon>,
+    route: "/addexercise",
+    component: <AddExercise />,
+  },
+  {
+    type: "collapse",
+    name: "Saved Workouts",
+    key: "workoutlibrary",
+    icon: <CollectionsBookmarkIcon fontSize="small">book</CollectionsBookmarkIcon>,
+    route: "/workoutlibrary",
+    component: <WorkoutLibrary />,
+  },
+  {
+    type: "collapse",
+    name: "Create Workout",
+    key: "addworkout",
+    icon: <DirectionsRunIcon fontSize="small">accessibility</DirectionsRunIcon>,
+    route: "/addworkout",
+    component: <AddWorkout />,
+  },
+
+  {
+    type: "collapse",
+    name: "Add New Team",
+    key: "addteam",
+    icon: <Icon fontSize="small">accessibility</Icon>,
+    route: "/addteam",
+    component: <Addnewteam />,
+  },
+
+  {
+    type: "collapse",
+    name: "Add New Wellness",
+    key: "addwellness",
+    icon: <Icon fontSize="small">accessibility</Icon>,
+    route: "/addwellness",
+    component: <Addnewwellness />,
   },
   {
     type: "collapse",
@@ -81,14 +142,6 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/billing",
     component: <Billing />,
-  },
-  {
-    type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
-    route: "/rtl",
-    component: <RTL />,
   },
   {
     type: "collapse",
@@ -116,9 +169,52 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Sign Up",
+    name: "Sign Out",
+    key: "sign-out",
+    icon: <Icon fontSize="small">logout</Icon>,
+    route: "/authentication/sign-out",
+    component: <SignOut />,
+  },
+  {
+    type: "collapse",
+    name: "Coach or Player",
+    key: "coachorplayer",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/authentication/coachorplayer",
+    component: <CoachOrPlayer />,
+  },
+  {
+    type: "collapse",
+    key: "coachinfo",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/coachinfo",
+    component: <CoachInfo />,
+  },
+  {
+    type: "collapse",
+    key: "teaminfo",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/teaminfo",
+    component: <TeamInfo />,
+  },
+  {
+    type: "collapse",
+    key: "wellness-setup",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/wellness-setup",
+    component: <WellnessSetup />,
+  },
+  {
+    type: "collapse",
+    key: "summary",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/summary",
+    component: <Summary />,
+  },
+  {
+    type: "collapse",
     key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
+    icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
   },

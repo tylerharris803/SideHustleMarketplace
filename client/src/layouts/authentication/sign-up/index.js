@@ -30,7 +30,10 @@ import MDButton from "components/MDButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
-import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import bgImage from "assets/images/grass2.jpg";
+import logo from "assets/images/logo-ct.png";
+import { FormControl, InputLabel, Select } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
 
 function Cover() {
   return (
@@ -47,24 +50,40 @@ function Cover() {
           mb={1}
           textAlign="center"
         >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Join us today
-          </MDTypography>
-          <MDTypography display="block" variant="button" color="white" my={1}>
-            Enter your email and password to register
+          <img src={logo} alt="CoachSync Logo" style={{ maxWidth: '20%', marginTop: '5px' }} />
+          <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
+            Welcome to <strong style={{ fontWeight: 'bold' }}>CoachSync</strong>
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="text" label="Name" variant="standard" fullWidth />
+              <MDInput type="text" label="First Name" variant="standard" fullWidth />
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput type="text" label="Last Name" variant="standard" fullWidth />
+            </MDBox>
+            <MDTypography display="block" variant="button" color="text" my={1}>
+                Birthdate
+            </MDTypography>
+            <MDBox mb={2}>
+              <MDInput type="date" variant="standard" fullWidth />
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput type="tel" label="Phone Number" variant="standard" fullWidth />
             </MDBox>
             <MDBox mb={2}>
               <MDInput type="email" label="Email" variant="standard" fullWidth />
             </MDBox>
-            <MDBox mb={2}>
-              <MDInput type="password" label="Password" variant="standard" fullWidth />
-            </MDBox>
+            {/* <MDBox mb={2}>
+              <FormControl fullWidth>
+                <InputLabel>Coach or Player?</InputLabel>
+                <Select>
+                  <MenuItem value="player">Player</MenuItem>
+                  <MenuItem value="coach">Coach</MenuItem>
+                </Select>
+              </FormControl>
+            </MDBox> */}
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox />
               <MDTypography
@@ -87,8 +106,8 @@ function Cover() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign in
+              <MDButton component={Link} to="/authentication/coachorplayer" variant="gradient" color="info" fullWidth>
+                get started!
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">

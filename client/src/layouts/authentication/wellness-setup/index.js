@@ -70,10 +70,9 @@ function Cover() {
         alert(error.message);
       }
     }
-  
+
     fetchWellnessOptions();
   }, []);
-  
 
   const handleDayChange = (day) => {
     setSelectedDays((prevSelectedDays) => {
@@ -114,7 +113,7 @@ function Cover() {
               Select the wellness check-in activities that you want to assign your team.
             </MDTypography>
             <MDBox pt={1} pb={2} px={2}>
-            <FormControl>
+              <FormControl>
                 <MDBox display="flex" flexDirection="column">
                   {wellnessOptions.map((option, index) => (
                     <FormControlLabel
@@ -136,7 +135,7 @@ function Cover() {
               <MDTypography display="block" variant="button" color="text" my={1}>
                 How often you want to check-in?
               </MDTypography>
-                
+
               <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
                 <MDBox mb={2}>
                   <FormControl>
@@ -159,7 +158,13 @@ function Cover() {
               </MDBox>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/summary" variant="gradient" color="info" fullWidth>
+              <MDButton
+                component={Link}
+                to="/authentication/summary"
+                variant="gradient"
+                color="info"
+                fullWidth
+              >
                 Next
               </MDButton>
             </MDBox>

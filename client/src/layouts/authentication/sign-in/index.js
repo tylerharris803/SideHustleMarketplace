@@ -51,14 +51,14 @@ function Basic() {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-  
+
     try {
-      console.log('Supabase Auth Object:', supabase.auth);
+      console.log("Supabase Auth Object:", supabase.auth);
       const { user, error } = await supabase.auth.signIn({
         email,
         password,
       });
-  
+
       if (error) {
         console.error("Authentication failed:", error.message);
       } else {
@@ -140,7 +140,13 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton type="submit" variant="gradient" color="info" fullWidth onClick={handleSignIn}>
+              <MDButton
+                type="submit"
+                variant="gradient"
+                color="info"
+                fullWidth
+                onClick={handleSignIn}
+              >
                 sign in
               </MDButton>
             </MDBox>

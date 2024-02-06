@@ -15,8 +15,8 @@ import MDButton from "components/MDButton";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
-import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
-import SportsIcon from '@mui/icons-material/Sports';
+import SportsBaseballIcon from "@mui/icons-material/SportsBaseball";
+import SportsIcon from "@mui/icons-material/Sports";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -29,12 +29,11 @@ import bgImage from "assets/images/grass2.jpg";
 import { FormControl, InputLabel, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Cover() {
   const [selectedRole, setSelectedRole] = React.useState("player");
-  
 
   const handleRoleChange = (event, newRole) => {
     setSelectedRole(newRole);
@@ -42,8 +41,8 @@ function Cover() {
 
   const handleNextClick = () => {
     try {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('userRole', selectedRole);
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("userRole", selectedRole);
       } else {
         // Handle the case when localStorage is not available
         console.error("localStorage is not available");
@@ -53,7 +52,7 @@ function Cover() {
       console.error("Error while saving to localStorage:", error);
     }
   };
-  
+
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -69,7 +68,8 @@ function Cover() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
-            Are you a <strong style={{ fontWeight: 'bold' }}>Player</strong> or <strong style={{ fontWeight: 'bold' }}>Coach</strong>?
+            Are you a <strong style={{ fontWeight: "bold" }}>Player</strong> or{" "}
+            <strong style={{ fontWeight: "bold" }}>Coach</strong>?
           </MDTypography>
           {/* <MDTypography display="block" variant="button" color="white" my={1}>
             Enter your email and password to register
@@ -86,21 +86,28 @@ function Cover() {
                 fullWidth
               >
                 <ToggleButton value="player">
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     Player
-                    <SportsBaseballIcon sx={{ width: "80%", minHeight:'30px' }} />
+                    <SportsBaseballIcon sx={{ width: "80%", minHeight: "30px" }} />
                   </div>
                 </ToggleButton>
                 <ToggleButton value="coach">
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     Coach
-                    <SportsIcon sx={{ width: "100%", minHeight:'30px' }} />
+                    <SportsIcon sx={{ width: "100%", minHeight: "30px" }} />
                   </div>
                 </ToggleButton>
               </ToggleButtonGroup>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/coachinfo" variant="gradient" color="info" fullWidth onClick={handleNextClick}>
+              <MDButton
+                component={Link}
+                to="/authentication/coachinfo"
+                variant="gradient"
+                color="info"
+                fullWidth
+                onClick={handleNextClick}
+              >
                 Next
               </MDButton>
             </MDBox>

@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ import MenuItem from "@mui/material/MenuItem";
 function Cover() {
   const [profilePic, setProfilePic] = React.useState(null);
 
-  const onDrop = useCallback(acceptedFiles => {
+  const onDrop = useCallback((acceptedFiles) => {
     // Do something with the uploaded file (e.g., store it in state)
     setProfilePic(acceptedFiles[0]);
   }, []);
@@ -77,7 +77,7 @@ function Cover() {
                 <MDInput type="text" label="Coach Role" variant="outlined" fullWidth />
               </MDBox>
             </MDBox>
-            <MDBox mb={2} {...getRootProps()} style={{ cursor: 'pointer' }}>
+            <MDBox mb={2} {...getRootProps()} style={{ cursor: "pointer" }}>
               <input {...getInputProps()} />
               <MDTypography display="block" variant="button" color="text" my={1}>
                 Upload Profile Pic
@@ -98,17 +98,17 @@ function Cover() {
               <MDBox display="flex" flexDirection="column" alignItems="center">
                 <div
                   style={{
-                    width: '200px', // Adjust the size of the circular image
-                    height: '200px', // Make sure this is the same as the width
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    border: '2px solid #fff', // Optional: border color
+                    width: "200px", // Adjust the size of the circular image
+                    height: "200px", // Make sure this is the same as the width
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    border: "2px solid #fff", // Optional: border color
                   }}
                 >
                   <img
                     src={URL.createObjectURL(profilePic)}
                     alt="Profile"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 </div>
                 <MDButton onClick={deleteProfilePic} variant="text" color="error">

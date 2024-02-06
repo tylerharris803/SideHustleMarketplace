@@ -15,8 +15,8 @@ import MDButton from "components/MDButton";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
-import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
-import SportsIcon from '@mui/icons-material/Sports';
+import SportsBaseballIcon from "@mui/icons-material/SportsBaseball";
+import SportsIcon from "@mui/icons-material/Sports";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -29,26 +29,25 @@ import bgImage from "assets/images/grass2.jpg";
 import { FormControl, InputLabel, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Cover() {
   const [selectedRole, setSelectedRole] = React.useState("player");
-  const [userRole, setUserRole] = React.useState('');
+  const [userRole, setUserRole] = React.useState("");
 
   useEffect(() => {
     try {
-      if (typeof localStorage !== 'undefined') {
-        const storedUserRole = localStorage.getItem('userRole');
-        setUserRole(storedUserRole || '');
+      if (typeof localStorage !== "undefined") {
+        const storedUserRole = localStorage.getItem("userRole");
+        setUserRole(storedUserRole || "");
       } else {
-        console.error('localStorage is not available');
+        console.error("localStorage is not available");
       }
     } catch (error) {
-      console.error('Error while retrieving from localStorage:', error);
+      console.error("Error while retrieving from localStorage:", error);
     }
   }, []);
-
 
   const handleRoleChange = (event, newRole) => {
     setSelectedRole(newRole);
@@ -56,8 +55,8 @@ function Cover() {
 
   const handleNextClick = () => {
     try {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('userRole', selectedRole);
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("userRole", selectedRole);
       } else {
         // Handle the case when localStorage is not available
         console.error("localStorage is not available");
@@ -91,19 +90,31 @@ function Cover() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-            <MDBox mt={2} mb={1}>
-              <MDTypography variant="body2" color="text">
-                User Role: {userRole}
-              </MDTypography>
-            </MDBox>
+              <MDBox mt={2} mb={1}>
+                <MDTypography variant="body2" color="text">
+                  User Role: {userRole}
+                </MDTypography>
+              </MDBox>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/dashboard" variant="gradient" color="success" fullWidth onClick={handleNextClick}>
+              <MDButton
+                component={Link}
+                to="/dashboard"
+                variant="gradient"
+                color="success"
+                fullWidth
+                onClick={handleNextClick}
+              >
                 Submit
               </MDButton>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/wellness-setup" color="white" fullWidth>
+              <MDButton
+                component={Link}
+                to="/authentication/wellness-setup"
+                color="white"
+                fullWidth
+              >
                 Go Back
               </MDButton>
             </MDBox>

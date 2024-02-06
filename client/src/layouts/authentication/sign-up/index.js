@@ -50,9 +50,9 @@ function Cover() {
           mb={1}
           textAlign="center"
         >
-          <img src={logo} alt="CoachSync Logo" style={{ maxWidth: '20%', marginTop: '5px' }} />
+          <img src={logo} alt="CoachSync Logo" style={{ maxWidth: "20%", marginTop: "5px" }} />
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
-            Welcome to <strong style={{ fontWeight: 'bold' }}>CoachSync</strong>
+            Welcome to <strong style={{ fontWeight: "bold" }}>CoachSync</strong>
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
@@ -64,7 +64,7 @@ function Cover() {
               <MDInput type="text" label="Last Name" variant="standard" fullWidth />
             </MDBox>
             <MDTypography display="block" variant="button" color="text" my={1}>
-                Birthdate
+              Birthdate
             </MDTypography>
             <MDBox mb={2}>
               <MDInput type="date" variant="standard" fullWidth />
@@ -106,7 +106,13 @@ function Cover() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/coachorplayer" variant="gradient" color="info" fullWidth>
+              <MDButton
+                component={Link}
+                to="/authentication/coachorplayer"
+                variant="gradient"
+                color="info"
+                fullWidth
+              >
                 get started!
               </MDButton>
             </MDBox>

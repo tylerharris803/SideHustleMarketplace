@@ -2,13 +2,10 @@
 import { useEffect, useState } from "react";
 
 import Icon from "@mui/material/Icon";
+import { Link } from "react-router-dom"; // Import Link from React Router
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
-import MDBadge from "components/MDBadge";
-import MDProgress from "components/MDProgress";
 import MDButton from "components/MDButton";
 
 // Add supabase connection
@@ -34,14 +31,12 @@ export default function data() {
     if (custexerciseData != null) {
       setCustomizedExercises(custexerciseData);
     }
-    console.log("custexerciseData: ", custexerciseData)
 
     const { data: exerciseData, error: exerciseError } = await supabase.from("exercise").select("*");
     if (exerciseError) throw exerciseError;
     if (exerciseData != null) {
       setExercises(exerciseData);
     }
-    console.log("exerciseData: ", exerciseData)
 
   } catch (error) {
     alert(error.message);
@@ -50,14 +45,19 @@ export default function data() {
      getWorkouts();
    }, []);
 
-
+  
   return {
+    
     columns: [
       { Header: "name", accessor: "name", width: "20%", align: "left" },
-      { Header: "workoutId", accessor: "workoutId", width: "20%", align: "left" },
       { Header: "exercises", accessor: "exercises", width: "40%", align: "left" },
-      { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
-      { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
+      // { Header: "sets", accessor: "sets", width: "20%", align: "left" },
+      // { Header: "reps", accessor: "reps", width: "20%", align: "left" },
+      // { Header: "duration", accessor: "duration", width: "20%", align: "left" },
+      // { Header: "notes", accessor: "notes", width: "10%", align: "left" },
+      { Header: "edit", accessor: "edit", width: "10%", align: "left" },
+      { Header: "delete", accessor: "delete", width: "10%", align: "left" },
+
     ],
     rows: workouts.map((workout, index) => {
       // Find customized exercises that belong to the current workout
@@ -67,7 +67,7 @@ export default function data() {
       // Map matched exercises to their corresponding data from the exercise table
       const mappedExercises = matchedExercises.map(customizedExercise => {
         const correspondingExercise = exercises.find(exercise => exercise.id === customizedExercise.exercise_id);
-        return correspondingExercise ? correspondingExercise.name : 'Unknown Exercise';
+        return correspondingExercise ? correspondingExercise : 'hhh';
       });
 
       console.log("mapped: ", mappedExercises)
@@ -78,31 +78,13 @@ export default function data() {
             {workout.workout_name}
           </MDBox>
         ),
-        workoutId: (
-          <MDBox display="flex" py={1}>
-            {workout.id}
-          </MDBox>
-        ),
-        // exercises: (
-        //   <MDBox display="flex" py={1}>
-        //     {matchedExercises.length > 0 ? 
-        //       matchedExercises.map((exercise, index) => (
-        //         <span key={index}>
-        //           {exercise.exercise_id}
-        //           {index < matchedExercises.length - 1 && ", "}
-        //         </span>
-        //       )) 
-        //       : 
-        //       "No exercises found"
-        //     }
-        //   </MDBox>
-        // ),
+
         exercises: (
           <MDBox display="flex" py={1}>
             {mappedExercises.length > 0 ? 
               mappedExercises.map((mappedExercises, index) => (
                 <span key={index}>
-                  {mappedExercises.toLowerCase()}{index < mappedExercises.length - 1 ? ", " : ""}
+                  {mappedExercises.name}{index < mappedExercises.length - 1 ? ", " : ""}
                 </span>
               )) 
               : 
@@ -110,24 +92,77 @@ export default function data() {
             }
           </MDBox>
         ),
-        // exercises: (
+        // sets: (
         //   <MDBox display="flex" py={1}>
-        //     {mappedExercises.length > 0 ? mappedExercises.join(", ") : "No exercises found"}
+        //     {matchedExercises.length > 0 ? 
+        //       matchedExercises.map((matchedExercises, index) => (
+        //         <span key={index}>
+        //           {matchedExercises.sets}{index < matchedExercises.length - 1 ? ", " : ""}
+        //         </span>
+        //       )) 
+        //       : 
+        //       ""
+        //     }
+        //   </MDBox>
+        // ),
+        // reps: (
+        //   <MDBox display="flex" py={1}>
+        //     {matchedExercises.length > 0 ? 
+        //       matchedExercises.map((matchedExercises, index) => (
+        //         <span key={index}>
+        //           {matchedExercises.reps}{index < matchedExercises.length - 1 ? ", " : ""}
+        //         </span>
+        //       )) 
+        //       : 
+        //       ""
+        //     }
+        //   </MDBox>
+        // ),
+        // duration: (
+        //   <MDBox display="flex" py={1}>
+        //     {matchedExercises.length > 0 ? 
+        //       matchedExercises.map((matchedExercises, index) => (
+        //         <span key={index}>
+        //           {matchedExercises.duration}{index < matchedExercises.length - 1 ? ", " : ""}
+        //         </span>
+        //       )) 
+        //       : 
+        //       ""
+        //     }
+        //   </MDBox>
+        // ),
+        // notes: (
+        //   <MDBox display="flex" py={1}>
+        //     {matchedExercises.length > 0 ? 
+        //       matchedExercises.map((matchedExercises, index) => (
+        //         <span key={index}>
+        //           {matchedExercises.coach_notes}{index < matchedExercises.length - 1 ? ", " : ""}
+        //         </span>
+        //       )) 
+        //       : 
+        //       ""
+        //     }
         //   </MDBox>
         // ),
         edit: (
-          <MDBox>
+          <Link to={`././addworkout/components/index.js/${workout.id}`}>
             <MDButton variant="text" color="dark">
-              <Icon>edit</Icon>&nbsp;edit
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <Icon>edit</Icon> 
+                <span style={{ marginLeft: '5px' }}>Edit</span>
+              </span>
             </MDButton>
-          </MDBox>
+          </Link>
         ),
         delete: (
-          <MDBox mr={1}>
+          <Link to={`././addworkout/components/index.js/${workout.id}`}>
             <MDButton variant="text" color="error">
-              <Icon>delete</Icon>&nbsp;delete
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <Icon>delete</Icon> 
+                <span style={{ marginLeft: '5px' }}>Delete</span>
+              </span>
             </MDButton>
-          </MDBox>
+          </Link>
         ),
       };
     }),

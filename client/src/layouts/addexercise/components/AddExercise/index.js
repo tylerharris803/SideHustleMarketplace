@@ -44,7 +44,7 @@ function AddExercise() {
       } else {
         console.log("Exercise added successfully!");
         // Optionally, you can redirect or show a success message here
-        toast.success("Team added successfully!", {
+        toast.success("Exercise added successfully!", {
           autoClose: 2000,
           onClose: () => {
             navigate("/exerciselibrary");

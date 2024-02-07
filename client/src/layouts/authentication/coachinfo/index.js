@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 // react-router-dom components
@@ -26,10 +26,16 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/grass2.jpg";
 import { FormControl, InputLabel, Select } from "@mui/material";
+import { supabase } from "../../../supabaseClient";
+import { fetchUserProfile } from "../../../fetchUserProfile";
+
 import MenuItem from "@mui/material/MenuItem";
 
-function Cover() {
-  const [profilePic, setProfilePic] = React.useState(null);
+function CoachInfoUpdate() {
+  const [profilePic, setProfilePic] = useState("");
+  const [coachRole, setCoachRole] = useState("");
+  const [profile, setProfile] = useState(null);
+
 
   const onDrop = useCallback(acceptedFiles => {
     // Do something with the uploaded file (e.g., store it in state)
@@ -42,6 +48,49 @@ function Cover() {
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userdata = await fetchUserProfile();
+
+      setProfile(userdata);
+    };
+    fetchData();
+  }, []);
+
+  const handleSubmit = async () => {
+    // Check if profile and profile.id are available
+    if (profile && profile.id) {
+      const coachRoleData = {
+        coach_role: document.getElementById("coach-role").value,
+        first_name: document.getElementById("first-name").value,
+        last_name: document.getElementById("last-name").value,
+        phone_number: document.getElementById("phone-number").value,
+        birth_date: document.getElementById("birth-date").value,
+      };
+  
+      try {
+        // Use supabase client's api.post method to add data
+        const { data, error } = await supabase
+          .from("profile")
+          .update([coachRoleData])
+          .eq("id", profile.id);
+  
+        if (error) {
+          console.error("Error updating coach role:", error);
+          // Handle the error here
+        } else {
+          console.log("Coach Role updated successfully!");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        // Handle the error here
+      }
+    } else {
+      console.error("Profile or profile ID is missing.");
+      // Handle the case where profile or profile ID is missing
+    }
+  };
 
   return (
     <CoverLayout image={bgImage}>
@@ -70,14 +119,34 @@ function Cover() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
+              <MDBox mb={2}>
+                <MDInput type="text" id="first-name" label="First Name" variant="outlined" fullWidth />
+              </MDBox>
+              <MDBox mb={2}>
+                <MDInput type="text" id="last-name" label="Last Name" variant="outlined" fullWidth />
+              </MDBox>
+              <MDBox mb={3}>
+                <MDInput type="phone" id="phone-number" label="Phone Number" variant="outlined" fullWidth />
+              </MDBox>
+              <MDBox mb={3}>
+                <MDTypography display="block" variant="button" color="text" my={1}>
+                  Birthdate
+                </MDTypography>
+                <MDInput 
+                  type="date" 
+                  id="birth-date" 
+                  variant="outlined" 
+                  fullWidth 
+                />              
+              </MDBox>
               <MDTypography display="block" variant="button" color="text" my={1}>
                 What type of coach are you? (Head, Assistant, etc...)
               </MDTypography>
               <MDBox mb={5}>
-                <MDInput type="text" label="Coach Role" variant="outlined" fullWidth />
+                <MDInput type="text" id="coach-role" label="Coach Role" variant="outlined" fullWidth />
               </MDBox>
             </MDBox>
-            <MDBox mb={2} {...getRootProps()} style={{ cursor: 'pointer' }}>
+            <MDBox mb={2} {...getRootProps()} style={{ cursor: 'pointer' }} >
               <input {...getInputProps()} />
               <MDTypography display="block" variant="button" color="text" my={1}>
                 Upload Profile Pic
@@ -123,6 +192,7 @@ function Cover() {
                 variant="gradient"
                 color="info"
                 fullWidth
+                onClick={handleSubmit}
               >
                 Next
               </MDButton>
@@ -139,4 +209,4 @@ function Cover() {
   );
 }
 
-export default Cover;
+export default CoachInfoUpdate;

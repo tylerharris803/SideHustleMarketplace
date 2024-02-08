@@ -72,7 +72,7 @@ function Overview() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar pageTitle="Profile" />
       <MDBox mb={2} />
       <Header>
         <MDBox mt={5} mb={3}>

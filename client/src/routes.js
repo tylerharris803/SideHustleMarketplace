@@ -50,6 +50,7 @@ import CoachOrPlayer from "layouts/authentication/coachorplayer";
 import CoachInfo from "layouts/authentication/coachinfo";
 import TeamInfo from "layouts/authentication/coachinfo";
 import WorkoutLibrary from "layouts/workoutlibrary";
+import ViewWorkout from "layouts/viewworkout";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -132,6 +133,14 @@ const routes = [
     icon: <Icon fontSize="small">accessibility</Icon>,
     route: "/addwellness",
     component: <Addnewwellness />,
+  },
+  {
+    type: "collapse",
+    name: "View Workout",
+    key: "viewworkout",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/viewworkout",
+    component: <ViewWorkout/>,
   },
   {
     type: "collapse",

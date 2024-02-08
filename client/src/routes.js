@@ -48,7 +48,9 @@ import SignUp from "layouts/authentication/sign-up";
 import SignOut from "layouts/authentication/sign-out";
 import CoachOrPlayer from "layouts/authentication/coachorplayer";
 import CoachInfo from "layouts/authentication/coachinfo";
-import TeamInfo from "layouts/authentication/coachinfo";
+import TeamInfo from "layouts/authentication/teaminfo";
+import WellnessSetup from "layouts/authentication/wellness-setup";
+import Summary from "layouts/authentication/summary";
 import WorkoutLibrary from "layouts/workoutlibrary";
 
 // @mui icons
@@ -167,14 +169,6 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
-  },
-  {
-    type: "collapse",
     name: "Sign Out",
     key: "sign-out",
     icon: <Icon fontSize="small">logout</Icon>,
@@ -185,13 +179,12 @@ const routes = [
     type: "collapse",
     name: "Coach or Player",
     key: "coachorplayer",
-    icon: <Icon fontSize="small"></Icon>,
+    icon: <Icon fontSize="small">person</Icon>,
     route: "/authentication/coachorplayer",
     component: <CoachOrPlayer />,
   },
   {
     type: "collapse",
-    name: "Coach Info",
     key: "coachinfo",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/coachinfo",
@@ -199,11 +192,31 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Team Info",
     key: "teaminfo",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/teaminfo",
     component: <TeamInfo />,
+  },
+  {
+    type: "collapse",
+    key: "wellness-setup",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/wellness-setup",
+    component: <WellnessSetup />,
+  },
+  {
+    type: "collapse",
+    key: "summary",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/summary",
+    component: <Summary />,
+  },
+  {
+    type: "collapse",
+    key: "sign-up",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/sign-up",
+    component: <SignUp />,
   },
 ];
 

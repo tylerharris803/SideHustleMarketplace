@@ -28,16 +28,16 @@ async function getCustomizedExercise(assignmentData) {
     .eq("workout_id", assignmentData.workout_id);
 
   // Fetch exercise data separately
-  const { data: exerciseData } = await supabase
-    .from("exercise")
-    .select("*");
+  const { data: exerciseData } = await supabase.from("exercise").select("*");
 
   // Merge exercise data with customized exercises
-  const customizedExercisesWithExerciseInfo = customizedExercisesData.map(customizedExercise => {
-    const exerciseInfo = exerciseData.find(exercise => exercise.id === customizedExercise.exercise_id);
+  const customizedExercisesWithExerciseInfo = customizedExercisesData.map((customizedExercise) => {
+    const exerciseInfo = exerciseData.find(
+      (exercise) => exercise.id === customizedExercise.exercise_id
+    );
     return {
       ...customizedExercise,
-      ...exerciseInfo
+      ...exerciseInfo,
     };
   });
   console.log(customizedExercisesWithExerciseInfo);
@@ -89,7 +89,6 @@ function CompleteWorkout() {
     fetchData();
   }, []);
 
-
   // Function to handle checkbox change for completed exercises
   const handleExerciseCompletionChange = (exercise) => {
     setCompletedExercises((prevCompletedExercises) => {
@@ -109,7 +108,7 @@ function CompleteWorkout() {
       updatedExercises[index][field] = value;
       return updatedExercises;
     });
-  }
+  };
 
   // Function to handle form submission
   const handleSubmit = async () => {
@@ -132,10 +131,8 @@ function CompleteWorkout() {
         console.log("Completion records added successfully!");
       }
     } catch (error) {
-      console.error("Error: ", error)
+      console.error("Error: ", error);
     }
-
-
 
     try {
       // Your submission logic
@@ -160,10 +157,18 @@ function CompleteWorkout() {
         </MDTypography>
       </MDBox>
 
-
       <MDBox pt={1} pb={2} px={2}>
         <InputLabel>Exercises</InputLabel>
-        <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0} className="MuiFormControlLabel-root"> {/* Add the className here */}
+        <MDBox
+          component="ul"
+          display="flex"
+          flexDirection="column"
+          p={0}
+          m={0}
+          className="MuiFormControlLabel-root"
+        >
+          {" "}
+          {/* Add the className here */}
           <MDBox mb={2}>
             <FormControl>
               <MDBox display="flex" flexDirection="column">
@@ -182,13 +187,19 @@ function CompleteWorkout() {
                         <MDTypography variant="body1" fontWeight="medium">
                           {customizedExercise.name}
                         </MDTypography>
-                        {(customizedExercise.reps || customizedExercise.sets || customizedExercise.duration) && (
+                        {(customizedExercise.reps ||
+                          customizedExercise.sets ||
+                          customizedExercise.duration) && (
                           <MDTypography variant="body2">
                             {customizedExercise.reps && `Reps: ${customizedExercise.reps}`}
-                            {customizedExercise.reps && customizedExercise.sets && customizedExercise.duration && ' | '}
+                            {customizedExercise.reps &&
+                              customizedExercise.sets &&
+                              customizedExercise.duration &&
+                              " | "}
                             {customizedExercise.sets && `Sets: ${customizedExercise.sets}`}
-                            {customizedExercise.sets && customizedExercise.duration && ' | '}
-                            {customizedExercise.duration && `Duration: ${customizedExercise.duration}`}
+                            {customizedExercise.sets && customizedExercise.duration && " | "}
+                            {customizedExercise.duration &&
+                              `Duration: ${customizedExercise.duration}`}
                           </MDTypography>
                         )}
                         <MDTypography variant="body2" color="text">
@@ -202,7 +213,9 @@ function CompleteWorkout() {
                           multiline
                           rows={3}
                           placeholder="Enter notes..."
-                          onChange={(event) => handleNotesChange(index, "notes", event.target.value)}
+                          onChange={(event) =>
+                            handleNotesChange(index, "notes", event.target.value)
+                          }
                         />
                       </div>
                     }

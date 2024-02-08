@@ -139,7 +139,7 @@ const routes = [
     key: "viewworkout",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/viewworkout",
-    component: <ViewWorkout/>,
+    component: <ViewWorkout />,
   },
   {
     type: "collapse",

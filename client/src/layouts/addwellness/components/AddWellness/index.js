@@ -45,7 +45,6 @@ function AddWellness() {
     fetchData();
   }, []);
 
-
   const handleSliderChange = (type, value) => {
     setWellnessData((prevData) => ({
       ...prevData,
@@ -57,23 +56,23 @@ function AddWellness() {
     const selectedDate = startDate.toISOString();
 
     const { data: existingEntries, error: existingEntriesError } = await supabase
-    .from("checkin")
-    .select()
-    .eq("player_id", profile.id)
-    .eq("date", selectedDate);
+      .from("checkin")
+      .select()
+      .eq("player_id", profile.id)
+      .eq("date", selectedDate);
 
     if (existingEntriesError) {
       console.error("Error checking for existing entries:", existingEntriesError);
       // Handle the error here
       return;
     }
-  
+
     if (existingEntries.length > 0) {
       // Display a pop-up or alert informing the user about the existing entry
-      toast.error('You already submitted wellness for this date. Please choose a new date.', {
+      toast.error("You already submitted wellness for this date. Please choose a new date.", {
         style: {
-          color: 'red',
-        }
+          color: "red",
+        },
       });
       return;
     }
@@ -119,7 +118,7 @@ function AddWellness() {
         </MDTypography>
         <MDTypography variant="body2" fontWeight="textSecondary" id="dateSelected">
           Select Date:
-        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>

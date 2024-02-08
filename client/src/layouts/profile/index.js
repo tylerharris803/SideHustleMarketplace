@@ -129,7 +129,7 @@ function Overview() {
         </MDBox> */}
         {/* <MDBox p={2}>
           <Grid container spacing={6}> */}
-            {/* <Grid item xs={12} md={6} xl={3}>
+        {/* <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor1}
                 label="project #2"
@@ -189,7 +189,7 @@ function Overview() {
                 ]}
               />
             </Grid> */}
-            {/* <Grid item xs={12} md={6} xl={3}>
+        {/* <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor4}
                 label="project #4"
@@ -209,7 +209,7 @@ function Overview() {
                 ]}
               />
             </Grid> */}
-          {/* </Grid>
+        {/* </Grid>
         </MDBox> */}
       </Header>
       <Footer />

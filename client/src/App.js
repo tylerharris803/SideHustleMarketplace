@@ -272,9 +272,8 @@ export default function App() {
           </div>
         </div>
       </div>
-    )
-  } 
-  else {
+    );
+  } else {
     // STOP UNDO
     return direction === "rtl" ? (
       <CacheProvider value={rtlCache}>

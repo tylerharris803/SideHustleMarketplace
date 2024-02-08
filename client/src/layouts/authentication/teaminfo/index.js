@@ -19,6 +19,7 @@ import Icon from "@mui/material/Icon";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import logo from "assets/images/logo-ct.png";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
@@ -37,6 +38,7 @@ function TeamInfoUpdate() {
   const [sports, setSports] = useState([]);
   const [teamid, setTeamID] = useState([]);
   const [profile, setProfile] = useState(null);
+  const [formValid, setFormValid] = useState(false);
 
   const onLogoDrop = useCallback((acceptedFiles) => {
     // Do something with the uploaded file (e.g., store it in state)
@@ -78,6 +80,14 @@ function TeamInfoUpdate() {
 
   const handleSportChange = (event) => {
     setSelectedSport(event.target.value);
+  };
+
+  const handleInputChange = () => {
+    const name = document.getElementById("team-name").value;
+    const sport_id = selectedSport;
+
+    const isValid = name !== '';
+    setFormValid(isValid);
   };
 
   const handleSubmit = async () => {
@@ -133,6 +143,7 @@ function TeamInfoUpdate() {
           mb={1}
           textAlign="center"
         >
+          <img src={logo} alt="CoachSync Logo" style={{ maxWidth: "20%", marginTop: "5px" }} />
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Team Info
           </MDTypography>
@@ -147,7 +158,7 @@ function TeamInfoUpdate() {
                 What type of coach are you? (Head, Assistant, etc...)
               </MDTypography> */}
               <MDBox mb={2}>
-                <MDInput type="text" id="team-name" label="Team Name" variant="outlined" fullWidth />
+                <MDInput type="text" id="team-name" label="Team Name" variant="outlined" fullWidth required onChange={handleInputChange}/>
               </MDBox>
             </MDBox>
             <MDBox mb={2}>
@@ -209,7 +220,7 @@ function TeamInfoUpdate() {
               </MDBox>
             )}
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/wellness-setup" variant="gradient" color="info" fullWidth onClick={handleSubmit}
+              <MDButton component={Link} to="/authentication/wellness-setup" variant="gradient" color={formValid ? "info" : "default"} fullWidth onClick={handleSubmit} disabled={!formValid}
 >
                 Next
               </MDButton>

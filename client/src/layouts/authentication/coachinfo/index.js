@@ -19,6 +19,7 @@ import Icon from "@mui/material/Icon";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import logo from "assets/images/logo-ct.png";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
@@ -36,6 +37,7 @@ function CoachInfoUpdate() {
   const [coachRole, setCoachRole] = useState("");
   const [profile, setProfile] = useState(null);
 
+  const [formValid, setFormValid] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
     // Do something with the uploaded file (e.g., store it in state)
@@ -57,6 +59,17 @@ function CoachInfoUpdate() {
     };
     fetchData();
   }, []);
+
+  const handleInputChange = () => {
+    const firstName = document.getElementById("first-name").value;
+    const lastName = document.getElementById("last-name").value;
+    const phoneNumber = document.getElementById("phone-number").value;
+    const birthDate = document.getElementById("birth-date").value;
+    const coachRole = document.getElementById("coach-role").value;
+
+    const isValid = firstName !== '' && lastName !== '' && phoneNumber !== '' && birthDate !== '' && coachRole !== '';
+    setFormValid(isValid);
+  };
 
   const handleSubmit = async () => {
     // Check if profile and profile.id are available
@@ -106,6 +119,7 @@ function CoachInfoUpdate() {
           mb={1}
           textAlign="center"
         >
+          <img src={logo} alt="CoachSync Logo" style={{ maxWidth: "20%", marginTop: "5px" }} />
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Coach Info
           </MDTypography>
@@ -120,13 +134,13 @@ function CoachInfoUpdate() {
           <MDBox component="form" role="form">
             <MDBox mb={2}>
               <MDBox mb={2}>
-                <MDInput type="text" id="first-name" label="First Name" variant="outlined" fullWidth />
+                <MDInput type="text" id="first-name" label="First Name" variant="outlined" fullWidth required onChange={handleInputChange}/>
               </MDBox>
               <MDBox mb={2}>
-                <MDInput type="text" id="last-name" label="Last Name" variant="outlined" fullWidth />
+                <MDInput type="text" id="last-name" label="Last Name" variant="outlined" fullWidth required onChange={handleInputChange}/>
               </MDBox>
               <MDBox mb={3}>
-                <MDInput type="phone" id="phone-number" label="Phone Number" variant="outlined" fullWidth />
+                <MDInput type="tel" id="phone-number" label="Phone Number" variant="outlined" fullWidth required onChange={handleInputChange}/>
               </MDBox>
               <MDBox mb={3}>
                 <MDTypography display="block" variant="button" color="text" my={1}>
@@ -137,13 +151,15 @@ function CoachInfoUpdate() {
                   id="birth-date" 
                   variant="outlined" 
                   fullWidth 
+                  required
+                  onChange={handleInputChange}
                 />              
               </MDBox>
               <MDTypography display="block" variant="button" color="text" my={1}>
                 What type of coach are you? (Head, Assistant, etc...)
               </MDTypography>
               <MDBox mb={5}>
-                <MDInput type="text" id="coach-role" label="Coach Role" variant="outlined" fullWidth />
+                <MDInput type="text" id="coach-role" label="Coach Role" variant="outlined" fullWidth required onChange={handleInputChange}/>
               </MDBox>
             </MDBox>
             <MDBox mb={2} {...getRootProps()} style={{ cursor: 'pointer' }} >
@@ -190,9 +206,10 @@ function CoachInfoUpdate() {
                 component={Link}
                 to="/authentication/teaminfo"
                 variant="gradient"
-                color="info"
+                color={formValid ? "info" : "default"} // Change color based on selectionMade
                 fullWidth
                 onClick={handleSubmit}
+                disabled={!formValid}
               >
                 Next
               </MDButton>

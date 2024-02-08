@@ -51,6 +51,7 @@ import CoachInfo from "layouts/authentication/coachinfo";
 import TeamInfo from "layouts/authentication/coachinfo";
 import WorkoutLibrary from "layouts/workoutlibrary";
 import ViewWorkout from "layouts/viewworkout";
+import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -128,9 +129,9 @@ const routes = [
 
   {
     type: "collapse",
-    name: "Add New Wellness",
+    name: "Wellness Checkin",
     key: "addwellness",
-    icon: <Icon fontSize="small">accessibility</Icon>,
+    icon: <PsychologyAltIcon fontSize="small">Wellness</PsychologyAltIcon>,
     route: "/addwellness",
     component: <Addnewwellness />,
   },

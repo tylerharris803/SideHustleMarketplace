@@ -20,6 +20,7 @@ import SportsIcon from "@mui/icons-material/Sports";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import logo from "assets/images/logo-ct.png";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
@@ -36,6 +37,7 @@ import { fetchUserProfile } from "../../../fetchUserProfile";
 function PlayerorCoach() {
   const [selectedRole, setSelectedRole] = useState("");
   const [profile, setProfile] = useState(null);
+  const [selectionMade, setSelectionMade] = useState(false); // Track if selection is made
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,35 +50,42 @@ function PlayerorCoach() {
   
   const handleRoleChange = (event, newRole) => {
     setSelectedRole(newRole);
+    setSelectionMade(true); // Set selection made to true when a role is selected
   };
 
   const handleSubmit = async () => {
     // Check if profile and profile.id are available
-    if (profile && profile.id) {
-      const roleData = {
-        player: selectedRole === "player" ? true : false
-      };
-  
-      try {
-        // Use supabase client's api.post method to add data
-        const { data, error } = await supabase
-          .from("profile")
-          .update([roleData])
-          .eq("id", profile.id);
-  
-        if (error) {
-          console.error("Error updating profile:", error);
+    if (selectedRole) {
+      // Rest of your handleSubmit logic
+      if (profile && profile.id) {
+        const roleData = {
+          player: selectedRole === "player" ? true : false
+        };
+    
+        try {
+          // Use supabase client's api.post method to add data
+          const { data, error } = await supabase
+            .from("profile")
+            .update([roleData])
+            .eq("id", profile.id);
+    
+          if (error) {
+            console.error("Error updating profile:", error);
+            // Handle the error here
+          } else {
+            console.log("Profile updated successfully!");
+          }
+        } catch (error) {
+          console.error("Error:", error);
           // Handle the error here
-        } else {
-          console.log("Profile updated successfully!");
         }
-      } catch (error) {
-        console.error("Error:", error);
-        // Handle the error here
+      } else {
+        console.error("Profile or profile ID is missing.");
+        // Handle the case where profile or profile ID is missing
       }
     } else {
-      console.error("Profile or profile ID is missing.");
-      // Handle the case where profile or profile ID is missing
+      // Notify the user to make a selection
+      toast.error("Please select either Player or Coach");
     }
   };
 
@@ -94,7 +103,7 @@ function PlayerorCoach() {
           mb={1}
           textAlign="center"
         >
-          {profile && profile.first_name ? (
+          {/* {profile && profile.first_name ? (
             <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
               First Name: {profile.first_name}
             </MDTypography>
@@ -105,7 +114,11 @@ function PlayerorCoach() {
           )}
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
             User Profile ID: {profile ? profile.id : ""}
-          </MDTypography>
+          </MDTypography> */}
+          {/* <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
+            Welcome to <strong style={{ fontWeight: "bold" }}>CoachSync</strong>
+          </MDTypography> */}
+          <img src={logo} alt="CoachSync Logo" style={{ maxWidth: "20%", marginTop: "5px" }} />
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
             Are you a <strong style={{ fontWeight: "bold" }}>Player</strong> or{" "}
             <strong style={{ fontWeight: "bold" }}>Coach</strong>?
@@ -136,8 +149,16 @@ function PlayerorCoach() {
               </ToggleButtonGroup>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton component={Link} to="/authentication/coachinfo" variant="gradient" color="info" fullWidth onClick={handleSubmit}>
-                Next
+            <MDButton
+              component={Link}
+              to="/authentication/coachinfo"
+              variant="gradient"
+              color={selectionMade ? "info" : "default"} // Change color based on selectionMade
+              fullWidth
+              onClick={handleSubmit}
+              disabled={!selectionMade}
+            > 
+               Next
               </MDButton>
             </MDBox>
             <MDBox mt={4} mb={1}>

@@ -107,7 +107,6 @@ export default function App() {
     const fetchData = async () => {
       const userdata = await fetchUserProfile();
       setProfile(userdata);
-      setLoading(false); // Set loading to false once profile data is fetched
     };
     fetchData();
   }, []);

@@ -28,6 +28,11 @@ import { FormControl, FormControlLabel, InputLabel, Select } from "@mui/material
 import MenuItem from "@mui/material/MenuItem";
 
 import { supabase } from "../../../supabaseClient";
+import { fetchUserProfile } from "../../../fetchUserProfile";
+
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const daysOfWeekMap = [
   { id: 1, name: "Sunday" },
@@ -39,10 +44,12 @@ const daysOfWeekMap = [
   { id: 7, name: "Saturday" },
 ];
 
-function Cover() {
+function WellnessSetup() {
+  const navigate = useNavigate();
   const [wellnessOptions, setWellnessOptions] = useState([]);
   const [selectedDays, setSelectedDays] = useState(daysOfWeekMap.map((day) => day.id));
   const [selectedWellnessOptions, setSelectedWellnessOptions] = useState(wellnessOptions);
+  const [profile, setProfile] = useState(null);
 
   const handleWellnessOptionChange = (option) => {
     setSelectedWellnessOptions((prevSelected) => {
@@ -74,6 +81,15 @@ function Cover() {
     fetchWellnessOptions();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const userdata = await fetchUserProfile();
+
+      setProfile(userdata);
+    };
+    fetchData();
+  }, []);
+
   const handleDayChange = (day) => {
     setSelectedDays((prevSelectedDays) => {
       const newSelectedDays = prevSelectedDays.includes(day)
@@ -85,6 +101,65 @@ function Cover() {
       return newSelectedDays;
     });
   };
+
+  const waterCheckinValue = selectedWellnessOptions.includes("water");
+  const sleepCheckinValue = selectedWellnessOptions.includes("sleep");
+  const stressCheckinValue = selectedWellnessOptions.includes("soreness");
+  const sorenessCheckinValue = selectedWellnessOptions.includes("energy");
+  const energyCheckinValue = selectedWellnessOptions.includes("stress");
+
+  const handleSubmit = async () => {
+    const teamWellnessData = {
+      checkin_frequency: selectedDays.sort((a, b) => a - b).join(""),
+      water_checkin: waterCheckinValue,
+      sleep_checkin: sleepCheckinValue,
+      stress_checkin: stressCheckinValue,
+      soreness_checkin: sorenessCheckinValue,
+      energy_checkin: energyCheckinValue,
+    };
+  
+    try {
+      // Fetch profile data to get user's team ID
+      const { data: profileData, error: profileError } = await supabase
+        .from("profile")
+        .select("team_id")
+        .eq("id", profile.id)
+        .single();
+  
+      if (profileError) {
+        throw profileError;
+      }
+  
+      if (profileData) {
+        const profileTeamID = profileData.team_id;
+  
+        // Use the team ID fetched from the profile to update team wellness data
+        const { data: updateData, error: updateError } = await supabase
+          .from("team")
+          .update(teamWellnessData)
+          .eq("id", profileTeamID);
+  
+        if (updateError) {
+          throw updateError;
+        }
+  
+        console.log("Team added successfully!");
+
+        toast.success("Perfect! Headed to your profile...", {
+          autoClose: 2000,
+          onClose: () => {
+            navigate("/profile");
+          },
+        });
+      } else {
+        console.error("Profile not found or team ID not available.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle the error here
+    }
+  };
+  
 
   return (
     <CoverLayout image={bgImage}>
@@ -158,14 +233,8 @@ function Cover() {
               </MDBox>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton
-                component={Link}
-                to="/authentication/summary"
-                variant="gradient"
-                color="info"
-                fullWidth
-              >
-                Next
+              <MDButton component={Link} variant="gradient" color="success" fullWidth onClick={handleSubmit}>
+                Submit
               </MDButton>
             </MDBox>
             <MDBox mt={4} mb={1}>
@@ -180,4 +249,4 @@ function Cover() {
   );
 }
 
-export default Cover;
+export default WellnessSetup;

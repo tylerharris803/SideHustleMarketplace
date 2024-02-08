@@ -28,15 +28,15 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import workoutsTableData from "layouts/tables/data/workoutsTableData";
+import Data from "layouts/viewworkout/data/index";
 
 function Tables() {
-  const { columns, rows } = workoutsTableData();
+  const { columns, rows } = Data();
   //   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
     <DashboardLayout>
-      <DashboardNavbar pageTitle="Saved Workouts" />
+      <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>

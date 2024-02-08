@@ -54,10 +54,34 @@ function AddWellness() {
   };
 
   const handleSubmit = async () => {
+    const selectedDate = startDate.toISOString();
+
+    const { data: existingEntries, error: existingEntriesError } = await supabase
+    .from("checkin")
+    .select()
+    .eq("player_id", profile.id)
+    .eq("date", selectedDate);
+
+    if (existingEntriesError) {
+      console.error("Error checking for existing entries:", existingEntriesError);
+      // Handle the error here
+      return;
+    }
+  
+    if (existingEntries.length > 0) {
+      // Display a pop-up or alert informing the user about the existing entry
+      toast.error('You already submitted wellness for this date. Please choose a new date.', {
+        style: {
+          color: 'red',
+        }
+      });
+      return;
+    }
+
     const dataToSubmit = Object.keys(wellnessData).map((type) => ({
       player_id: profile.id, //update to get current user id
       wellness_id: wellnessData[type].id,
-      date: startDate.toISOString(), //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
+      date: selectedDate, //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
       created_at: new Date().toISOString(),
       value: wellnessData[type].value,
     }));
@@ -66,7 +90,7 @@ function AddWellness() {
 
     try {
       // Use supabase client's api.post method to add data
-      const { data, error } = await supabase.from("checkin").upsert(dataToSubmit).select();
+      const { data, error } = await supabase.from("checkin").insert(dataToSubmit).select();
 
       if (error) {
         console.error("Error adding wellness:", error);

@@ -48,7 +48,6 @@ export default function Data() {
 
   
   return {
-    
     columns: [
       { Header: "name", accessor: "name", width: "20%", align: "left" },
       { Header: "exercises", accessor: "exercises", width: "40%", align: "left" },

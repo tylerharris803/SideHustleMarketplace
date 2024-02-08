@@ -62,11 +62,10 @@ import PeopleIcon from "@mui/icons-material/People";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 
-import AddNewTeam from "./layouts/addteam/components/AddTeam";
 import Addnewteam from "./layouts/addteam";
-//import AddWorkout from "layouts/addworkout/components/AddWorkout";
 import AddWorkout from "./layouts/addworkout";
 import Addnewwellness from "./layouts/addwellness";
+import CompleteWorkout from "./layouts/completeworkout";
 
 const routes = [
   {
@@ -118,7 +117,6 @@ const routes = [
     route: "/addworkout",
     component: <AddWorkout />,
   },
-
   {
     type: "collapse",
     name: "Add New Team",
@@ -127,7 +125,6 @@ const routes = [
     route: "/addteam",
     component: <Addnewteam />,
   },
-
   {
     type: "collapse",
     name: "Add New Wellness",
@@ -170,6 +167,14 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Complete Workout",
+    key: "completeworkout",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/completeworkout",
+    component: <CompleteWorkout />,
+  },
+  {
+    type: "collapse",
     name: "Sign In",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
@@ -194,6 +199,7 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Coach Info",
     key: "coachinfo",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/coachinfo",
@@ -201,6 +207,7 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Team Info",
     key: "teaminfo",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/teaminfo",
@@ -208,6 +215,7 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Wellness Setup",
     key: "wellness-setup",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/wellness-setup",
@@ -215,6 +223,7 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Summary",
     key: "summary",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/summary",
@@ -222,6 +231,7 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Sign Up",
     key: "sign-up",
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/sign-up",

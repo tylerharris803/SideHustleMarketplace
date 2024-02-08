@@ -77,9 +77,6 @@ function Overview() {
       <Header>
         <MDBox mt={5} mb={3}>
           <Grid container spacing={1}>
-            <Grid item xs={12} md={6} xl={4}>
-              <PlatformSettings />
-            </Grid>
             <Grid item xs={12} md={6} xl={4} sx={{ display: "flex" }}>
               <Divider orientation="vertical" sx={{ ml: -2, mr: 1 }} />
               {profile && (
@@ -88,9 +85,9 @@ function Overview() {
                   description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
                   info={{
                     fullName: profile.first_name + " " + profile.last_name,
-                    mobile: "(44) 123 1234 123",
-                    email: "alecthompson@mail.com",
-                    location: "USA",
+                    mobile: profile.phone_number,
+                    email: profile.email,
+                    birthdate: profile.birth_date,
                   }}
                   social={[
                     {
@@ -113,14 +110,14 @@ function Overview() {
                   shadow={false}
                 />
               )}
-              <Divider orientation="vertical" sx={{ mx: 0 }} />
+              {/* <Divider orientation="vertical" sx={{ mx: 0 }} /> */}
             </Grid>
-            <Grid item xs={12} xl={4}>
+            {/* <Grid item xs={12} xl={4}>
               <ProfilesList title="conversations" profiles={profilesListData} shadow={false} />
-            </Grid>
+            </Grid> */}
           </Grid>
         </MDBox>
-        <MDBox pt={2} px={2} lineHeight={1.25}>
+        {/* <MDBox pt={2} px={2} lineHeight={1.25}>
           <MDTypography variant="h6" fontWeight="medium">
             Projects
           </MDTypography>
@@ -129,10 +126,10 @@ function Overview() {
               Architects design houses
             </MDTypography>
           </MDBox>
-        </MDBox>
-        <MDBox p={2}>
-          <Grid container spacing={6}>
-            <Grid item xs={12} md={6} xl={3}>
+        </MDBox> */}
+        {/* <MDBox p={2}>
+          <Grid container spacing={6}> */}
+            {/* <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor1}
                 label="project #2"
@@ -191,8 +188,8 @@ function Overview() {
                   { image: team1, name: "Elena Morison" },
                 ]}
               />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
+            </Grid> */}
+            {/* <Grid item xs={12} md={6} xl={3}>
               <DefaultProjectCard
                 image={homeDecor4}
                 label="project #4"
@@ -211,9 +208,9 @@ function Overview() {
                   { image: team1, name: "Elena Morison" },
                 ]}
               />
-            </Grid>
-          </Grid>
-        </MDBox>
+            </Grid> */}
+          {/* </Grid>
+        </MDBox> */}
       </Header>
       <Footer />
     </DashboardLayout>

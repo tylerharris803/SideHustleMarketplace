@@ -95,6 +95,15 @@ function PlayerorCoach() {
           mb={1}
           textAlign="center"
         >
+          {profile && profile.first_name ? (
+            <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
+              First Name: {profile.first_name}
+            </MDTypography>
+          ) : (
+            <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
+              Oops, nothing here
+            </MDTypography>
+          )}
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
             User Profile ID: {profile ? profile.id : ""}
           </MDTypography>

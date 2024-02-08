@@ -87,6 +87,7 @@ const WelcomeBox = () => (
 export default function App() {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true); // Introduce a loading state
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -105,8 +106,8 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       const userdata = await fetchUserProfile();
-
       setProfile(userdata);
+      setLoading(false); // Set loading to false once profile data is fetched
     };
     fetchData();
   }, []);
@@ -272,8 +273,9 @@ export default function App() {
           </div>
         </div>
       </div>
-    );
-  } else {
+    )
+  } 
+  else {
     // STOP UNDO
     return direction === "rtl" ? (
       <CacheProvider value={rtlCache}>
@@ -320,7 +322,11 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
+          {profile && profile.first_name ? (
+            <Route path="*" element={<Navigate to="/dashboard" />} />
+          ) : (
+            <Route path="*" element={<Navigate to="/dashboard" />} />
+          )}
         </Routes>
       </ThemeProvider>
     );

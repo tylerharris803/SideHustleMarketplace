@@ -51,7 +51,7 @@ import CoachInfo from "layouts/authentication/coachinfo";
 import TeamInfo from "layouts/authentication/teaminfo";
 import WellnessSetup from "layouts/authentication/wellness-setup";
 import Summary from "layouts/authentication/summary";
-import WorkoutLibrary from "layouts/workoutlibrary"
+import WorkoutLibrary from "layouts/workoutlibrary";
 
 // @mui icons
 import Icon from "@mui/material/Icon";

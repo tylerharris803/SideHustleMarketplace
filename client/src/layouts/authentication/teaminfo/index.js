@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useDropzone } from 'react-dropzone';
+import { useDropzone } from "react-dropzone";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -159,16 +159,17 @@ function TeamInfoUpdate() {
                   variant="outlined"
                   value={selectedSport}
                   onChange={handleSportChange}
-                  sx={{ width: "100%", minHeight:'46px' }}              >
+                  sx={{ width: "100%", minHeight: "46px" }}
+                >
                   {sports.map((sport, index) => (
                     <MenuItem key={index} value={sport.id}>
                       {sport.name}
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>            
+              </FormControl>
             </MDBox>
-            <MDBox mb={2} {...getRootProps()} style={{ cursor: 'pointer' }}>
+            <MDBox mb={2} {...getRootProps()} style={{ cursor: "pointer" }}>
               <input {...getInputProps()} />
               <MDTypography display="block" variant="button" color="text" my={1}>
                 Upload Team Logo
@@ -189,17 +190,17 @@ function TeamInfoUpdate() {
               <MDBox display="flex" flexDirection="column" alignItems="center">
                 <div
                   style={{
-                    width: '200px', // Adjust the size of the circular image
-                    height: '200px', // Make sure this is the same as the width
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    border: '2px solid #fff', // Optional: border color
+                    width: "200px", // Adjust the size of the circular image
+                    height: "200px", // Make sure this is the same as the width
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    border: "2px solid #fff", // Optional: border color
                   }}
                 >
                   <img
                     src={URL.createObjectURL(teamLogo)}
                     alt="Team Logo"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 </div>
                 <MDButton onClick={deleteTeamLogo} variant="text" color="error">

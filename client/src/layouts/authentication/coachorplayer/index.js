@@ -15,8 +15,8 @@ import MDButton from "components/MDButton";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
-import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
-import SportsIcon from '@mui/icons-material/Sports';
+import SportsBaseballIcon from "@mui/icons-material/SportsBaseball";
+import SportsIcon from "@mui/icons-material/Sports";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -27,8 +27,8 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/grass2.jpg";
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { supabase } from "../../../supabaseClient";
 import { fetchUserProfile } from "../../../fetchUserProfile";
@@ -79,8 +79,7 @@ function PlayerorCoach() {
       // Handle the case where profile or profile ID is missing
     }
   };
-  
-  
+
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -108,7 +107,8 @@ function PlayerorCoach() {
             User Profile ID: {profile ? profile.id : ""}
           </MDTypography>
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
-            Are you a <strong style={{ fontWeight: 'bold' }}>Player</strong> or <strong style={{ fontWeight: 'bold' }}>Coach</strong>?
+            Are you a <strong style={{ fontWeight: "bold" }}>Player</strong> or{" "}
+            <strong style={{ fontWeight: "bold" }}>Coach</strong>?
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
@@ -122,15 +122,15 @@ function PlayerorCoach() {
                 fullWidth
               >
                 <ToggleButton value="player">
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     Player
-                    <SportsBaseballIcon sx={{ width: "80%", minHeight:'30px' }} />
+                    <SportsBaseballIcon sx={{ width: "80%", minHeight: "30px" }} />
                   </div>
                 </ToggleButton>
                 <ToggleButton value="coach">
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     Coach
-                    <SportsIcon sx={{ width: "100%", minHeight:'30px' }} />
+                    <SportsIcon sx={{ width: "100%", minHeight: "30px" }} />
                   </div>
                 </ToggleButton>
               </ToggleButtonGroup>

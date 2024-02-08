@@ -77,7 +77,7 @@ function WellnessSetup() {
         alert(error.message);
       }
     }
-  
+
     fetchWellnessOptions();
   }, []);
 
@@ -188,7 +188,7 @@ function WellnessSetup() {
               Select the wellness check-in activities that you want to assign your team.
             </MDTypography>
             <MDBox pt={1} pb={2} px={2}>
-            <FormControl>
+              <FormControl>
                 <MDBox display="flex" flexDirection="column">
                   {wellnessOptions.map((option, index) => (
                     <FormControlLabel
@@ -210,7 +210,7 @@ function WellnessSetup() {
               <MDTypography display="block" variant="button" color="text" my={1}>
                 How often you want to check-in?
               </MDTypography>
-                
+
               <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
                 <MDBox mb={2}>
                   <FormControl>

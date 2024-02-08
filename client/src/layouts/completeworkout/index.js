@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -24,17 +24,17 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
-import AddExercise from "layouts/addexercise/components/AddExercise";
+import CompleteWorkout from "layouts/completeworkout/components/CompleteWorkout";
 
-function AddingExercise() {
+function CompletingWorkout() {
   return (
     <DashboardLayout>
-      <DashboardNavbar pageTitle="Add Exercise" absolute isMini />
+      <DashboardNavbar absolute isMini />
       <MDBox mt={8} justifyContent="center" alignItems="center">
         <MDBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={12}>
-              <AddExercise />
+              <CompleteWorkout />
             </Grid>
           </Grid>
         </MDBox>
@@ -44,4 +44,4 @@ function AddingExercise() {
   );
 }
 
-export default AddingExercise;
+export default CompletingWorkout;

@@ -37,7 +37,7 @@ function CoachInfoUpdate() {
   const [profile, setProfile] = useState(null);
 
 
-  const onDrop = useCallback(acceptedFiles => {
+  const onDrop = useCallback((acceptedFiles) => {
     // Do something with the uploaded file (e.g., store it in state)
     setProfilePic(acceptedFiles[0]);
   }, []);
@@ -167,17 +167,17 @@ function CoachInfoUpdate() {
               <MDBox display="flex" flexDirection="column" alignItems="center">
                 <div
                   style={{
-                    width: '200px', // Adjust the size of the circular image
-                    height: '200px', // Make sure this is the same as the width
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    border: '2px solid #fff', // Optional: border color
+                    width: "200px", // Adjust the size of the circular image
+                    height: "200px", // Make sure this is the same as the width
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    border: "2px solid #fff", // Optional: border color
                   }}
                 >
                   <img
                     src={URL.createObjectURL(profilePic)}
                     alt="Profile"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 </div>
                 <MDButton onClick={deleteProfilePic} variant="text" color="error">

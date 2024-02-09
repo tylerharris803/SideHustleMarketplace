@@ -8,7 +8,7 @@ import AddTeam from "./components/AddTeam";
 function AddingTeam() {
   return (
     <DashboardLayout>
-      <DashboardNavbar pageTitle="Add New Team" absolute isMini />
+      <DashboardNavbar absolute isMini />
       <MDBox mt={8}>
         <MDBox mb={3}>
           <Grid container spacing={3}>

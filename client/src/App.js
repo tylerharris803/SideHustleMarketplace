@@ -58,7 +58,6 @@ import brandDark from "assets/images/logo-ct-dark.png";
 import { supabase } from "./supabaseClient";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { fetchUserProfile } from "./fetchUserProfile";
 
 const WelcomeBox = () => (
   <div
@@ -86,8 +85,6 @@ const WelcomeBox = () => (
 
 export default function App() {
   const [session, setSession] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true); // Introduce a loading state
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -101,14 +98,6 @@ export default function App() {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const userdata = await fetchUserProfile();
-      setProfile(userdata);
-    };
-    fetchData();
   }, []);
 
   const [controller, dispatch] = useMaterialUIController();
@@ -320,11 +309,7 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          {profile && profile.first_name ? (
-            <Route path="*" element={<Navigate to="/dashboard" />} />
-          ) : (
-            <Route path="*" element={<Navigate to="/dashboard" />} />
-          )}
+          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       </ThemeProvider>
     );

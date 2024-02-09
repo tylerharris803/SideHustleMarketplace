@@ -28,20 +28,20 @@ import team4 from "assets/images/team-4.jpg";
 import MDProgress from "../../../components/MDProgress";
 
 export default function data() {
-  const [exercises, setExercises] = useState([]);
-  async function getExercises() {
+  const [workouts, setWorkouts] = useState([]);
+  async function getWorkouts() {
     try {
-      const { data, error } = await supabase.from("exercise").select("*");
+      const { data, error } = await supabase.from("workout").select("*");
       if (error) throw error;
       if (data != null) {
-        setExercises(data);
+        setWorkouts(data);
       }
     } catch (error) {
       alert(error.message);
     }
   }
   useEffect(() => {
-    getExercises();
+    getWorkouts();
   }, []);
 
   const Author = ({ image, name, email }) => (
@@ -74,25 +74,15 @@ export default function data() {
       { Header: "action", accessor: "action", align: "center" },
     ],
 
-    rows: exercises.map((exercise, index) => ({
-      day: (
+    rows: exercises.map((workout, index) => ({
+      id: (
         <MDBox display="flex" py={1}>
-          {exercise.id} {/* Display the name of the current exercise */}
+          {workout.id} {/* Display the name of the current exercise */}
         </MDBox>
       ),
       workout: (
         <MDBox display="flex" py={1}>
-          {exercise.name} {/* Display the name of the current exercise */}
-        </MDBox>
-      ),
-      assignedto: (
-        <MDTypography variant="caption" color="text" fontWeight="medium">
-          {exercise.description}
-        </MDTypography>
-      ),
-      wellness: (
-        <MDBox width="8rem" textAlign="left">
-          <MDProgress value={60} color="info" variant="gradient" label={false} />
+          {workout.name} {/* Display the name of the current exercise */}
         </MDBox>
       ),
     })),

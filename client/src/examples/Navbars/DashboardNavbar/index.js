@@ -53,7 +53,7 @@ import {
   setOpenConfigurator,
 } from "context";
 
-function DashboardNavbar({ absolute, light, isMini, pageTitle }) {
+function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
@@ -131,7 +131,7 @@ function DashboardNavbar({ absolute, light, isMini, pageTitle }) {
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <MDBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
-          <Breadcrumbs icon="home" title={pageTitle} route={route} light={light} />
+          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
         </MDBox>
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
@@ -139,7 +139,7 @@ function DashboardNavbar({ absolute, light, isMini, pageTitle }) {
               <MDInput label="Search here" />
             </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
-              <Link to="/profile">
+              <Link to="/authentication/sign-in/basic">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
                   <Icon sx={iconsStyle}>account_circle</Icon>
                 </IconButton>
@@ -164,20 +164,18 @@ function DashboardNavbar({ absolute, light, isMini, pageTitle }) {
               >
                 <Icon sx={iconsStyle}>settings</Icon>
               </IconButton>
-              <Link to="/notifications">
-                <IconButton
-                  size="small"
-                  disableRipple
-                  color="inherit"
-                  sx={navbarIconButton}
-                  aria-controls="notification-menu"
-                  aria-haspopup="true"
-                  variant="contained"
-                  // onClick={handleOpenMenu}
-                >
-                  <Icon sx={iconsStyle}>notifications</Icon>
-                </IconButton>
-              </Link>
+              <IconButton
+                size="small"
+                disableRipple
+                color="inherit"
+                sx={navbarIconButton}
+                aria-controls="notification-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={handleOpenMenu}
+              >
+                <Icon sx={iconsStyle}>notifications</Icon>
+              </IconButton>
               {renderMenu()}
             </MDBox>
           </MDBox>
@@ -199,7 +197,6 @@ DashboardNavbar.propTypes = {
   absolute: PropTypes.bool,
   light: PropTypes.bool,
   isMini: PropTypes.bool,
-  pageTitle: PropTypes.string.isRequired,
 };
 
 export default DashboardNavbar;

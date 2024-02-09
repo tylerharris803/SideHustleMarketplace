@@ -40,18 +40,21 @@ async function getCustomizedExercise(assignmentData) {
       ...exerciseInfo,
     };
   });
-  console.log(customizedExercisesWithExerciseInfo);
+  console.log("exercises: ", customizedExercisesWithExerciseInfo);
 
   return customizedExercisesWithExerciseInfo;
 }
 
 async function getAssignment(profile) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const { data: assignmentData, error } = await supabase
     .from("assignment")
     .select("*")
     .eq("player_id", profile.id)
-    .eq("date", new Date().toISOString().split("T")[0])
+    .eq("date", today.toISOString().split("T")[0])
     .single();
+  console.log("assignment: ", assignmentData);
 
   return assignmentData;
 }
@@ -62,6 +65,7 @@ async function getWorkout(assignmentData) {
     .select("*")
     .eq("id", assignmentData.workout_id)
     .single();
+  console.log("workout: ", workoutData);
 
   return workoutData;
 }
@@ -77,9 +81,10 @@ function CompleteWorkout() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchUserProfile();
-      setProfile(data);
-      const assignmentData = await getAssignment(data);
+      const profileData = await fetchUserProfile();
+      console.log("profile", profileData)
+      setProfile(profileData);
+      const assignmentData = await getAssignment(profileData);
       setAssignment(assignmentData);
       const customizedExercisesData = await getCustomizedExercise(assignmentData);
       setCustomizedExercises(customizedExercisesData);

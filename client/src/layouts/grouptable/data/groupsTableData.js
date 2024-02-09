@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 import Icon from "@mui/material/Icon";
@@ -15,6 +14,10 @@ import MDButton from "components/MDButton";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+
+//accordian table stuff
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Add supabase connection
 import { supabase } from "../../../supabaseClient";
@@ -54,9 +57,6 @@ export default function data() {
         { Header: "First Name", accessor: "first", width: "20%", align: "left" },
         { Header: "Last Name", accessor: "last", width: "20%", align: "left" },
         { Header: "Position", accessor: "position", width: "40%", align: "left" },
-        { Header: "Jersey Number", accessor: "jersey", width: "40%", align: "left" },
-        { Header: "Phone Number", accessor: "phone", width: "40%", align: "left" },
-        { Header: "Email Address", accessor: "email", width: "40%", align: "left" },
         { Header: "Group", accessor: "group", width: "40%", align: "left" }, // New column for group name
         { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
         { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
@@ -76,21 +76,6 @@ export default function data() {
         position: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
             {group.position}
-          </MDTypography>
-        ),
-        jersey: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            {group.jersey_number}
-          </MDTypography>
-        ),
-        phone: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            {group.phone_number}
-          </MDTypography>
-        ),
-        email: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            {group.email_address}
           </MDTypography>
         ),
         group: (
@@ -115,11 +100,3 @@ export default function data() {
       })),
     };
   }
-
-
-
-
-
-
-
-

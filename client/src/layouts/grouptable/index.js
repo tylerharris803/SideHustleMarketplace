@@ -35,175 +35,76 @@ import projectsTableData from "layouts/tables/data/projectsTableData";
 
 function Tables() {
   const { columns, rows } = groupsTableData();
-  const { columns: pColumns, rows: pRows } = projectsTableData();
 
-  return (
-//     <DashboardLayout>
-//       <DashboardNavbar />
-//       <MDBox pt={6} pb={3}>
-//         <Grid container spacing={6}>
-//           <Grid item xs={12}>
-//             <Card>
-//               <MDBox
-//                 mx={2}
-//                 mt={-3}
-//                 py={3}
-//                 px={2}
-//                 variant="gradient"
-//                 bgColor="info"
-//                 borderRadius="lg"
-//                 coloredShadow="info"
-//               >
-//                 <MDTypography variant="h6" color="white">
-//                   Players Table
-//                 </MDTypography>
-//               </MDBox>
-//               <MDBox pt={3}>
-//                 <DataTable
-//                   table={{ columns, rows }}
-//                   isSorted={false}
-//                   entriesPerPage={false}
-//                   showTotalEntries={false}
-//                   noEndBorder
-//                 />
-//               </MDBox>
-//             </Card>
-//           </Grid>
-//           <Grid item xs={12}>
-//             <Card>
-//               <MDBox
-//                 mx={2}
-//                 mt={-3}
-//                 py={3}
-//                 px={2}
-//                 variant="gradient"
-//                 bgColor="info"
-//                 borderRadius="lg"
-//                 coloredShadow="info"
-//               >
-//                 <MDTypography variant="h6" color="white">
-//                   Projects Table
-//                 </MDTypography>
-//               </MDBox>
-//               <MDBox pt={3}>
-//                 <DataTable
-//                   table={{ columns: pColumns, rows: pRows }}
-//                   isSorted={false}
-//                   entriesPerPage={false}
-//                   showTotalEntries={false}
-//                   noEndBorder
-//                 />
-//               </MDBox>
-//             </Card>
-//           </Grid>
-//         </Grid>
-//       </MDBox>
-//       <Footer />
-//     </DashboardLayout>
-//   );
-// }
-<DashboardLayout>
-<DashboardNavbar />
-<MDBox pt={6} pb={3}>
-  <Grid container spacing={6}>
-    <Grid item xs={12}>
-      <Card>
-        <MDBox
-          mx={2}
-          mt={-3}
-          py={3}
-          px={2}
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-        >
-          <MDTypography variant="h6" color="white">
-            Players Table
-          </MDTypography>
+    return (
+        <DashboardLayout>
+        <DashboardNavbar />
+        <MDBox pt={3} pb={3}>
+        <Grid container spacing={4}>
+            <Grid item xs={12}>
+            <Card>
+                <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+                >
+                <MDTypography variant="h6" color="white">
+                    Groups
+                </MDTypography>
+                </MDBox>
+                <MDBox pt={1}>
+                <TableContainer component={Paper}>
+                    <Table>
+                    {/* <TableHead>
+                        <TableRow>
+                        {columns.map((column, index) => (
+                            <TableCell key={index}>{column.Header}</TableCell> // the column header
+                        ))}
+                        </TableRow>
+                    </TableHead> */}
+                    <TableBody>
+                        {rows.map((row, index) => (
+                        <Accordion key={index}>
+                            <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            >
+                                {/* this is the row text that is showing on the table */}
+                            <TableCell >{row.group}</TableCell> 
+                            </AccordionSummary>
+                            <AccordionDetails >
+                                <TableHead>
+                                <TableRow>
+                                    {columns.map((column, index) => (
+                                        <TableCell key={index}>{column.Header}</TableCell> // the column header
+                                    ))}
+                                </TableRow>
+                                </TableHead>
+                            <TableRow>
+                                <TableCell style={{ paddingRight: 20 }}>{row.first}</TableCell>
+                                <TableCell style={{ paddingRight: 20 }}>{row.last}</TableCell>
+                                <TableCell style={{ paddingRight: 20 }}>{row.position}</TableCell>
+                             
+                                <TableCell align="right">{row.edit}</TableCell>
+                                <TableCell align="right">{row.delete}</TableCell>
+                            </TableRow>
+                            </AccordionDetails>
+                        </Accordion>
+                        ))}
+                    </TableBody>
+                    </Table>
+                </TableContainer>
+                </MDBox>
+            </Card>
+            </Grid>
+        </Grid>
         </MDBox>
-        <MDBox pt={3}>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {columns.map((column, index) => (
-                    <TableCell key={index}>{column.Header}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row, index) => (
-                  <Accordion key={index}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                    >
-                      <TableCell>{row.first}</TableCell>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <TableRow>
-                        <TableCell>{row.last}</TableCell>
-                        <TableCell>{row.position}</TableCell>
-                        <TableCell>{row.group}</TableCell>
-                        <TableCell>{row.edit}</TableCell>
-                        <TableCell>{row.delete}</TableCell>
-                      </TableRow>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </MDBox>
-      </Card>
-    </Grid>
-    <Grid item xs={12}>
-      <Card>
-        <MDBox
-          mx={2}
-          mt={-3}
-          py={3}
-          px={2}
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-        >
-          <MDTypography variant="h6" color="white">
-            Projects Table
-          </MDTypography>
-        </MDBox>
-        <MDBox pt={3}>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {pColumns.map((column, index) => (
-                    <TableCell key={index}>{column.Header}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {pRows.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{row.first}</TableCell>
-                    <TableCell>{row.last}</TableCell>
-                    <TableCell>{row.position}</TableCell>
-                    <TableCell>{row.group}</TableCell>
-                    <TableCell>{row.edit}</TableCell>
-                    <TableCell>{row.delete}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </MDBox>
-      </Card>
-    </Grid>
-  </Grid>
-</MDBox>
-<Footer />
-</DashboardLayout>
-);
+        <Footer />
+        </DashboardLayout>
+    );
 }
 export default Tables;

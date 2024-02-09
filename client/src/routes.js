@@ -69,6 +69,7 @@ import Addnewteam from "./layouts/addteam";
 import AddWorkout from "./layouts/addworkout";
 import Addnewwellness from "./layouts/addwellness";
 import AddAssignment from "layouts/addassignment/index";
+import Groups2Icon from '@mui/icons-material/Groups2'; //grouptable icon
 
 const routes = [
   {
@@ -99,7 +100,7 @@ const routes = [
     type: "collapse",
     name: "Team Groups",
     key: "grouptable",
-    icon: <ListAltIcon fontSize="small">book</ListAltIcon>,
+    icon: <Groups2Icon  fontSize="small">book</Groups2Icon >,
     route: "/grouptable",
     component: <GroupTable />,
   },

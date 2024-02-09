@@ -57,42 +57,44 @@ export default function data() {
         { Header: "First Name", accessor: "first", width: "20%", align: "left" },
         { Header: "Last Name", accessor: "last", width: "20%", align: "left" },
         { Header: "Position", accessor: "position", width: "40%", align: "left" },
-        { Header: "Group", accessor: "group", width: "40%", align: "left" }, // New column for group name
-        { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
-        { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
+        // { Header: "Group", accessor: "group", width: "40%", align: "left" }, // New column for group name
+        // { Header: "Edit", accessor: "edit", width: "10%", align: "right" },
+        // { Header: "Delete", accessor: "delete", width: "10%", align: "right" },
       ],
   
-      rows: groups.map(group => ({
+      rows: groups
+      .filter(group => group.team && group.team.name) // Filter out rows with empty first or last name
+      .map(group => ({
         first: (
-          <MDBox display="flex" py={1}>
+          <MDBox display="flex" py={1} pr={2.8} pl={2}>
             {group.first_name}
           </MDBox>
         ),
         last: (
-          <MDBox display="flex" py={1}>
+          <MDBox display="flex" py={1} pr={2.8}>
             {group.last_name}
           </MDBox>
         ),
         position: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
+          <MDTypography variant="text" pr={50}>
             {group.position}
           </MDTypography>
         ),
         group: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
+          <MDTypography variant="primary" fontWeight="medium">
             {group.team ? group.team.name : ''} {/* Display group name if available */}
           </MDTypography>
         ),
         edit: (
           <MDBox>
-            <MDButton variant="text" color="dark">
+            <MDButton variant="text" color="dark" pr={4}>
               <Icon>edit</Icon>&nbsp;edit
             </MDButton>
           </MDBox>
         ),
         delete: (
           <MDBox mr={1}>
-            <MDButton variant="text" color="error">
+            <MDButton variant="text" color="error" pr={4}>
               <Icon>delete</Icon>&nbsp;delete
             </MDButton>
           </MDBox>

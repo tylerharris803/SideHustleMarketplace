@@ -3,6 +3,14 @@ import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Grid from "@mui/material/Grid";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Chip from '@mui/material/Chip';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
+
 
 // Material Dashboard 2 React components
 import MDBox from "../../../components/MDBox";
@@ -18,6 +26,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DateCalendarValue from "./calendar";
+import IndeterminateCheckbox from "../components/checkboxList"
 
 const exerciseChoices = ["Exercise 1", "Exercise 2", "Exercise 3", "Exercise 4", "Exercise 5"];
 
@@ -55,6 +64,7 @@ function AddAssignment() {
   useEffect(() => {
     getWorkouts();
   }, []);
+
 
 //   const handleAddExercise = () => {
 //     setExerciseCount((prevCount) => prevCount + 1);
@@ -152,22 +162,79 @@ function AddAssignment() {
         </FormControl>
       </MDBox>
     </MDBox>
-     
-    <MDBox pt={1} pb={2} px={2}>
-      <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-         <DateCalendarValue />
-      </MDBox>
-    </MDBox>
+    <Grid container spacing={2}>    
+        <Grid item xs={6}>
+            {/* assigned on: (calendar) */}
+            <MDBox pt={1} pb={2} px={2}>
+                <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+                    <MDTypography variant="h9">
+                        Assign On:
+                    </MDTypography>
+                    <DateCalendarValue />
+                </MDBox>
+            </MDBox>
+            {/* assignment notes: (textfield) */}
+            <MDBox pt={1} pb={2} px={2}>
+                <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+                    <MDTypography variant="h9">
+                        Assignment Notes:
+                    </MDTypography>
+                    <br></br>
+                    <TextField id="filled-textarea"
+                    label="Assigned Workout Notes"
+                    multiline
+                    variant="filled">
+                        {/* the notes will go here */}
+                    </TextField>
+                </MDBox>
+            </MDBox>
+        </Grid>
 
-    {/* You can map selectedWorkouts here if you need to render other content */}
-    
-    {/* <MDBox px={2} pb={2}>
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
-        <MDTypography variant="caption" color="white" fontWeight="bold" textTransform="uppercase">
-          Submit
-        </MDTypography>
-      </Button>
-    </MDBox> */}
+        <Grid item xs={6}>
+            {/* assigned to: (player list) */}
+            <MDBox pt={1} pb={2} px={2}>
+                <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+                    <MDTypography variant="h9">
+                        Assign To:
+                    </MDTypography>
+                    <br></br>
+                    <FormGroup>
+                        <FormControlLabel control={<Checkbox defaultUnChecked />} label="All Players" />
+                    </FormGroup>
+                </MDBox>
+                <br></br>
+                {/* search players and be able to select multiple */}
+                <MDBox>
+                    <Autocomplete
+                        multiple
+                        id="workout-id"
+                        options={workouts.map((workout) => workout.workout_name)} // Assuming workout.workout_name is an array
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Search for players here"
+                                placeholder="Assign to:"
+                            />
+                        )}
+                    />
+                </MDBox>
+                <br></br>
+                <MDBox>
+                    <MDTypography variant="body2" color="secondary">
+                        Groups:
+                    </MDTypography>
+                    <IndeterminateCheckbox></IndeterminateCheckbox>
+                </MDBox>
+            </MDBox>
+        </Grid>
+    </Grid>  
+    <MDBox display="flex" justifyContent="flex-end" px={2} pb={2}>
+        <Button variant="contained" color="primary">
+            <MDTypography variant="caption" color="white" fontWeight="bold" textTransform="uppercase">
+            Assign
+            </MDTypography>
+        </Button>
+    </MDBox> 
   </Card>
 );
 }

@@ -38,7 +38,7 @@ function Tables() {
 
     return (
         <DashboardLayout>
-        <DashboardNavbar />
+        <DashboardNavbar pageTitle="Team Groups" />
         <MDBox pt={3} pb={3}>
         <Grid container spacing={4}>
             <Grid item xs={12}>

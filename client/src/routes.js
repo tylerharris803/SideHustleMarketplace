@@ -49,7 +49,9 @@ import SignUp from "layouts/authentication/sign-up";
 import SignOut from "layouts/authentication/sign-out";
 import CoachOrPlayer from "layouts/authentication/coachorplayer";
 import CoachInfo from "layouts/authentication/coachinfo";
-import TeamInfo from "layouts/authentication/coachinfo";
+import TeamInfo from "layouts/authentication/teaminfo";
+import WellnessSetup from "layouts/authentication/wellness-setup";
+import Summary from "layouts/authentication/summary";
 import WorkoutLibrary from "layouts/workoutlibrary";
 import ViewWorkout from "layouts/viewworkout";
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
@@ -63,13 +65,14 @@ import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
-import AddNewTeam from "./layouts/addteam/components/AddTeam";
 import Addnewteam from "./layouts/addteam";
-//import AddWorkout from "layouts/addworkout/components/AddWorkout";
 import AddWorkout from "./layouts/addworkout";
 import Addnewwellness from "./layouts/addwellness";
 import AddAssignment from "layouts/addassignment/index";
+
 import Groups2Icon from '@mui/icons-material/Groups2'; //grouptable icon
+import CompleteWorkout from "./layouts/completeworkout";
+
 
 const routes = [
   {
@@ -129,7 +132,6 @@ const routes = [
     route: "/addworkout",
     component: <AddWorkout />,
   },
-
   {
     type: "collapse",
     name: "Add New Team",
@@ -138,7 +140,6 @@ const routes = [
     route: "/addteam",
     component: <Addnewteam />,
   },
-
   {
     type: "collapse",
     name: "Wellness Checkin",
@@ -153,7 +154,7 @@ const routes = [
     key: "viewworkout",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/viewworkout",
-    component: <ViewWorkout/>,
+    component: <ViewWorkout />,
   },
   {
     type: "collapse",
@@ -189,19 +190,19 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Complete Workout",
+    key: "completeworkout",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/completeworkout",
+    component: <CompleteWorkout />,
+  },
+  {
+    type: "collapse",
     name: "Sign In",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
-  },
-  {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
   },
   {
     type: "collapse",
@@ -215,7 +216,7 @@ const routes = [
     type: "collapse",
     name: "Coach or Player",
     key: "coachorplayer",
-    icon: <Icon fontSize="small"></Icon>,
+    icon: <Icon fontSize="small">person</Icon>,
     route: "/authentication/coachorplayer",
     component: <CoachOrPlayer />,
   },
@@ -234,6 +235,30 @@ const routes = [
     icon: <Icon fontSize="small"></Icon>,
     route: "/authentication/teaminfo",
     component: <TeamInfo />,
+  },
+  {
+    type: "collapse",
+    name: "Wellness Setup",
+    key: "wellness-setup",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/wellness-setup",
+    component: <WellnessSetup />,
+  },
+  {
+    type: "collapse",
+    name: "Summary",
+    key: "summary",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/summary",
+    component: <Summary />,
+  },
+  {
+    type: "collapse",
+    name: "Sign Up",
+    key: "sign-up",
+    icon: <Icon fontSize="small"></Icon>,
+    route: "/authentication/sign-up",
+    component: <SignUp />,
   },
 ];
 

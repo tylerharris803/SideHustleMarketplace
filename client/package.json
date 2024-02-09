@@ -28,7 +28,9 @@
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-chartjs-2": "5.2.0",
+    "react-datepicker": "^6.1.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-github-btn": "1.4.0",
     "react-router-dom": "6.11.0",
     "react-scripts": "5.0.1",
@@ -43,7 +45,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-    "lint": "eslint \"src/**/*.js\" --fix"
+    "lint": "eslint \"src/**/*.js\" --fix",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [

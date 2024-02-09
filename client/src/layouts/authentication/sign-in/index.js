@@ -15,6 +15,9 @@ Coded by www.creative-tim.com
 
 import { useState } from "react";
 
+//STOP UNDO HERE
+import { supabase } from "../../../supabaseClient";
+
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -42,7 +45,30 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 function Basic() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log("Supabase Auth Object:", supabase.auth);
+      const { user, error } = await supabase.auth.signIn({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error("Authentication failed:", error.message);
+      } else {
+        console.log("Authentication successful", user);
+        // Optionally, you can redirect or update the UI after successful authentication
+      }
+    } catch (error) {
+      console.error("Unexpected error during authentication:", error.message);
+    }
+  };
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -114,7 +140,13 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton type="submit" variant="gradient" color="info" fullWidth>
+              <MDButton
+                type="submit"
+                variant="gradient"
+                color="info"
+                fullWidth
+                onClick={handleSignIn}
+              >
                 sign in
               </MDButton>
             </MDBox>

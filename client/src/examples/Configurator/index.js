@@ -138,10 +138,10 @@ function Configurator() {
         px={3}
       >
         <MDBox>
-          <MDTypography variant="h5">Material UI Configurator</MDTypography>
-          <MDTypography variant="body2" color="text">
+          <MDTypography variant="h5">Appearance Settings</MDTypography>
+          {/*           <MDTypography variant="body2" color="text">
             See our dashboard options.
-          </MDTypography>
+          </MDTypography> */}
         </MDBox>
 
         <Icon
@@ -163,7 +163,7 @@ function Configurator() {
 
       <MDBox pt={0.5} pb={3} px={3}>
         <MDBox>
-          <MDTypography variant="h6">Sidenav Colors</MDTypography>
+          <MDTypography variant="h6">Navigation Selection Color</MDTypography>
 
           <MDBox mb={0.5}>
             {sidenavColors.map((color) => (
@@ -209,10 +209,10 @@ function Configurator() {
         </MDBox>
 
         <MDBox mt={3} lineHeight={1}>
-          <MDTypography variant="h6">Sidenav Type</MDTypography>
-          <MDTypography variant="button" color="text">
+          <MDTypography variant="h6">Navigation Menu Color</MDTypography>
+          {/*           <MDTypography variant="button" color="text">
             Choose between different sidenav types.
-          </MDTypography>
+          </MDTypography> */}
 
           <MDBox
             sx={{
@@ -267,7 +267,7 @@ function Configurator() {
             </MDButton>
           </MDBox>
         </MDBox>
-        <MDBox
+        {/*         <MDBox
           display="flex"
           justifyContent="space-between"
           alignItems="center"
@@ -277,15 +277,15 @@ function Configurator() {
           <MDTypography variant="h6">Navbar Fixed</MDTypography>
 
           <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
-        </MDBox>
+        </MDBox> */}
         <Divider />
         <MDBox display="flex" justifyContent="space-between" alignItems="center" lineHeight={1}>
-          <MDTypography variant="h6">Light / Dark</MDTypography>
+          <MDTypography variant="h6">Dark Mode</MDTypography>
 
           <Switch checked={darkMode} onChange={handleDarkMode} />
         </MDBox>
         <Divider />
-        <MDBox mt={3} mb={2}>
+        {/* <MDBox mt={3} mb={2}>
           <MDButton
             component={Link}
             href="https://www.creative-tim.com/learning-lab/react/quick-start/material-dashboard/"
@@ -338,7 +338,7 @@ function Configurator() {
               &nbsp; Share
             </MDButton>
           </MDBox>
-        </MDBox>
+        </MDBox> */}
       </MDBox>
     </ConfiguratorRoot>
   );

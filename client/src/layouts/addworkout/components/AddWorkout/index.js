@@ -227,7 +227,6 @@ function AddWorkout() {
           </MDTypography>
         </div>
       </MDBox>
-  
 
       <MDBox
         mb={2}

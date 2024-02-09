@@ -81,7 +81,7 @@ function Cover() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
-            Summary
+            Thank you! We updated your profile.
           </MDTypography>
           {/* <MDTypography display="block" variant="button" color="white" my={1}>
             Enter your email and password to register
@@ -89,14 +89,8 @@ function Cover() {
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
-            <MDBox mb={2}>
-              <MDBox mt={2} mb={1}>
-                <MDTypography variant="body2" color="text">
-                  User Role: {userRole}
-                </MDTypography>
-              </MDBox>
-            </MDBox>
-            <MDBox mt={4} mb={1}>
+            <MDBox mb={2}></MDBox>
+            <MDBox mt={2} mb={1}>
               <MDButton
                 component={Link}
                 to="/dashboard"
@@ -105,7 +99,7 @@ function Cover() {
                 fullWidth
                 onClick={handleNextClick}
               >
-                Submit
+                Next
               </MDButton>
             </MDBox>
             <MDBox mt={4} mb={1}>

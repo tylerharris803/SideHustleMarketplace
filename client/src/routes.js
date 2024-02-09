@@ -67,11 +67,9 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import Addnewteam from "./layouts/addteam";
 import AddWorkout from "./layouts/addworkout";
 import Addnewwellness from "./layouts/addwellness";
-<<<<<<< jordan-table
 import AddAssignment from "layouts/addassignment/index";
-=======
 import CompleteWorkout from "./layouts/completeworkout";
->>>>>>> dev
+
 
 const routes = [
   {
@@ -146,6 +144,14 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/viewworkout",
     component: <ViewWorkout />,
+  },
+  {
+    type: "collapse",
+    name: "Assign Workout",
+    key: "addassignment",
+    icon: <AssignmentIcon fontSize="small">add_assignment</AssignmentIcon>,
+    route: "/addassignment",
+    component: <AddAssignment/>,
   },
   {
     type: "collapse",

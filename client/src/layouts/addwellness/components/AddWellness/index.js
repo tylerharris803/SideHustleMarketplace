@@ -9,9 +9,6 @@ import MDTypography from "../../../../components/MDTypography";
 
 import { FormControl, FormControlLabel, InputLabel, Select, Slider } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
 
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../../../supabaseClient";
@@ -22,12 +19,22 @@ import slider from "@mui/material/Slider";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { fetchUserProfile } from "../../../../fetchUserProfile";
+
+//need this for displaying which dow they want to use?
+const daysOfWeekMap = [
+  { id: 1, name: "Sunday" },
+  { id: 2, name: "Monday" },
+  { id: 3, name: "Tuesday" },
+  { id: 4, name: "Wednesday" },
+  { id: 5, name: "Thursday" },
+  { id: 6, name: "Friday" },
+  { id: 7, name: "Saturday" },
+];
 
 function AddWellness() {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
+  //const [selectedSport, setSelectedSport] = useState(""); // new state for selected sport
+  //const [selectedDays, setSelectedDays] = useState([]); // new state for selected days
   const [wellnessData, setWellnessData] = useState({
     water: { id: 1, value: 3 },
     sleep: { id: 2, value: 3 },
@@ -36,15 +43,6 @@ function AddWellness() {
     energy: { id: 5, value: 3 },
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchUserProfile();
-
-      setProfile(data);
-    };
-    fetchData();
-  }, []);
-
   const handleSliderChange = (type, value) => {
     setWellnessData((prevData) => ({
       ...prevData,
@@ -52,35 +50,27 @@ function AddWellness() {
     }));
   };
 
+  // const handleSportChange = (event) => {
+  //   setSelectedSport(event.target.value);
+  // };
+
+  // const handleDayChange = (day) => {
+  //   setSelectedDays((prevSelectedDays) => {
+  //     const newSelectedDays = prevSelectedDays.includes(day)
+  //       ? prevSelectedDays.filter((d) => d !== day)
+  //       : [...prevSelectedDays, day];
+
+  //     console.log("selecteddays: ", newSelectedDays);
+
+  //     return newSelectedDays;
+  //   });
+  // };
+
   const handleSubmit = async () => {
-    const selectedDate = startDate.toISOString();
-
-    const { data: existingEntries, error: existingEntriesError } = await supabase
-      .from("checkin")
-      .select()
-      .eq("player_id", profile.id)
-      .eq("date", selectedDate);
-
-    if (existingEntriesError) {
-      console.error("Error checking for existing entries:", existingEntriesError);
-      // Handle the error here
-      return;
-    }
-
-    if (existingEntries.length > 0) {
-      // Display a pop-up or alert informing the user about the existing entry
-      toast.error("You already submitted wellness for this date. Please choose a new date.", {
-        style: {
-          color: "red",
-        },
-      });
-      return;
-    }
-
     const dataToSubmit = Object.keys(wellnessData).map((type) => ({
-      player_id: profile.id, //update to get current user id
+      player_id: "2cefa8cf-5c6f-4827-a552-5864f6dd130d", //update to get current user id
       wellness_id: wellnessData[type].id,
-      date: selectedDate, //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
+      date: "2024-02-01", //get date that is selected...limiting to current date? allowing users to go back and select a date missed?
       created_at: new Date().toISOString(),
       value: wellnessData[type].value,
     }));
@@ -89,7 +79,7 @@ function AddWellness() {
 
     try {
       // Use supabase client's api.post method to add data
-      const { data, error } = await supabase.from("checkin").insert(dataToSubmit).select();
+      const { data, error } = await supabase.from("checkin").upsert(dataToSubmit).select();
 
       if (error) {
         console.error("Error adding wellness:", error);
@@ -117,8 +107,8 @@ function AddWellness() {
           Add Wellness
         </MDTypography>
         <MDTypography variant="body2" fontWeight="textSecondary" id="dateSelected">
-          Select Date:
-          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+          Current Date: {new Date().toLocaleDateString()}{" "}
+          {/* Want to update to be able to select a date */}
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>

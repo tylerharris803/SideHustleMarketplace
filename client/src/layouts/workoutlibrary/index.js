@@ -28,8 +28,6 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import exercisesTableData from "layouts/tables/data/exercisesTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
 import workoutsTableData from "layouts/tables/data/workoutsTableData";
 
 function Tables() {
@@ -38,7 +36,7 @@ function Tables() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar pageTitle="Saved Workouts" />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
@@ -59,7 +57,7 @@ function Tables() {
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
-                  table={{ columns, rows }}
+                  table={{ columns, rows }} //these are being drawn from the workoutsTableData
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}

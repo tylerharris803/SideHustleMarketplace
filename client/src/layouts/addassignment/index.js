@@ -3,17 +3,17 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
 import Footer from "../../examples/Footer";
-import AddTeam from "./components/AddTeam";
+import AddAssigment from "../addassignment/components/index";
 
-function AddingTeam() {
+function AddingAssignment() {
   return (
     <DashboardLayout>
-      <DashboardNavbar pageTitle="Add New Team" absolute isMini />
+      <DashboardNavbar pageTitle="Add Assignment" absolute isMini />
       <MDBox mt={8}>
         <MDBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={12}>
-              <AddTeam />
+              <AddAssigment/>
             </Grid>
           </Grid>
         </MDBox>
@@ -23,4 +23,4 @@ function AddingTeam() {
   );
 }
 
-export default AddingTeam;
+export default AddingAssignment;

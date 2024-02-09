@@ -60,12 +60,14 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import PeopleIcon from "@mui/icons-material/People";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import AddNewTeam from "./layouts/addteam/components/AddTeam";
 import Addnewteam from "./layouts/addteam";
 //import AddWorkout from "layouts/addworkout/components/AddWorkout";
 import AddWorkout from "./layouts/addworkout";
 import Addnewwellness from "./layouts/addwellness";
+import AddAssignment from "layouts/addassignment/index";
 
 const routes = [
   {
@@ -142,6 +144,14 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/viewworkout",
     component: <ViewWorkout/>,
+  },
+  {
+    type: "collapse",
+    name: "Assign Workout",
+    key: "addassignment",
+    icon: <AssignmentIcon fontSize="small">add_assignment</AssignmentIcon>,
+    route: "/addassignment",
+    component: <AddAssignment/>,
   },
   {
     type: "collapse",

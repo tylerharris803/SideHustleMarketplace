@@ -155,14 +155,6 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Assign Workout",
-    key: "addassignment",
-    icon: <AssignmentIcon fontSize="small">add_assignment</AssignmentIcon>,
-    route: "/addassignment",
-    component: <AddAssignment/>,
-  },
-  {
-    type: "collapse",
     name: "Billing",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,

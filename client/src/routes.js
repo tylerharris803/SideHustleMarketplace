@@ -39,6 +39,7 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import ExerciseLibrary from "layouts/exerciselibrary";
+import GroupTable from "layouts/grouptable";
 import AddExercise from "layouts/addexercise";
 import Billing from "layouts/billing";
 import Notifications from "layouts/notifications";
@@ -93,6 +94,14 @@ const routes = [
     icon: <ListAltIcon fontSize="small">book</ListAltIcon>,
     route: "/exerciselibrary",
     component: <ExerciseLibrary />,
+  },
+  {
+    type: "collapse",
+    name: "Team Groups",
+    key: "grouptable",
+    icon: <ListAltIcon fontSize="small">book</ListAltIcon>,
+    route: "/grouptable",
+    component: <GroupTable />,
   },
 
   {

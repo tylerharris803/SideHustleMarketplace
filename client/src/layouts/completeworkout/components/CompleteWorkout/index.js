@@ -104,17 +104,19 @@ function CompleteWorkout() {
   }, []);
 
   // Function to handle checkbox change for completed exercises
-// Function to handle checkbox change for completed exercises
+  // Function to handle checkbox change for completed exercises
   const handleExerciseCompletionChange = (exercise) => {
     setCompletedExercises((prevCompletedExercises) => {
       const isAlreadyCompleted = prevCompletedExercises.some(
-        (completedExercise) => completedExercise.customized_exercise_id === exercise.customized_exercise_id
+        (completedExercise) =>
+          completedExercise.customized_exercise_id === exercise.customized_exercise_id
       );
 
       if (isAlreadyCompleted) {
         // If the exercise is already completed, remove it from completedExercises
         const updatedCompletedExercises = prevCompletedExercises.filter(
-          (completedExercise) => completedExercise.customized_exercise_id !== exercise.customized_exercise_id
+          (completedExercise) =>
+            completedExercise.customized_exercise_id !== exercise.customized_exercise_id
         );
         return updatedCompletedExercises;
       } else {
@@ -123,7 +125,6 @@ function CompleteWorkout() {
       }
     });
   };
-
 
   const handleNotesChange = (index, value) => {
     setCustomizedExercises((prevCustomizedExercises) => {
@@ -216,15 +217,13 @@ function CompleteWorkout() {
   }
 
   if (assignment.completed) {
-    return(
+    return (
       <Card id="delete-account">
         <MDBox pt={3} px={2}>
           <MDTypography variant="h4" fontWeight="medium">
             Congrats! You already completed today&apos;s workout.
           </MDTypography>
-          <MDTypography variant="body1">
-            Here&apos;s a summary of the workout:
-          </MDTypography>
+          <MDTypography variant="body1">Here&apos;s a summary of the workout:</MDTypography>
           <MDBox>
             <MDTypography variant="body2">
               <strong>Workout Name:</strong> {workout ? workout.workout_name : "Unknown"}
@@ -237,8 +236,10 @@ function CompleteWorkout() {
             </MDTypography>
             {customizedExercises.map((exercise, index) => (
               <MDTypography variant="body2" key={index}>
-                - {exercise.name} ({exercise.reps ? `Reps: ${exercise.reps}` : ""}{exercise.reps && exercise.sets ? ", " : ""}
-                {exercise.sets ? `Sets: ${exercise.sets}` : ""}{(exercise.reps || exercise.sets) && exercise.duration ? ", " : ""}
+                - {exercise.name} ({exercise.reps ? `Reps: ${exercise.reps}` : ""}
+                {exercise.reps && exercise.sets ? ", " : ""}
+                {exercise.sets ? `Sets: ${exercise.sets}` : ""}
+                {(exercise.reps || exercise.sets) && exercise.duration ? ", " : ""}
                 {exercise.duration ? `Duration: ${exercise.duration}` : ""})
               </MDTypography>
             ))}
@@ -312,9 +313,7 @@ function CompleteWorkout() {
                             multiline
                             rows={1}
                             placeholder="Enter notes..."
-                            onChange={(event) =>
-                              handleNotesChange(index, event.target.value)
-                            }
+                            onChange={(event) => handleNotesChange(index, event.target.value)}
                           />
                         </div>
                       }

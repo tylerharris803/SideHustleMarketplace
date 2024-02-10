@@ -54,7 +54,7 @@ import WellnessSetup from "layouts/authentication/wellness-setup";
 import Summary from "layouts/authentication/summary";
 import WorkoutLibrary from "layouts/workoutlibrary";
 import ViewWorkout from "layouts/viewworkout";
-import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
+import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -63,16 +63,15 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import PeopleIcon from "@mui/icons-material/People";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 import Addnewteam from "./layouts/addteam";
 import AddWorkout from "./layouts/addworkout";
 import Addnewwellness from "./layouts/addwellness";
 import AddAssignment from "layouts/addassignment/index";
 
-import Groups2Icon from '@mui/icons-material/Groups2'; //grouptable icon
+import Groups2Icon from "@mui/icons-material/Groups2"; //grouptable icon
 import CompleteWorkout from "./layouts/completeworkout";
-
 
 const routes = [
   {
@@ -103,7 +102,7 @@ const routes = [
     type: "collapse",
     name: "Team Groups",
     key: "grouptable",
-    icon: <Groups2Icon  fontSize="small">book</Groups2Icon >,
+    icon: <Groups2Icon fontSize="small">book</Groups2Icon>,
     route: "/grouptable",
     component: <GroupTable />,
   },
@@ -162,7 +161,7 @@ const routes = [
     key: "addassignment",
     icon: <AssignmentIcon fontSize="small">add_assignment</AssignmentIcon>,
     route: "/addassignment",
-    component: <AddAssignment/>,
+    component: <AddAssignment />,
   },
   {
     type: "collapse",

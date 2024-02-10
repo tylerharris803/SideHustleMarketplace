@@ -16,55 +16,72 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
 //accordian table stuff
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 // Add supabase connection
 import { supabase } from "../../../supabaseClient";
 
 export default function data() {
-    const [groups, setGroups] = useState([]);
-    async function getGroups() {
-      try {
-          const { data: profilesData, error: profilesError } = await supabase.from("profile").select("*");
-          if (profilesError) throw profilesError;
-    
-          const { data: membershipData, error: membershipError } = await supabase.from("team_group_membership").select("*");
-          if (membershipError) throw membershipError;
-    
-          const { data: teamData, error: teamError } = await supabase.from("team_group").select("*");
-          if (teamError) throw teamError;
-    
-          const groupsWithMembership = profilesData.map(profile => {
-            const membership = membershipData.find(membership => membership.player_user_id === profile.id);
-            if (membership) {
-              const team = teamData.find(team => team.id === membership.team_group_id);
-              return { ...profile, membership, team };
-            }
-            return profile;
-          });
-          setGroups(groupsWithMembership);
-      } catch (error) {
-        alert(error.message);
-      }
+  const [groups, setGroups] = useState([]);
+  async function getGroups() {
+    try {
+      const { data: profilesData, error: profilesError } = await supabase
+        .from("profile")
+        .select("*");
+      if (profilesError) throw profilesError;
+
+      const { data: membershipData, error: membershipError } = await supabase
+        .from("team_group_membership")
+        .select("*");
+      if (membershipError) throw membershipError;
+
+      const { data: teamData, error: teamError } = await supabase.from("team_group").select("*");
+      if (teamError) throw teamError;
+
+      const groupsWithMembership = profilesData.map((profile) => {
+        const membership = membershipData.find(
+          (membership) => membership.player_user_id === profile.id
+        );
+        if (membership) {
+          const team = teamData.find((team) => team.id === membership.team_group_id);
+          return { ...profile, membership, team };
+        }
+        return profile;
+      });
+      setGroups(groupsWithMembership);
+    } catch (error) {
+      alert(error.message);
     }
-    useEffect(() => {
-      getGroups();
-    }, []);
-  
-    return {
-      columns: [
-        { Header: "First Name", accessor: "first", width: "20%", align: "left" },
-        { Header: "Last Name", accessor: "last", width: "20%", align: "left" },
-        { Header: "Position", accessor: "position", width: "40%", align: "left" },
-        // { Header: "Group", accessor: "group", width: "40%", align: "left" }, // New column for group name
-        // { Header: "Edit", accessor: "edit", width: "10%", align: "right" },
-        // { Header: "Delete", accessor: "delete", width: "10%", align: "right" },
-      ],
-  
-      rows: groups
-      .filter(group => group.team && group.team.name) // Filter out rows with empty first or last name
-      .map(group => ({
+  }
+  useEffect(() => {
+    getGroups();
+  }, []);
+
+  return {
+    columns: [
+      { Header: "First Name", accessor: "first", width: "20%", align: "left" },
+      { Header: "Last Name", accessor: "last", width: "20%", align: "left" },
+      { Header: "Position", accessor: "position", width: "40%", align: "left" },
+      // { Header: "Group", accessor: "group", width: "40%", align: "left" }, // New column for group name
+      // { Header: "Edit", accessor: "edit", width: "10%", align: "right" },
+      // { Header: "Delete", accessor: "delete", width: "10%", align: "right" },
+    ],
+
+    rows: groups
+      .filter((group) => group.team && group.team.name) // Filter out rows with empty first or last name
+      .map((group) => ({
         first: (
           <MDBox display="flex" py={1} pr={2.8} pl={2}>
             {group.first_name}
@@ -82,7 +99,7 @@ export default function data() {
         ),
         group: (
           <MDTypography variant="primary" fontWeight="medium">
-            {group.team ? group.team.name : ''} {/* Display group name if available */}
+            {group.team ? group.team.name : ""} {/* Display group name if available */}
           </MDTypography>
         ),
         edit: (
@@ -100,5 +117,5 @@ export default function data() {
           </MDBox>
         ),
       })),
-    };
-  }
+  };
+}

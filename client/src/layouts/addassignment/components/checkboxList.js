@@ -1,15 +1,15 @@
 // import * as React from 'react';
 // import Box from '@mui/material/Box';
 // import Checkbox from '@mui/material/Checkbox';
-// import FormControlLabel from '@mui/material/FormControlLabel'; 
+// import FormControlLabel from '@mui/material/FormControlLabel';
 
 // export default function IndeterminateCheckbox() {
 //     const [checked, setChecked] = React.useState([false, false, false, false, false]);
-  
+
 //     const handleChange0 = (event) => {
 //         setChecked([checked[0], checked[1], event.target.checked, event.target.checked, event.target.checked]);
 //     };
-    
+
 //     const handleChange1 = (event) => {
 //         setChecked([event.target.checked, event.target.checked, checked[2], checked[3], checked[4]]);
 //     };
@@ -17,29 +17,29 @@
 //     const handleChange2 = (event) => {
 //       setChecked([checked[0], event.target.checked, checked[2], checked[3], checked[4]]);
 //     };
-  
+
 //     const handleChange3 = (event) => {
 //       setChecked([checked[0], checked[1], event.target.checked, checked[3], checked[4]]);
 //     };
-  
+
 //     const handleChange4 = (event) => {
 //       const newChecked = [...checked];
 //       newChecked[2] = event.target.checked;
 //       setChecked(newChecked);
 //     };
-  
+
 //     const handleChange5 = (event) => {
 //       const newChecked = [...checked];
 //       newChecked[3] = event.target.checked;
 //       setChecked(newChecked);
 //     };
-  
+
 //     const handleChange6 = (event) => {
 //       const newChecked = [...checked];
 //       newChecked[4] = event.target.checked;
 //       setChecked(newChecked);
 //     };
-  
+
 //     const children = (
 //       <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
 //         <FormControlLabel
@@ -52,7 +52,7 @@
 //         />
 //       </Box>
 //     );
-  
+
 //     const defenseChildren = (
 //       <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
 //         <FormControlLabel
@@ -69,7 +69,7 @@
 //         />
 //       </Box>
 //     );
-  
+
 //     return (
 //       <div>
 //         <FormControlLabel
@@ -97,14 +97,12 @@
 //     );
 // }
 
-
-
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { useEffect, useState } from 'react';
-import { supabase } from '../../../supabaseClient';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../supabaseClient";
 
 export default function IndeterminateCheckbox() {
   const [groups, setGroups] = useState([]);
@@ -112,24 +110,30 @@ export default function IndeterminateCheckbox() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data: teamGroups, error } = await supabase.from('team_group').select('*');
+        const { data: teamGroups, error } = await supabase.from("team_group").select("*");
         if (error) throw error;
 
-        const { data: teamMemberships, error: membershipsError } = await supabase.from('team_group_membership').select('*');
+        const { data: teamMemberships, error: membershipsError } = await supabase
+          .from("team_group_membership")
+          .select("*");
         if (membershipsError) throw membershipsError;
 
-        const { data: profiles, error: profilesError } = await supabase.from('profile').select('*');
+        const { data: profiles, error: profilesError } = await supabase.from("profile").select("*");
         if (profilesError) throw profilesError;
 
-        const formattedGroups = teamGroups.map(teamGroup => {
-          const groupMemberships = teamMemberships.filter(membership => membership.team_group_id === teamGroup.id);
-          const members = groupMemberships.map(membership => profiles.find(profile => profile.id === membership.player_user_id));
+        const formattedGroups = teamGroups.map((teamGroup) => {
+          const groupMemberships = teamMemberships.filter(
+            (membership) => membership.team_group_id === teamGroup.id
+          );
+          const members = groupMemberships.map((membership) =>
+            profiles.find((profile) => profile.id === membership.player_user_id)
+          );
           return { ...teamGroup, members };
         });
 
         setGroups(formattedGroups);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        console.error("Error fetching data:", error.message);
       }
     }
 
@@ -146,12 +150,12 @@ export default function IndeterminateCheckbox() {
   const handleGroupChange = (event, groupIndex) => {
     const newGroups = [...groups];
     const newCheckedState = event.target.checked;
-    newGroups[groupIndex].members = newGroups[groupIndex].members.map(member => ({
+    newGroups[groupIndex].members = newGroups[groupIndex].members.map((member) => ({
       ...member,
-      checked: newCheckedState
+      checked: newCheckedState,
     }));
     setGroups(newGroups);
-};
+  };
 
   const handleMemberChange = (event, groupIndex, memberIndex) => {
     const newGroups = [...groups];
@@ -167,13 +171,16 @@ export default function IndeterminateCheckbox() {
             label={group.name}
             control={
               <Checkbox
-                checked={group.members.every(member => member.checked)}
-                indeterminate={!group.members.every(member => member.checked) && group.members.some(member => member.checked)}
-                onChange={event => handleGroupChange(event, groupIndex)}
+                checked={group.members.every((member) => member.checked)}
+                indeterminate={
+                  !group.members.every((member) => member.checked) &&
+                  group.members.some((member) => member.checked)
+                }
+                onChange={(event) => handleGroupChange(event, groupIndex)}
               />
             }
           />
-          <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
             {group.members.map((member, memberIndex) => (
               <FormControlLabel
                 key={member.id}
@@ -181,7 +188,7 @@ export default function IndeterminateCheckbox() {
                 control={
                   <Checkbox
                     checked={member.checked}
-                    onChange={event => handleMemberChange(event, groupIndex, memberIndex)}
+                    onChange={(event) => handleMemberChange(event, groupIndex, memberIndex)}
                   />
                 }
               />
@@ -192,5 +199,3 @@ export default function IndeterminateCheckbox() {
     </div>
   );
 }
-
-

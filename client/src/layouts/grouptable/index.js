@@ -25,8 +25,19 @@ import MDTypography from "components/MDTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
@@ -36,14 +47,14 @@ import projectsTableData from "layouts/tables/data/projectsTableData";
 function Tables() {
   const { columns, rows } = groupsTableData();
 
-    return (
-        <DashboardLayout>
-        <DashboardNavbar pageTitle="Team Groups" />
-        <MDBox pt={3} pb={3}>
+  return (
+    <DashboardLayout>
+      <DashboardNavbar pageTitle="Team Groups" />
+      <MDBox pt={3} pb={3}>
         <Grid container spacing={4}>
-            <Grid item xs={12}>
+          <Grid item xs={12}>
             <Card>
-                <MDBox
+              <MDBox
                 mx={2}
                 mt={-3}
                 py={3}
@@ -52,14 +63,14 @@ function Tables() {
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
-                >
+              >
                 <MDTypography variant="h6" color="white">
-                    Groups
+                  Groups
                 </MDTypography>
-                </MDBox>
-                <MDBox pt={1}>
+              </MDBox>
+              <MDBox pt={1}>
                 <TableContainer component={Paper}>
-                    <Table>
+                  <Table>
                     {/* <TableHead>
                         <TableRow>
                         {columns.map((column, index) => (
@@ -68,43 +79,41 @@ function Tables() {
                         </TableRow>
                     </TableHead> */}
                     <TableBody>
-                        {rows.map((row, index) => (
+                      {rows.map((row, index) => (
                         <Accordion key={index}>
-                            <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            >
-                                {/* this is the row text that is showing on the table */}
-                            <TableCell >{row.group}</TableCell> 
-                            </AccordionSummary>
-                            <AccordionDetails >
-                                <TableHead>
-                                <TableRow>
-                                    {columns.map((column, index) => (
-                                        <TableCell key={index}>{column.Header}</TableCell> // the column header
-                                    ))}
-                                </TableRow>
-                                </TableHead>
+                          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            {/* this is the row text that is showing on the table */}
+                            <TableCell>{row.group}</TableCell>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <TableHead>
+                              <TableRow>
+                                {columns.map((column, index) => (
+                                  <TableCell key={index}>{column.Header}</TableCell> // the column header
+                                ))}
+                              </TableRow>
+                            </TableHead>
                             <TableRow>
-                                <TableCell style={{ paddingRight: 20 }}>{row.first}</TableCell>
-                                <TableCell style={{ paddingRight: 20 }}>{row.last}</TableCell>
-                                <TableCell style={{ paddingRight: 20 }}>{row.position}</TableCell>
-                             
-                                <TableCell align="right">{row.edit}</TableCell>
-                                <TableCell align="right">{row.delete}</TableCell>
+                              <TableCell style={{ paddingRight: 20 }}>{row.first}</TableCell>
+                              <TableCell style={{ paddingRight: 20 }}>{row.last}</TableCell>
+                              <TableCell style={{ paddingRight: 20 }}>{row.position}</TableCell>
+
+                              <TableCell align="right">{row.edit}</TableCell>
+                              <TableCell align="right">{row.delete}</TableCell>
                             </TableRow>
-                            </AccordionDetails>
+                          </AccordionDetails>
                         </Accordion>
-                        ))}
+                      ))}
                     </TableBody>
-                    </Table>
+                  </Table>
                 </TableContainer>
-                </MDBox>
+              </MDBox>
             </Card>
-            </Grid>
+          </Grid>
         </Grid>
-        </MDBox>
-        <Footer />
-        </DashboardLayout>
-    );
+      </MDBox>
+      <Footer />
+    </DashboardLayout>
+  );
 }
 export default Tables;

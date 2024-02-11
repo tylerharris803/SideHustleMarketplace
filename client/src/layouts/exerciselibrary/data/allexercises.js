@@ -31,7 +31,7 @@ export default function data() {
   const [exercises, setExercises] = useState([]);
   async function getExercises() {
     try {
-      const { data, error } = await supabase.from("exercise").select("*");
+      const { data, error } = await supabase.from("course").select("*");
       if (error) throw error;
       if (data != null) {
         setExercises(data);

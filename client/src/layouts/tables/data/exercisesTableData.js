@@ -36,45 +36,69 @@ import team4 from "assets/images/team-4.jpg";
 import { supabase } from "../../../supabaseClient";
 
 export default function data() {
-  const [exercises, setExercises] = useState([]);
-  async function getExercises() {
+  const [courses, setCourses] = useState([]);
+  async function getCourses() {
     try {
-      const { data, error } = await supabase.from("exercise").select("*");
+      const { data, error } = await supabase.from("course").select("*");
       if (error) throw error;
       if (data != null) {
-        setExercises(data);
+        setCourses(data);
       }
     } catch (error) {
       alert(error.message);
     }
   }
   useEffect(() => {
-    getExercises();
+    getCourses();
   }, []);
 
   return {
     columns: [
-      { Header: "name", accessor: "name", width: "20%", align: "left" },
-      { Header: "category", accessor: "category", width: "20%", align: "left" },
+      { Header: "title", accessor: "title", width: "20%", align: "left" },
+      { Header: "industry", accessor: "industry", width: "20%", align: "left" },
+      { Header: "date_created", accessor: "date_created", width: "20%", align: "left" },
       { Header: "description", accessor: "description", width: "40%", align: "left" },
+      { Header: "price", accessor: "price", width: "20%", align: "left" },
+      { Header: "num_students", accessor: "num_students", width: "20%", align: "left" },
+      { Header: "length", accessor: "length", width: "20%", align: "left" },
       { Header: "Edit", accessor: "edit", width: "10%", align: "left" },
       { Header: "Delete", accessor: "delete", width: "10%", align: "center" },
     ],
 
-    rows: exercises.map((exercise, index) => ({
-      name: (
+    rows: courses.map((course, index) => ({
+      title: (
         <MDBox display="flex" py={1}>
-          {exercise.name} {/* Display the name of the current exercise */}
+          {course.title} 
         </MDBox>
       ),
-      category: (
+      industry: (
         <MDBox display="flex" py={1}>
-          {exercise.category} {/* Display the name of the current exercise */}
+          {course.industry}
         </MDBox>
+      ),
+      date_created: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {course.date_created}
+        </MDTypography>
       ),
       description: (
         <MDTypography variant="caption" color="text" fontWeight="medium">
-          {exercise.description}
+          {course.description}
+        </MDTypography>
+      ),
+      price: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {course.price}
+        </MDTypography>
+      ),
+      num_students: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {course.num_students}
+        </MDTypography>
+      ),
+      length: (
+        <MDTypography variant="caption" color="text" fontWeight="medium">
+          {course.length}
         </MDTypography>
       ),
       edit: (
@@ -92,122 +116,5 @@ export default function data() {
         </MDBox>
       ),
     })),
-
-    // rows: [
-    //   {
-    //     author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
-    //     function: <Job title="Manager" description="Organization" />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         23/04/18
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
-    //     function: <Job title="Programator" description="Developer" />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         11/01/19
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     author: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
-    //     function: <Job title="Executive" description="Projects" />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         19/09/17
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     author: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
-    //     function: <Job title="Programator" description="Developer" />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         24/12/08
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     author: <Author image={team3} name="Richard Gran" email="richard@creative-tim.com" />,
-    //     function: <Job title="Manager" description="Executive" />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         04/10/21
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-    //     ),
-    //   },
-    //   {
-    //     author: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
-    //     function: <Job title="Programator" description="Developer" />,
-    //     status: (
-    //       <MDBox ml={-1}>
-    //         <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-    //       </MDBox>
-    //     ),
-    //     employed: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         14/09/20
-    //       </MDTypography>
-    //     ),
-    //     action: (
-    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-    //         Edit
-    //       </MDTypography>
-    //     ),
-    //   },
-    // ],
   };
 }
